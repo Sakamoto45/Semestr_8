@@ -1,0 +1,32 @@
+\begin{thebibliography}{1}
+\def\selectlanguageifdefined#1{
+\expandafter\ifx\csname date#1\endcsname\relax
+\else\selectlanguage{#1}\fi}
+\providecommand*{\href}[2]{{\small #2}}
+\providecommand*{\url}[1]{{\small #1}}
+\providecommand*{\BibUrl}[1]{\url{#1}}
+\providecommand{\BibAnnote}[1]{}
+\providecommand*{\BibEmph}[1]{#1}
+\ProvideTextCommandDefault{\cyrdash}{\iflanguage{russian}{\hbox
+  to.8em{--\hss--}}{\textemdash}}
+\providecommand*{\BibDash}{\ifdim\lastskip>0pt\unskip\nobreak\hskip.2em plus
+  0.1em\fi
+\cyrdash\hskip.2em plus 0.1em\ignorespaces}
+\renewcommand{\newblock}{\ignorespaces}
+
+\bibitem{SSA_with_R}
+\selectlanguageifdefined{english}
+Golyandina~N, Korobeynikov~A, Zhigljavsky~A. Singular Spectrum Analysis with R.
+  \BibDash
+\newblock Springer, 2018. \BibDash
+\newblock P.~272.
+
+\bibitem{supportive_mssa}
+\selectlanguageifdefined{russian}
+Федоров~Н. Поддерживающие временные ряды в
+  анализе сингулярного спектра. \BibDash
+\newblock 2020. \BibDash
+\newblock выпускная квалификационная работа
+  магистра, СПбГУ, СПб.
+
+\end{thebibliography}
