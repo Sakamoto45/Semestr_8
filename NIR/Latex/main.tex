@@ -25,20 +25,7 @@
 \newtheorem*{algorithm}{Алгоритм}
 
 % \newcommand{\rank}{\mathsf{rank}\ }
-% \newcommand{\Lrank}{\mathsf{rank}_L\ }
-% \newcommand{\T}{\mathcal{T}}
-% \newcommand{\F}{\mathsf{F}}
-% \newcommand{\MF}{\vec{\F}}
-% \newcommand{\sfS}{\mathsf{S}}
-% \newcommand{\sfR}{\mathsf{R}}
-% \newcommand{\MS}{\vec{\sfS}}
-% \newcommand{\MSE}{\mathsf{MSE}}
-% \newcommand{\SSA}{\mathsf{SSA}}
-% \newcommand{\MSSA}{\mathsf{MSSA}}
-% \newcommand{\ProjSSA}{\mathsf{ProjSSA}}
-% \newcommand{\mean}{\mathsf{mean}}
-% \newcommand{\X}{\mathbf{X}}
-% \newcommand{\wX}{\overset{\wedge}{\X}}
+
 
 
 
@@ -54,46 +41,77 @@
 \author{Ткаченко Егор Андреевич}
 \group{группа 19.Б04-мм}
 \sa       {Кривулин Николай Кимович}
-\sastatus {д.\,ф.-м.\,н., доцент}
+\sastatus {д.\,ф.-м.\,н., профессор}
 \city{Санкт-Петербург}
 \date{2023}
 
 
 \begin{document}
 
-    % \maketitle
-    % \pagebreak
-    % \tableofcontents
-    % \pagebreak
+    \maketitle
+    \pagebreak
+    \tableofcontents
+    \pagebreak
 
-    % \intro
-    %     цитирование, чтобы ошибка не вылезала \cite{SSA_with_R}
+    \intro
 
-    % \section{Определения}
+    \section{Постановка задачи принятия решений}
+
+    \section{Определение тропической математики}
+    \section{Алгоритм решения задачи}
+    (на какую статью сослаться?)
+    % \cite{SSA_with_R}
+
+
        
+    \chapter{Разработка структуры для хранения чисел}
+
+    Для аналитического решения задачи принятия решения структура должна поддерживать операцию умножения, извлечения корня $n$-ой степени и отношение линейного порядка.
+    Рациональных чисел $\displaystyle \frac{a}{b} \, (a \in \mathbb{Z}, b \in \mathbb{N})$ не хватит из-за операции извлечения корня. 
+    Достаточно добавить к структуре числа корень целой степени  $(\frac{a}{b})^{\frac{1}{n}}, a \in \mathbb{Z}, b \in \mathbb{N}, n \in \mathbb{N}$.
+
+    С такой структурой операции умножения 
 
 
+    \chapter{Реализация матриц и алгоритма}
 
-
-    \section{Решение задачи 1}
-    \input{1.tex}
-    \section{Решение задачи 2}
-    \input{2.tex}
-    \section{Решение задачи 9}
-    \input{9.tex}
-    \section{Решение задачи 1 из статьи стр 9}
-    \input{test.tex}
-    \section{Решение задачи о выборе места работы из статьи стр 20}
-    \input{test2.tex}    
+    \section{Вывод решения}
+    Для удобства я дописал к каждому классу метод вывода в latex. 
     
+
+    \section{}
+
+
+
+
+% Проделанная работа
+% -разработана структура для точного хранения чисел (a/b)^(1/n), для которой определены операции сложения (мах) и умножения;
+% -написана программа использующая эту структуру и реализующая решение задачи по заданным матрицам парных сравнений, выводящая решение в latex;
+% -возможно пример реализации чего-то в программе;
+
+
+    \section{Пример работы программы}
+        \input{1.tex}
+
+    % \section{Решение задачи 1}
     % \input{1.tex}
+    % \section{Решение задачи 2}
+    % \input{2.tex}
+    % \section{Решение задачи 9}
     % \input{9.tex}
+    % \section{Решение задачи 1 из статьи стр 9}
+    % \input{test.tex}
+    % \section{Решение задачи о выборе места работы из статьи стр 20}
+    % \input{test2.tex}    
+    
 
 
 
+    \conclusion
+% -с такой неинтуитивной алгеброй приятно иметь калькулятор;
+% -в ходе решения задачи принятия решений числа могут стать очень большими, что может быть проблемой при больших размерностях. (и тут можно сказать как я планирую решить эту проблему в дипломе).
 
 
-    % \conclusion
 
 	% \renewcommand{\refname}{}
 	% \vspace{-25pt}

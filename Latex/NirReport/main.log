@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.20)  7 MAR 2023 01:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.5.27)  7 JUN 2022 14:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/user/Projects/SPBU/Semestr_8/NIR/Latex/main.tex
-(/home/user/Projects/SPBU/Semestr_8/NIR/Latex/main.tex
+**/home/user/Projects/SPBU/Semestr_6/Latex/NirReport/main.tex
+(/home/user/Projects/SPBU/Semestr_6/Latex/NirReport/main.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-04-10> (/usr/share/texmf-dist/tex/latex/disser/disser.cls
 Document Class: disser 2017/03/03 1.4.1 Document class for dissertations
@@ -500,15 +500,6 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@postskip=\skip59
 \thm@headsep=\skip60
 \dth@everypar=\toks28
-) (/usr/share/texmf-dist/tex/latex/tools/bm.sty
-Package: bm 2021/04/25 v1.2e Bold Symbol Support (DPC/FMi)
-\symboldoperators=\mathgroup6
-\symboldletters=\mathgroup7
-\symboldsymbols=\mathgroup8
-Package bm Info: No bold for \OMX/cmex/m/n, using \pmb.
-Package bm Info: No bold for \U/msa/m/n, using \pmb.
-Package bm Info: No bold for \U/msb/m/n, using \pmb.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 149.
 ) (/usr/share/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2022/02/26 3.73 The Babel package
 \babel@savecnt=\count289
@@ -542,30 +533,30 @@ LaTeX Warning: Unused global option(s):
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 49.
+Package hyperref Info: Link coloring OFF on input line 61.
  (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/share/texmf-dist/tex/latex/refcount/refcount.sty
@@ -575,9 +566,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count292
 )
-LaTeX Info: Redefining \ref on input line 49.
-LaTeX Info: Redefining \pageref on input line 49.
-LaTeX Info: Redefining \nameref on input line 49.
+LaTeX Info: Redefining \ref on input line 61.
+LaTeX Info: Redefining \pageref on input line 61.
+LaTeX Info: Redefining \nameref on input line 61.
  (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -635,7 +626,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \th on input line 49.
+LaTeX Info: Redefining \th on input line 61.
 \firstskip=\skip61
 \secondskip=\skip62
 \thirdskip=\skip63
@@ -644,11 +635,11 @@ LaTeX Info: Redefining \th on input line 49.
 \seventhskip=\skip66
 \eightthskip=\skip67
 <<ot1.cmap>><<oml.cmap>><<oms.cmap>><<omx.cmap>>
-LaTeX Font Info:    Trying to load font information for U+msa on input line 52.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 64.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 52.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 64.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
@@ -663,195 +654,344 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ]
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRV' on input line 56.
+(hyperref)                removing `\CYRV' on input line 68.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrv' on input line 56.
+(hyperref)                removing `\cyrv' on input line 68.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 56.
+(hyperref)                removing `\cyre' on input line 68.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrd' on input line 56.
+(hyperref)                removing `\cyrd' on input line 68.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 56.
+(hyperref)                removing `\cyre' on input line 68.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrn' on input line 56.
+(hyperref)                removing `\cyrn' on input line 68.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyri' on input line 56.
+(hyperref)                removing `\cyri' on input line 68.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 56.
+(hyperref)                removing `\cyre' on input line 68.
 
 [3
 
 
+] [4] [5]
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\CYRG' on input line 151.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyrl' on input line 151.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyra' on input line 151.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyrv' on input line 151.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyra' on input line 151.
+
+[6
+
 ]
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRG' on input line 67.
+(hyperref)                removing `\CYRG' on input line 186.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrl' on input line 67.
+(hyperref)                removing `\cyrl' on input line 186.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 67.
+(hyperref)                removing `\cyra' on input line 186.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrv' on input line 67.
+(hyperref)                removing `\cyrv' on input line 186.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 67.
+(hyperref)                removing `\cyra' on input line 186.
 
-[4
+[7
+
+]
+<images//experiment_1_cos.pdf, id=125, 505.89pt x 505.89pt>
+File: images//experiment_1_cos.pdf Graphic file (type pdf)
+<use images//experiment_1_cos.pdf>
+Package pdftex.def Info: images//experiment_1_cos.pdf  used on input line 221.
+(pdftex.def)             Requested size: 386.96597pt x 312.9847pt.
+ [8 <./images//experiment_1_cos.pdf>]
+<images//experiment_1_exp.pdf, id=158, 505.89pt x 505.89pt>
+File: images//experiment_1_exp.pdf Graphic file (type pdf)
+<use images//experiment_1_exp.pdf>
+Package pdftex.def Info: images//experiment_1_exp.pdf  used on input line 237.
+(pdftex.def)             Requested size: 386.96597pt x 312.9847pt.
+<images//experiment_1_expcos1.pdf, id=160, 505.89pt x 505.89pt>
+File: images//experiment_1_expcos1.pdf Graphic file (type pdf)
+<use images//experiment_1_expcos1.pdf>
+Package pdftex.def Info: images//experiment_1_expcos1.pdf  used on input line 253.
+(pdftex.def)             Requested size: 386.96597pt x 312.9847pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[9 <./images//experiment_1_exp.pdf>]
+<images//experiment_1_expcos2.pdf, id=192, 505.89pt x 505.89pt>
+File: images//experiment_1_expcos2.pdf Graphic file (type pdf)
+<use images//experiment_1_expcos2.pdf>
+Package pdftex.def Info: images//experiment_1_expcos2.pdf  used on input line 269.
+(pdftex.def)             Requested size: 386.96597pt x 312.9847pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[10 <./images//experiment_1_expcos1.pdf>] [11 <./images//experiment_1_expcos2.pdf>]
+<images//experiment_2_cos1.pdf, id=251, 505.89pt x 505.89pt>
+File: images//experiment_2_cos1.pdf Graphic file (type pdf)
+<use images//experiment_2_cos1.pdf>
+Package pdftex.def Info: images//experiment_2_cos1.pdf  used on input line 303.
+(pdftex.def)             Requested size: 217.66211pt x 217.66739pt.
+<images//experiment_2_cos2.pdf, id=252, 505.89pt x 505.89pt>
+File: images//experiment_2_cos2.pdf Graphic file (type pdf)
+<use images//experiment_2_cos2.pdf>
+Package pdftex.def Info: images//experiment_2_cos2.pdf  used on input line 309.
+(pdftex.def)             Requested size: 217.66211pt x 217.66739pt.
+<images//experiment_2_exp1.pdf, id=255, 505.89pt x 505.89pt>
+File: images//experiment_2_exp1.pdf Graphic file (type pdf)
+<use images//experiment_2_exp1.pdf>
+Package pdftex.def Info: images//experiment_2_exp1.pdf  used on input line 327.
+(pdftex.def)             Requested size: 217.66211pt x 217.66739pt.
+<images//experiment_2_exp2.pdf, id=256, 505.89pt x 505.89pt>
+File: images//experiment_2_exp2.pdf Graphic file (type pdf)
+<use images//experiment_2_exp2.pdf>
+Package pdftex.def Info: images//experiment_2_exp2.pdf  used on input line 333.
+(pdftex.def)             Requested size: 217.66211pt x 217.66739pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[12 <./images//experiment_2_cos1.pdf> <./images//experiment_2_cos2.pdf>]
+<images//experiment_3_expline.pdf, id=282, 505.89pt x 505.89pt>
+File: images//experiment_3_expline.pdf Graphic file (type pdf)
+<use images//experiment_3_expline.pdf>
+Package pdftex.def Info: images//experiment_3_expline.pdf  used on input line 350.
+(pdftex.def)             Requested size: 386.95897pt x 386.96597pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images//experiment_3_linefirstcomp.pdf, id=284, 505.89pt x 505.89pt>
+File: images//experiment_3_linefirstcomp.pdf Graphic file (type pdf)
+<use images//experiment_3_linefirstcomp.pdf>
+Package pdftex.def Info: images//experiment_3_linefirstcomp.pdf  used on input line 362.
+(pdftex.def)             Requested size: 386.95897pt x 386.96597pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images//experiment_3_secondpart1.pdf, id=286, 505.89pt x 505.89pt>
+File: images//experiment_3_secondpart1.pdf Graphic file (type pdf)
+<use images//experiment_3_secondpart1.pdf>
+Package pdftex.def Info: images//experiment_3_secondpart1.pdf  used on input line 378.
+(pdftex.def)             Requested size: 217.66211pt x 217.66739pt.
+<images//experiment_3_secondpart2.pdf, id=287, 505.89pt x 505.89pt>
+File: images//experiment_3_secondpart2.pdf Graphic file (type pdf)
+<use images//experiment_3_secondpart2.pdf>
+Package pdftex.def Info: images//experiment_3_secondpart2.pdf  used on input line 384.
+(pdftex.def)             Requested size: 217.66211pt x 217.66739pt.
+[13 <./images//experiment_2_exp1.pdf> <./images//experiment_2_exp2.pdf>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[14 <./images//experiment_3_expline.pdf>]
+<images//experiment_3_lost1.pdf, id=323, 505.89pt x 505.89pt>
+File: images//experiment_3_lost1.pdf Graphic file (type pdf)
+<use images//experiment_3_lost1.pdf>
+Package pdftex.def Info: images//experiment_3_lost1.pdf  used on input line 412.
+(pdftex.def)             Requested size: 386.95897pt x 386.96597pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images//experiment_3_lost2.pdf, id=324, 505.89pt x 505.89pt>
+File: images//experiment_3_lost2.pdf Graphic file (type pdf)
+<use images//experiment_3_lost2.pdf>
+Package pdftex.def Info: images//experiment_3_lost2.pdf  used on input line 419.
+(pdftex.def)             Requested size: 386.95897pt x 386.96597pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images//experiment_3_lost3.pdf, id=327, 505.89pt x 505.89pt>
+File: images//experiment_3_lost3.pdf Graphic file (type pdf)
+<use images//experiment_3_lost3.pdf>
+Package pdftex.def Info: images//experiment_3_lost3.pdf  used on input line 428.
+(pdftex.def)             Requested size: 386.95897pt x 386.96597pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[15 <./images//experiment_3_linefirstcomp.pdf>]
+<images//experiment_3_mssa2.pdf, id=341, 505.89pt x 505.89pt>
+File: images//experiment_3_mssa2.pdf Graphic file (type pdf)
+<use images//experiment_3_mssa2.pdf>
+Package pdftex.def Info: images//experiment_3_mssa2.pdf  used on input line 442.
+(pdftex.def)             Requested size: 386.96597pt x 312.9847pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images//experiment_3_mssa1.pdf, id=342, 505.89pt x 505.89pt>
+File: images//experiment_3_mssa1.pdf Graphic file (type pdf)
+<use images//experiment_3_mssa1.pdf>
+Package pdftex.def Info: images//experiment_3_mssa1.pdf  used on input line 449.
+(pdftex.def)             Requested size: 386.96597pt x 312.9847pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[16 <./images//experiment_3_secondpart1.pdf> <./images//experiment_3_secondpart2.pdf>] [17 <./images//experiment_3_lost1.pdf>] [18 <./images//experiment_3_lost2.pdf>] [19 <./images//experiment_3_lost3.pdf>] [20 <./images//experiment_3_mssa2.pdf>] [21 <./images//experiment_3_mssa1.pdf>]
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\CYRZ' on input line 468.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyra' on input line 468.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyrk' on input line 468.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyrl' on input line 468.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyryu' on input line 468.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyrch' on input line 468.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyre' on input line 468.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyrn' on input line 468.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyri' on input line 468.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyre' on input line 468.
+
+(./main.bbl [22
 
 ]
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRG' on input line 76.
+(hyperref)                removing `\CYRS' on input line 1.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrl' on input line 76.
+(hyperref)                removing `\cyrp' on input line 1.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 76.
+(hyperref)                removing `\cyri' on input line 1.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrv' on input line 76.
+(hyperref)                removing `\cyrs' on input line 1.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 76.
-
-(./1.tex [5
-
-] [6] [7]
-Overfull \hbox (15.94296pt too wide) detected at line 175
-\OML/cmm/m/it/12 B[] \OT1/cmr/m/n/12 = []
- []
-
-
-Overfull \hbox (98.19211pt too wide) detected at line 182
-\OML/cmm/m/it/12 B[] \OT1/cmr/m/n/12 = []
- []
-
-[8]
-Overfull \hbox (19.79736pt too wide) detected at line 192
-\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^U[]B\OT1/cmr/m/n/12 )[] = []
- []
-
-
-Overfull \hbox (196.04553pt too wide) detected at line 199
-\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^U[]B\OT1/cmr/m/n/12 )[] = []
- []
-
-
-Overfull \hbox (196.04553pt too wide) detected at line 206
-\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^U[]B\OT1/cmr/m/n/12 )[] = []
- []
-
-[9]
-Overfull \hbox (16.49324pt too wide) detected at line 251
-\OML/cmm/m/it/12 D[] \OT1/cmr/m/n/12 = []
- []
-
-
-Overfull \hbox (98.74239pt too wide) detected at line 258
-\OML/cmm/m/it/12 D[] \OT1/cmr/m/n/12 = []
- []
-
-
-Overfull \hbox (20.34764pt too wide) detected at line 268
-\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^U[]D\OT1/cmr/m/n/12 )[] = []
- []
-
-
-Overfull \hbox (196.59581pt too wide) detected at line 275
-\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^U[]D\OT1/cmr/m/n/12 )[] = []
- []
-
-
-Overfull \hbox (196.59581pt too wide) detected at line 282
-\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^U[]D\OT1/cmr/m/n/12 )[] = []
- []
-
-[10]) [11]
-
-Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRZ' on input line 110.
+(hyperref)                removing `\cyro' on input line 1.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 110.
+(hyperref)                removing `\cyrk' on input line 1.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrk' on input line 110.
+(hyperref)                removing `\cyrl' on input line 1.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrl' on input line 110.
+(hyperref)                removing `\cyri' on input line 1.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyryu' on input line 110.
+(hyperref)                removing `\cyrt' on input line 1.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrch' on input line 110.
+(hyperref)                removing `\cyre' on input line 1.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 110.
+(hyperref)                removing `\cyrr' on input line 1.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrn' on input line 110.
+(hyperref)                removing `\cyra' on input line 1.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyri' on input line 110.
+(hyperref)                removing `\cyrt' on input line 1.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 110.
+(hyperref)                removing `\cyru' on input line 1.
 
-[12
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyrr' on input line 1.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyrery' on input line 1.
+
+) [23
 
 ] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 6AD063948B214B1A17D583ACDC88528C;2290.
+(rerunfilecheck)             Checksum: D659338E3CBE11BA0BA69FA96B26485C;3001.
  ) 
 Here is how much of TeX's memory you used:
- 13539 strings out of 478238
- 217277 string characters out of 5850455
- 522360 words of memory out of 5000000
- 31512 multiletter control sequences out of 15000+600000
- 483091 words of font info for 63 fonts, out of 8000000 for 9000
+ 13732 strings out of 478238
+ 223181 string characters out of 5850456
+ 512477 words of memory out of 5000000
+ 31627 multiletter control sequences out of 15000+600000
+ 490225 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,7n,77p,472b,349s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on main.pdf (12 pages, 180268 bytes).
+ 75i,9n,77p,1205b,444s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
+Output written on main.pdf (23 pages, 448722 bytes).
 PDF statistics:
- 192 PDF objects out of 1000 (max. 8388607)
- 152 compressed objects within 2 object streams
- 26 named destinations out of 1000 (max. 500000)
- 105 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 559 PDF objects out of 1000 (max. 8388607)
+ 462 compressed objects within 5 object streams
+ 68 named destinations out of 1000 (max. 500000)
+ 198 words of extra memory for PDF output out of 10000 (max. 10000000)
 
