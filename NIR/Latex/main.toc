@@ -1,11 +1,16 @@
 \babel@toc {russian}{}\relax 
 \contentsline {chapter}{\cyrillictext \CYRV \cyrv \cyre \cyrd \cyre \cyrn \cyri \cyre }{3}{chapter*.2}%
 \contentsline {section}{\numberline {1.\hskip 1em}Постановка задачи принятия решений}{3}{section.0.1}%
+\contentsline {subsection}{\numberline {1.1.\hskip 1em}Однокритериальная задача парных сравнений}{3}{subsection.0.1.1}%
+\contentsline {subsection}{\numberline {1.2.\hskip 1em}Многокритериальная задача парных сравнений}{3}{subsection.0.1.2}%
 \contentsline {section}{\numberline {2.\hskip 1em}Определение тропической математики}{3}{section.0.2}%
-\contentsline {section}{\numberline {3.\hskip 1em}Алгоритм решения задачи}{3}{section.0.3}%
-\contentsline {chapter}{\chaptername ~1.\hskip 1em Разработка структуры для хранения чисел}{4}{chapter.1}%
-\contentsline {chapter}{\chaptername ~2.\hskip 1em Реализация матриц и алгоритма}{5}{chapter.2}%
-\contentsline {section}{\numberline {2.1.\hskip 1em}Вывод решения}{5}{section.2.1}%
-\contentsline {section}{\numberline {2.2.\hskip 1em}}{5}{section.2.2}%
-\contentsline {section}{\numberline {2.3.\hskip 1em}Пример работы программы}{5}{section.2.3}%
-\contentsline {chapter}{\cyrillictext \CYRZ \cyra \cyrk \cyrl \cyryu \cyrch \cyre \cyrn \cyri \cyre }{12}{chapter*.4}%
+\contentsline {section}{\numberline {3.\hskip 1em}Алгоритм решения задачи}{4}{section.0.3}%
+\contentsline {chapter}{\chaptername ~1.\hskip 1em Разработка структуры для хранения чисел}{5}{chapter.1}%
+\contentsline {chapter}{\chaptername ~2.\hskip 1em Реализации}{6}{chapter.2}%
+\contentsline {section}{\numberline {2.1.\hskip 1em}Матрицы}{6}{section.2.1}%
+\contentsline {section}{\numberline {2.2.\hskip 1em}Вывод решения}{7}{section.2.2}%
+\contentsline {section}{\numberline {2.3.\hskip 1em}Пример работы программы}{8}{section.2.3}%
+\contentsline {chapter}{\cyrillictext \CYRZ \cyra \cyrk \cyrl \cyryu \cyrch \cyre \cyrn \cyri \cyre }{13}{chapter*.4}%
+\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{14}{chapter*.6}%
+\babel@toc {russian}{}\relax 
+\babel@toc {russian}{}\relax 
