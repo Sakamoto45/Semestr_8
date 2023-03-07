@@ -14,7 +14,7 @@ output:
 
 # library(readxl)
 # library(reshape2)
-# library(ggplot2)
+library(ggplot2)
 # library(GGally) # pairwise plot
 # library(stringr) # str_squish
 
@@ -75,16 +75,15 @@ function24_edited <- function(point) {
 ```
 
 ```{r}
-integrate <- function(
-    N = 100000,
-    random_point_min = rep(0, 3),
-    random_point_max = rep(10, 3),
-    linear_limits = matrix(c(
-        c(-1, 0, 0, 0),
-        c(param_b, -1, 0, 0),
-        c(param_c, 0, -1, 0)
-    ), nrow = 3, byrow = TRUE),
-    f = function24) {
+integrate <- function(N = 100000,
+                      random_point_min = rep(0, 3),
+                      random_point_max = rep(10, 3),
+                      linear_limits = matrix(c(
+                          c(-1, 0, 0, 0),
+                          c(param_b, -1, 0, 0),
+                          c(param_c, 0, -1, 0)
+                      ), nrow = 3, byrow = TRUE),
+                      f = function24) {
     # random_point_min <- c(0, 0, 0)
 
     # random_point_max <- rep(10, 3)
@@ -96,7 +95,6 @@ integrate <- function(
         )
     }
 
-    # N <- 100000
     attempts <- 0
     filtered_points <- matrix(ncol = 3)
 
@@ -132,15 +130,14 @@ integrate <- function(
     D <- mean(apply(filtered_points, 1, function(x) (f(x) - I)^2)) / p
 
     # return(c(I, I_, D))
-    return(c(I - sqrt(D / N) * 1.96, I + sqrt(D / N) * 1.96))
+    return(list(N = N, box_size = random_point_max[1], left = I - sqrt(D / N) * 1.96, right = I + sqrt(D / N) * 1.96))
 }
 
-integrate2 <- function(
-    N = 100000,
-    random_point_min = rep(0, 3),
-    random_point_max = rep(10, 3),
-    linear_limits = matrix(c(c(-1, 0, 0, 0)), nrow = 1, byrow = TRUE),
-    f = function24_edited) {
+integrate2 <- function(N = 100000,
+                       random_point_min = rep(0, 3),
+                       random_point_max = rep(10, 3),
+                       linear_limits = matrix(c(c(-1, 0, 0, 0)), nrow = 1, byrow = TRUE),
+                       f = function24_edited) {
     return(integrate(N, random_point_min, random_point_max, linear_limits, f))
 }
 
@@ -148,38 +145,67 @@ integrate2 <- function(
 ```
 
 ```{r}
-integrate(random_point_max = rep(1, 3))
-integrate(random_point_max = rep(5, 3))
-integrate(random_point_max = rep(10, 3))
-integrate(random_point_max = rep(50, 3))
-integrate(random_point_max = rep(100, 3))
-integrate(random_point_max = rep(500, 3))
+df1_box <- data.frame(rbind(
+    integrate(random_point_max = rep(1, 3)),
+    integrate(random_point_max = rep(5, 3)),
+    integrate(random_point_max = rep(10, 3)),
+    integrate(random_point_max = rep(50, 3)),
+    integrate(random_point_max = rep(100, 3)),
+    integrate(random_point_max = rep(500, 3))
+))
+
+df2_box <- data.frame(rbind(
+    integrate2(random_point_max = rep(1, 3)),
+    integrate2(random_point_max = rep(5, 3)),
+    integrate2(random_point_max = rep(10, 3)),
+    integrate2(random_point_max = rep(50, 3)),
+    integrate2(random_point_max = rep(100, 3)),
+    integrate2(random_point_max = rep(500, 3))
+))
 ```
 
 ```{r}
-integrate(N = 10)
-integrate(N = 100)
-integrate(N = 1000)
-integrate(N = 10000)
-integrate(N = 100000)
+df1_N <- data.frame(rbind(
+    # integrate(N = 100),
+    # integrate(N = 500),
+    integrate(N = 1000),
+    integrate(N = 2000),
+    integrate(N = 5000),
+    integrate(N = 10000),
+    integrate(N = 20000)
+    # integrate(N = 50000)
+    # integrate(N = 100000)
+))
+
+df2_N <- data.frame(rbind(
+    # integrate2(N = 100),
+    # integrate2(N = 500),
+    integrate2(N = 3 * 1000),
+    integrate2(N = 3 * 2000),
+    integrate2(N = 3 * 5000),
+    integrate2(N = 3 * 10000),
+    integrate2(N = 3 * 20000)
+    # integrate2(N = 50000)
+    # integrate2(N = 100000)
+))
+# integrate2(N = 100000)
 ```
 
 ```{r}
-integrate2(random_point_max = rep(1, 3))
-integrate2(random_point_max = rep(5, 3))
-integrate2(random_point_max = rep(10, 3))
-integrate2(random_point_max = rep(50, 3))
-integrate2(random_point_max = rep(100, 3))
-integrate2(random_point_max = rep(500, 3))
+ggplot() +
+    geom_line(data = df1_N, mapping = aes(y = as.numeric(left), x = log(3 * as.numeric(N), 10)), color = "red") +
+    geom_line(data = df1_N, mapping = aes(y = as.numeric(right), x = log(3 * as.numeric(N), 10)), color = "red") +
+    geom_line(data = df2_N, mapping = aes(y = as.numeric(left), x = log(as.numeric(N), 10)), color = "blue") +
+    geom_line(data = df2_N, mapping = aes(y = as.numeric(right), x = log(as.numeric(N), 10)), color = "blue")
 ```
+
 
 ```{r}
-integrate2(N = 10)
-integrate2(N = 100)
-integrate2(N = 1000)
-integrate2(N = 10000)
-integrate2(N = 100000)
+ggplot() +
+    geom_line(data = df1_box, mapping = aes(y = as.numeric(left), x = log(as.numeric(box_size), 10)), color = "red") +
+    geom_line(data = df1_box, mapping = aes(y = as.numeric(right), x = log(as.numeric(box_size), 10)), color = "red") +
+    geom_line(data = df2_box, mapping = aes(y = as.numeric(left), x = log(as.numeric(box_size), 10)), color = "blue") +
+    geom_line(data = df2_box, mapping = aes(y = as.numeric(right), x = log(as.numeric(box_size), 10)), color = "blue")
 ```
-
 
 
