@@ -14,11 +14,51 @@
 \cyrdash\hskip.2em plus 0.1em\ignorespaces}
 \renewcommand{\newblock}{\ignorespaces}
 
-\bibitem{Decision_making}
+\bibitem{Krivulin2020Reshenie}
 \selectlanguageifdefined{russian}
-Кривулин~Н. О решении многокритериальных
-  задач принятия решений на основе парных
-  сравнений. \BibDash
-\newblock 2019.
+О решении многокритериальных задач
+  принятия решений на основе парных
+  сравнений~/ Кривулин~Н.~К., Абильдаев~Т.,
+  Горшечникова~В.~Д., Капаца~Д., Магдич~Е.~А. и
+  Мандрикова~А.~А.~//
+  \href{https://doi.org/10.32603/2071-2340-2020-2-27-58}{\BibEmph{Компьютерные
+  инструменты в образовании}}. \BibDash
+\newblock 2020. \BibDash
+\newblock {№}~2. \BibDash
+\newblock {С.}~27--58. \BibDash
+\newblock {Режим доступа}:
+  \BibUrl{http://cte.eltech.ru/ojs/index.php/kio/article/view/1655}.
+
+\bibitem{Krivulin2019Metody}
+\selectlanguageifdefined{russian}
+Кривулин~Н.~К., Агеев~В.~А. Методы
+  тропической оптимизации в
+  многокритериальных задачах оценки
+  альтернатив на основе парных сравнений~//
+  \href{https://doi.org/10.21638/11702/spbu10.2019.405}{\BibEmph{Вестн.
+  С.-Петерб. ун-та. Прикл. матем.}} \BibDash
+\newblock 2019. \BibDash
+\newblock Т.~15, {№}~4. \BibDash
+\newblock {С.}~472--488.
+
+\bibitem{Krivulin2019Tropical}
+\selectlanguageifdefined{english}
+Krivulin~Nikolai, Sergeev~Serge\u{\i}. Tropical implementation of the
+  {A}nalytical {H}ierarchy {P}rocess decision method~//
+  \href{https://doi.org/10.1016/j.fss.2018.10.013}{\BibEmph{Fuzzy Sets and
+  Systems}}. \BibDash
+\newblock 2019. \BibDash
+\newblock Vol. 377. \BibDash
+\newblock P.~31--51. \BibDash
+\newblock 1802.01989.
+
+\bibitem{Krivulin2022Using}
+\selectlanguageifdefined{english}
+Krivulin~Nikolai, Prinkov~Alexey, Gladkikh~Igor. Using pairwise comparisons to
+  determine consumer preferences in hotel selection~//
+  \href{https://doi.org/10.3390/math10050730}{\BibEmph{Mathematics}}. \BibDash
+\newblock 2022. \BibDash
+\newblock Vol.~10, no.~5. \BibDash
+\newblock P.~1--25.
 
 \end{thebibliography}
