@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1654590744 "main.aux" "main.bbl" "main" 1654602647
+["bibtex main"] 1654590744 "main.aux" "main.bbl" "main" 1678330842
   "./ugost2008.bst" 1640166390 60164 b85a42b3567d4e9f2b117d0cc07b7ae6 ""
-  "main.aux" 1654602646 13726 5fd6bd71f2fd5d2195c7d93f7871d41f "pdflatex"
+  "main.aux" 1678330842 13726 5fd6bd71f2fd5d2195c7d93f7871d41f "pdflatex"
   "references.bib" 1654590723 608 4c80e70bf7332ff5666b78e373e31d54 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1654602646 "/home/user/Projects/SPBU/Semestr_6/Latex/NirReport/main.tex" "main.pdf" "main" 1654602647
+["pdflatex"] 1678330841 "/home/user/Projects/SPBU/Semestr_8/Latex/NirReport/main.tex" "main.pdf" "main" 1678330842
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/labi1200.tfm" 1639994445 3592 9415307df98650ffeddaa22e262436dc ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/labx1200.tfm" 1633082937 3308 eee81981029f67083258db36df06e523 ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/labx1440.tfm" 1633082934 3304 6a543c07045572737981351171e0505e ""
@@ -19,7 +19,7 @@
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lati0600.tfm" 1640327872 3528 d301f5141277b5cf2d3e1e47a41a7d24 ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lati0800.tfm" 1640327870 3528 34d5b03fb0a23b3c8d81225e326c0140 ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lati1200.tfm" 1639993601 3512 f3a56cfe95a159371df20f73d1eb107d ""
-  "/home/user/Projects/SPBU/Semestr_6/Latex/NirReport/main.tex" 1654602645 43438 2a8701ebd1490f5bdb353e98a78c29b8 ""
+  "/home/user/Projects/SPBU/Semestr_8/Latex/NirReport/main.tex" 1654602645 43438 2a8701ebd1490f5bdb353e98a78c29b8 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1650183167 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc" 1650183167 3141 82d5616418ed8d5de703b3951bedecb4 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1650183167 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -155,8 +155,8 @@
   "/usr/share/texmf-dist/tex/latex/textcase/textcase.sty" 1650183167 2156 a092fd3ecd0a13fd597725ee6894b032 ""
   "/usr/share/texmf-dist/tex/latex/url/url.sty" 1650183167 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1650183167 39911 2da6c67557ec033436fe5418a70a8a61 ""
-  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1653652899 4315013 0bd608b4a39f125b8b5a85f16e5c9077 ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1653652888 2927656 dc6a243d10ff960c8922590cbc6a288f ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1668975308 4315013 0bd608b4a39f125b8b5a85f16e5c9077 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1668975286 2927664 3fe029cb0745d2a683eb3884032b48f9 ""
   "images//experiment_1_cos.pdf" 1654443895 7896 0e9360d399bc39d991fade2e63620ea5 ""
   "images//experiment_1_exp.pdf" 1654444597 8213 5cbf0d0a0e4887c92259e8ce8a2adc7c ""
   "images//experiment_1_expcos1.pdf" 1654449021 8192 cc83da26a04250d2b99742be2662067f ""
@@ -174,11 +174,11 @@
   "images//experiment_3_mssa2.pdf" 1654562790 8704 b7ad9b62cc6e57438d14a530b9349af7 ""
   "images//experiment_3_secondpart1.pdf" 1654487141 4676 f73974077fc245ab78315156d2476ab9 ""
   "images//experiment_3_secondpart2.pdf" 1654487124 4667 7fbb0854891b10bfda6388d827c85c64 ""
-  "main.aux" 1654602646 13726 5fd6bd71f2fd5d2195c7d93f7871d41f "pdflatex"
+  "main.aux" 1678330842 13726 5fd6bd71f2fd5d2195c7d93f7871d41f "pdflatex"
   "main.bbl" 1654590744 1160 8513c369b3de1a968b52ba3e6a8d463f "bibtex main"
-  "main.out" 1654602646 3001 d659338e3cbe11ba0ba69fa96b26485c "pdflatex"
+  "main.out" 1678330842 3001 d659338e3cbe11ba0ba69fa96b26485c "pdflatex"
   "main.tex" 1654602645 43438 2a8701ebd1490f5bdb353e98a78c29b8 ""
-  "main.toc" 1654602646 3795 d1beb5331a114e7421c0a3df3aeb9d95 "pdflatex"
+  "main.toc" 1678330842 3795 d1beb5331a114e7421c0a3df3aeb9d95 "pdflatex"
   "spbureport.rtx" 1639992843 1608 621c9633cb9ae1ccc5a8a0005b5dae3c ""
   (generated)
   "main.aux"

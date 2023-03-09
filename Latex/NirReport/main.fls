@@ -1,7 +1,7 @@
-PWD /home/user/Projects/SPBU/Semestr_6/Latex/NirReport
+PWD /home/user/Projects/SPBU/Semestr_8/Latex/NirReport
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/user/Projects/SPBU/Semestr_6/Latex/NirReport/main.tex
+INPUT /home/user/Projects/SPBU/Semestr_8/Latex/NirReport/main.tex
 OUTPUT main.log
 INPUT /usr/share/texmf-dist/tex/latex/disser/disser.cls
 INPUT /usr/share/texmf-dist/tex/latex/disser/disser.cls

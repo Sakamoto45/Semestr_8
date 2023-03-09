@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1678275350 "main.aux" "main.bbl" "main" 1678275443
+["bibtex main"] 1678330930 "main.aux" "main.bbl" "main" 1678330931
   "./ugost2008.bst" 1677916773 60164 b85a42b3567d4e9f2b117d0cc07b7ae6 ""
-  "main.aux" 1678275443 4104 2ccec5f49ac3f9fbacd83ab6a81abf8f "pdflatex"
-  "references.bib" 1678274741 5706 04db7b19e34e7f65f43630180895bb49 ""
+  "main.aux" 1678330931 4104 2ccec5f49ac3f9fbacd83ab6a81abf8f "pdflatex"
+  "references.bib" 1678330930 5681 04c473923a1c9683761e445eb1ea18ff ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1678275442 "/home/user/Projects/SPBU/Semestr_8/NIR/Latex/main.tex" "main.pdf" "main" 1678275443
+["pdflatex"] 1678330930 "/home/user/Projects/SPBU/Semestr_8/NIR/Latex/main.tex" "main.pdf" "main" 1678330931
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/labx1000.tfm" 1633082935 3300 6abb8e321227ead2a8e929e5abc72bd3 ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/labx1200.tfm" 1633082937 3308 eee81981029f67083258db36df06e523 ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/labx1440.tfm" 1633082934 3304 6a543c07045572737981351171e0505e ""
@@ -18,7 +18,7 @@
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/larm1728.tfm" 1633082929 3252 92d08740ce00199d6cf9ff4aaada81d1 ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lati1200.tfm" 1639993601 3512 f3a56cfe95a159371df20f73d1eb107d ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/latt1200.tfm" 1654450504 1272 bf3bb5cc29880b269c8bcb412a1ac6e2 ""
-  "/home/user/Projects/SPBU/Semestr_8/NIR/Latex/main.tex" 1678275442 26755 ae88604fd867f30ad9271e113acf6520 ""
+  "/home/user/Projects/SPBU/Semestr_8/NIR/Latex/main.tex" 1678330851 26755 ae88604fd867f30ad9271e113acf6520 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1650183167 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc" 1650183167 3141 82d5616418ed8d5de703b3951bedecb4 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1650183167 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -162,11 +162,11 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1668975308 4315013 0bd608b4a39f125b8b5a85f16e5c9077 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1668975286 2927664 3fe029cb0745d2a683eb3884032b48f9 ""
   "1.tex" 1678268829 7479 47f97adb1f49880cc6ee48213956006c ""
-  "main.aux" 1678275443 4104 2ccec5f49ac3f9fbacd83ab6a81abf8f "pdflatex"
-  "main.bbl" 1678275350 2642 0b2210935a9b98d33832fe628d3bf1e1 "bibtex main"
-  "main.out" 1678275443 3862 22948ba5e804b9265d3697ed9e955d18 "pdflatex"
-  "main.tex" 1678275442 26755 ae88604fd867f30ad9271e113acf6520 ""
-  "main.toc" 1678275443 2043 f67b55ac957f6e1cb8c2a90eff75778c "pdflatex"
+  "main.aux" 1678330931 4104 2ccec5f49ac3f9fbacd83ab6a81abf8f "pdflatex"
+  "main.bbl" 1678330930 2615 c8f6723a7b3a7f30046b138e40f286b7 "bibtex main"
+  "main.out" 1678330931 3862 22948ba5e804b9265d3697ed9e955d18 "pdflatex"
+  "main.tex" 1678330851 26755 ae88604fd867f30ad9271e113acf6520 ""
+  "main.toc" 1678330931 2043 f67b55ac957f6e1cb8c2a90eff75778c "pdflatex"
   "spbureport.rtx" 1677916779 1608 621c9633cb9ae1ccc5a8a0005b5dae3c ""
   (generated)
   "main.aux"
