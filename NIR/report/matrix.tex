@@ -1,0 +1,406 @@
+\addcontentsline{toc}{section}{matrix.h}
+\begin{lstlisting}[caption=matrix.h\label{listing:matrix}]
+#pragma once
+
+#include <vector>
+#include <assert.h>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+template <typename T>
+class Matrix;
+template <typename T>
+Matrix<T> Identity(uint size);
+template <typename T>
+Matrix<T> Ones(uint rows, uint cols);
+
+template <typename T>
+class Matrix
+{
+public:
+    Matrix(uint rows, uint cols, T value = 0)
+        : matrix_(rows, std::vector<T>(cols, value)) {}
+    Matrix(const std::vector<std::vector<T>> &matrix)
+        : matrix_(matrix) {}
+    Matrix(std::initializer_list<std::vector<T>> matrix)
+        : matrix_(matrix)
+    {
+        // std::cout << "initializer_list T" << std::endl;
+
+        for (uint i = 0; i < rows(); i++)
+        {
+            assert(cols() == matrix_[i].size());
+        }
+    }
+    template <typename U>
+    Matrix(const Matrix<U> &other) : Matrix(other.rows(), other.cols())
+    {
+        // std::cout << "Matrix U" << std::endl;
+
+        for (uint i = 0; i < rows(); i++)
+        {
+            for (uint j = 0; j < cols(); j++)
+            {
+                matrix_[i][j] = other[i][j];
+            }
+        }
+    }
+
+    std::vector<T> &operator[](uint i)
+    {
+        return matrix_[i];
+    }
+    const std::vector<T> &operator[](uint i) const
+    {
+        return matrix_[i];
+    }
+
+    Matrix operator+=(const Matrix &other)
+    {
+        assert(rows() == other.rows());
+        assert(cols() == other.cols());
+        for (uint i = 0; i < rows(); i++)
+        {
+            for (uint j = 0; j < cols(); j++)
+            {
+                matrix_[i][j] += other[i][j];
+            }
+        }
+        return *this;
+    }
+    Matrix operator+(const Matrix &other) const
+    {
+        return Matrix(*this) += other;
+    }
+
+    Matrix operator-() const
+    {
+        Matrix result(rows(), cols());
+        for (uint i = 0; i < rows(); i++)
+        {
+            for (uint j = 0; j < cols(); j++)
+            {
+                result[i][j] = -matrix_[i][j];
+            }
+        }
+        return result;
+    }
+    Matrix operator-=(const Matrix &other)
+    {
+        assert(rows() == other.rows());
+        assert(cols() == other.cols());
+        for (uint i = 0; i < rows(); i++)
+        {
+            for (uint j = 0; j < cols(); j++)
+            {
+                matrix_[i][j] -= other[i][j];
+            }
+        }
+        return *this;
+    }
+    Matrix operator-(const Matrix &other) const
+    {
+        return Matrix(*this) -= other;
+    }
+
+    Matrix operator*=(const Matrix &other)
+    {
+        assert(cols() == other.rows());
+        Matrix result(rows(), other.cols());
+        for (uint i = 0; i < result.rows(); i++)
+        {
+            for (uint j = 0; j < result.cols(); j++)
+            {
+                for (uint k = 0; k < cols(); k++)
+                {
+                    result[i][j] += matrix_[i][k] * other[k][j];
+                }
+            }
+        }
+        matrix_ = std::move(result.matrix_);
+        return *this;
+    }
+    Matrix operator*(const Matrix &other) const
+    {
+        return Matrix(*this) *= other;
+    }
+
+    Matrix operator*=(const T &scalar)
+    {
+        for (uint i = 0; i < rows(); i++)
+        {
+            for (uint j = 0; j < cols(); j++)
+            {
+                matrix_[i][j] *= scalar;
+            }
+        }
+        return *this;
+    }
+    Matrix operator*(const T &scalar) const
+    {
+        return Matrix(*this) *= scalar;
+    }
+
+    Matrix operator/=(const T &scalar)
+    {
+        for (uint i = 0; i < rows(); i++)
+        {
+            for (uint j = 0; j < cols(); j++)
+            {
+                matrix_[i][j] /= scalar;
+            }
+        }
+        return *this;
+    }
+    Matrix operator/(const T &scalar) const
+    {
+        return Matrix(*this) /= scalar;
+    }
+
+    Matrix Transpose() const
+    {
+        Matrix result(cols(), rows());
+        for (uint i = 0; i < rows(); i++)
+        {
+            for (uint j = 0; j < cols(); j++)
+            {
+                result[j][i] = (matrix_[i][j] == T{0} ? T{0}
+                                                      : T{1} / matrix_[i][j]);
+            }
+        }
+        return result;
+    }
+
+    T Trace() const
+    {
+        assert(rows() == cols());
+        T result;
+        for (uint i = 0; i < cols(); i++)
+        {
+            result += matrix_[i][i];
+        }
+        return result;
+    }
+
+    T Determinant() const
+    {
+        T result{Trace()};
+        Matrix tmp(*this);
+        for (uint i = 1; i < cols(); i++)
+        {
+            tmp *= *this;
+            result += tmp.Trace();
+        }
+        return result;
+    }
+
+    T SpectralRadius() const
+    {
+        T result{Trace()};
+        Matrix tmp(*this);
+        for (uint i = 2; i <= cols(); i++)
+        {
+            tmp *= *this;
+            result += tmp.Trace().Root(i);
+        }
+        return result;
+    }
+
+    Matrix Kleene() const
+    {
+        Matrix tmp{*this};
+        Matrix result{Identity<T>(cols())};
+        for (uint i = 1; i < cols(); i++)
+        {
+            result += tmp;
+            tmp *= *this;
+        }
+        return result;
+    }
+
+    bool isLinearlyDependent(const Matrix &b)
+    {
+        assert(b.cols() == 1);
+        Matrix &A = *this;
+        Matrix result((A * (b.Transpose() * A).Transpose()).Transpose() * b);
+
+        return result[0][0] == T{1};
+    }
+
+    Matrix Span()
+    {
+        Matrix result(getCol(0));
+        for (uint j = 1; j < cols(); j++)
+        {
+            auto tmp = getCol(j);
+            if (!result.isLinearlyDependent(tmp))
+            {
+                result.cbind(tmp);
+            }
+        }
+        return result;
+    }
+
+    Matrix BestVector()
+    {
+        T lambda = SpectralRadius();
+        Matrix P((*this / lambda).Kleene().Span());
+
+        // uint k = 0;
+        vector<uint> k;
+        T max_value = -1;
+        for (uint j = 0; j < P.cols(); j++)
+        {
+            Matrix col_j(P.getCol(j));
+            T tmp = (col_j * col_j.Transpose()).sum();
+            if (tmp > max_value)
+            {
+                // k = j;
+                k.clear();
+                max_value = tmp;
+            }
+            if (tmp == max_value)
+            {
+                k.push_back(j);
+            }
+        }
+        vector<uint> l(k.size(), 0);
+        for (uint it = 0; it < k.size(); it++)
+        {
+            for (uint i = 0; i < P.rows(); i++)
+            {
+                if (P[i][k[it]] < P[l[it]][k[it]])
+                {
+                    l[it] = i;
+                }
+            }
+        }
+
+        Matrix result(P * (Identity<T>(P.cols()) +
+                            P.filter(l[0], k[0]).Transpose() * P));
+        for (uint i = 1; i < k.size(); i++)
+        {
+            result.cbind(P * (Identity<T>(P.cols()) +
+                                P.filter(l[1], k[1]).Transpose() * P));
+        }
+
+        return result.Span().normCol();
+    }
+
+    Matrix WorstVector()
+    {
+        T lambda(SpectralRadius());
+        Matrix kleene((*this / lambda).Kleene());
+        T Delta = kleene.sum();
+    
+        return (Matrix(rows(), cols(), T{1} / Delta)
+                + *this / lambda).Kleene().Span().normCol();
+    }
+
+    Matrix cbind(const Matrix &other)
+    {
+        assert(rows() == other.rows());
+        for (uint i = 0; i < rows(); i++)
+        {
+            matrix_[i].insert(matrix_[i].end(), other[i].begin(),
+                                                other[i].end());
+        }
+        return *this;
+    }
+
+    Matrix rbind(const Matrix &other)
+    {
+        assert(cols() == other.cols());
+        matrix_.insert(matrix_.end(), other.matrix_.begin(),
+                                      other.matrix_.end());
+        return *this;
+    }
+
+    Matrix getCol(uint j)
+    {
+        assert(j < cols());
+        Matrix result(rows(), 1);
+        for (uint i = 0; i < rows(); i++)
+        {
+            result[i][0] = matrix_[i][j];
+        }
+        return result;
+    }
+
+    Matrix filter(uint i, uint j) const
+    {
+        assert(i < rows());
+        assert(j < cols());
+        Matrix result(rows(), cols());
+        result[i][j] = (*this)[i][j];
+        return result;
+    }
+
+    Matrix norm()
+    {
+        return *this / sum();
+    }
+
+    Matrix normCol()
+    {
+        Matrix result(*this);
+        for (uint col = 0; col < result.cols(); col++)
+        {
+            T max_in_col;
+            for (uint row = 0; row < result.rows(); row++)
+            {
+                max_in_col += result[row][col];
+            }
+            for (uint row = 0; row < result.rows(); row++)
+            {
+                result[row][col] /= max_in_col;
+            }
+        }
+        return result;
+    }
+
+    T sum()
+    {
+        return (Ones<T>(1, rows()) * (*this) * Ones<T>(cols(), 1))[0][0];
+    }
+
+    uint rows() const
+    {
+        return matrix_.size();
+    }
+    uint cols() const
+    {
+        return matrix_.front().size();
+    }
+
+private:
+    std::vector<std::vector<T>> matrix_;
+};
+
+template <typename T>
+Matrix<T> operator*(const T &scalar, const Matrix<T> &matrix)
+{
+    return Matrix(matrix) *= scalar;
+}
+
+template <typename T>
+Matrix<T> Identity(uint size)
+{
+    Matrix<T> result(size, size, T{0});
+    for (uint i = 0; i < size; i++)
+    {
+        result[i][i] = T{1};
+    }
+    return result;
+}
+
+template <typename T>
+Matrix<T> Ones(uint rows, uint cols)
+{
+    Matrix<T> result(rows, cols, T{1});
+    return result;
+}
+    
+\end{lstlisting}

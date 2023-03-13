@@ -7,7 +7,7 @@
 \mode<handout> {
     \usepackage{pgfpages}
     \setbeameroption{show notes}
-    \pgfpagesuselayout{2 on 1}[a4paper, border shrink=5mm]
+    % \pgfpagesuselayout{2 on 1}[a4paper, border shrink=5mm]
     \setbeamercolor{note page}{bg=white}
     \setbeamercolor{note title}{bg=gray!10}
     \setbeamercolor{note date}{fg=gray!10}
@@ -60,6 +60,9 @@
 
 \begin{document}
 
+% \setbeameroption{show notes}
+\setbeameroption{hide notes}
+
 \begin{frame}[plain]
     \titlepage
 
@@ -71,8 +74,7 @@
 %\section{Короткая тема}
 %\subsection{Общие слова}
 
-\setbeameroption{show notes}
-% \setbeameroption{hide notes}
+
 
 \begin{frame}{Введение}
     Существует задача прогноза временного ряда. При построении прогноза ряда можно использовать другие ряды.

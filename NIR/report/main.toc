@@ -8,10 +8,10 @@
 \contentsline {chapter}{\chaptername ~4.\hskip 1em Разработка программных средств}{8}{chapter.4}%
 \contentsline {section}{\numberline {4.1.\hskip 1em}Разработка структуры для хранения чисел}{8}{section.4.1}%
 \contentsline {section}{\numberline {4.2.\hskip 1em}Матрицы}{9}{section.4.2}%
-\contentsline {section}{\numberline {4.3.\hskip 1em}Вывод решения}{10}{section.4.3}%
-\contentsline {chapter}{\chaptername ~5.\hskip 1em Пример решения практической задачи}{11}{chapter.5}%
-\contentsline {chapter}{\cyrillictext \CYRZ \cyra \cyrk \cyrl \cyryu \cyrch \cyre \cyrn \cyri \cyre }{15}{chapter*.4}%
-\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{16}{chapter*.6}%
+\contentsline {section}{\numberline {4.3.\hskip 1em}Вывод решения}{9}{section.4.3}%
+\contentsline {chapter}{\chaptername ~5.\hskip 1em Пример решения практической задачи}{10}{chapter.5}%
+\contentsline {chapter}{\cyrillictext \CYRZ \cyra \cyrk \cyrl \cyryu \cyrch \cyre \cyrn \cyri \cyre }{14}{chapter*.4}%
+\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{15}{chapter*.6}%
 \babel@toc {russian}{}\relax 
 \babel@toc {russian}{}\relax 
 \babel@toc {english}{}\relax 
@@ -20,3 +20,7 @@
 \babel@toc {russian}{}\relax 
 \babel@toc {russian}{}\relax 
 \babel@toc {russian}{}\relax 
+\contentsline {chapter}{\appendixname ~\CYRA .\hskip 1em Исходный код}{16}{appendix.A}%
+\contentsline {section}{fraction.h}{16}{section*.8}%
+\contentsline {section}{matrix.h}{21}{lstnumber.A.1.203}%
+\contentsline {section}{to\_latex.h}{31}{lstnumber.A.2.403}%

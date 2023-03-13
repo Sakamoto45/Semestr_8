@@ -1,0 +1,173 @@
+\addcontentsline{toc}{section}{to\_latex.h}
+\begin{lstlisting}[caption=to\_latex.h\label{listing:to_latex}]
+#pragma once
+
+#include <iostream>
+#include <string>
+#include <sstream>
+#include "matrix.h"
+#include "fraction.h"
+#include <cln/integer_io.h>
+#include <eigen3/Eigen/Dense>
+
+using std::to_string;
+
+std::string equation(std::string str)
+{
+    // return "\\begin{equation*}\n" +
+    //        str +
+    //        "\\end{equation*}";
+
+    return "$$" + str + "$$";
+}
+
+template <typename T>
+std::ostream &operator<<(std::ostream &out, const Matrix<T> &matrix)
+{
+    std::cout << to_string(matrix) << std::endl;
+    return out;
+}
+
+std::ostream &operator<<(std::ostream &out, const MaxMultiFraction &fraction)
+{
+    std::cout << to_string(fraction);
+    return out;
+}
+
+template <typename T>
+std::string to_string(const Matrix<T> &matrix)
+{
+    std::string result;
+    for (uint i = 0; i < matrix.rows(); i++)
+    {
+        if (i != 0)
+        {
+            result += "\n";
+        }
+        for (uint j = 0; j < matrix.cols(); j++)
+        {
+            if (j != 0)
+            {
+                result += " ";
+            }
+            result += to_string(matrix[i][j]);
+        }
+    }
+    return result;
+}
+
+std::string to_string(const cln::cl_I &integer)
+{
+    std::stringstream ss;
+    cln::print_integer(ss, 10, integer);
+
+    return ss.str();
+}
+
+std::string to_string(const MaxMultiFraction &fraction)
+{
+    std::string result = to_string(fraction.numerator_);
+    if (fraction.denominator_ != 1)
+    {
+        result += "/";
+        result += to_string(fraction.denominator_);
+    }
+
+    if (fraction.root_ != 1)
+    {
+        result = "(" + result + ")^(1/" + to_string(fraction.root_) + ")";
+    }
+    return result;
+}
+
+template <typename T>
+std::string to_latex(const T &obj, std::string name = "")
+{
+    return name + (name != "" ? " = " : "") + to_string(obj);
+}
+
+template <typename T>
+std::string to_latex(const Matrix<T> &matrix)
+{
+    std::string result;
+    result += "\\begin{pmatrix}\n";
+    for (uint i = 0; i < matrix.rows(); i++)
+    {
+        if (i != 0)
+        {
+            result += "\\\\\n";
+        }
+        for (uint j = 0; j < matrix.cols(); j++)
+        {
+            if (j != 0)
+            {
+                result += " & ";
+            }
+            result += to_latex(matrix[i][j]);
+        }
+    }
+    result += "\n\\end{pmatrix}\n";
+
+    return result;
+}
+
+// template <>
+std::string to_latex(const MaxMultiFraction &fraction)
+{
+    std::string result = to_string(fraction.numerator_);
+    if (fraction.denominator_ != 1)
+    {
+        result = result + "/" + to_string(fraction.denominator_);
+    }
+
+    if (fraction.root_ != 1)
+    {
+        result = "(" + result + ")^{1/" + to_string(fraction.root_) + "}";
+    }
+    return result;
+}
+
+// template <typename T>
+// template <>
+std::string to_latex(const Eigen::MatrixXd &matrix)
+{
+    std::string result;
+    result += "\\begin{pmatrix}\n";
+    for (uint i = 0; i < matrix.rows(); i++)
+    {
+        if (i != 0)
+        {
+            result += "\\\\\n";
+        }
+        for (uint j = 0; j < matrix.cols(); j++)
+        {
+            if (j != 0)
+            {
+                result += " & ";
+            }
+            result += to_latex(matrix(i, j));
+        }
+    }
+    result += "\n\\end{pmatrix}\n";
+
+    return result;
+}
+
+// template <typename scalar>
+std::string to_latex(const Eigen::VectorXd &vector)
+{
+    std::string result;
+    result += "\\begin{pmatrix}\n";
+    for (uint i = 0; i < vector.rows(); i++)
+    {
+        if (i != 0)
+        {
+            result += "\\\\\n";
+        }
+        result += to_latex(vector(i));
+    }
+    result += "\n\\end{pmatrix}\n";
+
+    return result;
+}
+\end{lstlisting}

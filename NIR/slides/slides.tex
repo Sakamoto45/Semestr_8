@@ -1,0 +1,266 @@
+\documentclass[ucs, notheorems, handout]{beamer}
+
+\usetheme[numbers,totalnumbers,nologo]{Statmod}
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+
+\mode<handout> {
+    \usepackage{pgfpages}
+    \setbeameroption{show notes}
+    % \pgfpagesuselayout{2 on 1}[a4paper, border shrink=5mm]
+    \setbeamercolor{note page}{bg=white}
+    \setbeamercolor{note title}{bg=gray!10}
+    \setbeamercolor{note date}{fg=gray!10}
+}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{tikz}
+\usepackage{ragged2e}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+
+\graphicspath{ {images/} }
+
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm} %for \newtheorem*
+\usepackage{bm}
+
+
+
+\newtheorem{theorem}{Теорема}
+
+\newcommand{\rank}{\mathsf{rank}\ }
+\newcommand{\Lrank}{\mathsf{rank}_L\ }
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\F}{\mathsf{F}}
+\newcommand{\MF}{\vec{\F}}
+\newcommand{\sfS}{\mathsf{S}}
+\newcommand{\sfR}{\mathsf{R}}
+\newcommand{\MS}{\vec{\sfS}}
+\newcommand{\MSE}{\mathsf{MSE}}
+\newcommand{\SSA}{\mathsf{SSA}}
+\newcommand{\MSSA}{\mathsf{MSSA}}
+\newcommand{\ProjSSA}{\mathsf{ProjSSA}}
+\newcommand{\mean}{\mathsf{mean}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\wX}{\overset{\wedge}{\X}}
+
+
+\title[Решение задач принятия решений]{Разработка программных средств и решение задач принятия решений с помощью методов тропической математики}
+
+\author{Ткаченко Егор Андреевич, группа 19.Б04-мм}
+
+% \sa{Научный руководитель  д.ф.-м.н., профессор Кривулин Николай Кимович}
+
+\institute[Санкт-Петербургский Государственный Университет]{%
+    \small
+    Научный руководитель: д.ф.-м.н., профессор Кривулин Н.К.\\ \vspace{0.5cm}
+    Санкт-Петербургский государственный университет\\
+    Прикладная математика и информатика\\
+    Вычислительная стохастика и статистические модели\\
+    \vspace{1.25cm}
+    Отчет по научно-исследовательской работе (семестр 7)}
+
+\date[Зачет]{Санкт-Петербург, 2023}
+
+\subject{Talks}
+
+\begin{document}
+
+% \setbeameroption{show notes}
+\setbeameroption{hide notes}
+
+\begin{frame}[plain]
+    \titlepage
+
+    \note{Научный руководитель  д.ф.-м.н., профессор Кривулин Николай Кимович,\\
+    кафедра статистического моделирования}
+\end{frame}
+
+
+
+
+\begin{frame}{Введение}
+    \begin{itemize}
+        \item Существуют задачи принятия решений на основе парных сравнений.
+
+        \item Для их решения существует два вида методов --- эвристические алгоритмы и строго обоснованные математические решения (аналитические методы).
+    
+        \item Одним из аналитических решений является метод аппроксимации матрицы парных сравнений в log-чебышевской метрике. Данный метод хорошо записывается в терминах max-алгебры.
+    
+        \item Цель работы --- разработать программные средства, решающие задачи принятия решений.
+    \end{itemize}
+    
+    
+    \note{
+        что говорить
+    }
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Задачи принятия решений}
+    \begin{block}{Однокритериальная задача}
+        \begin{itemize}
+            \item Существует $n$ альтернатив $\mathcal{A}_{1},\ldots,\mathcal{A}_{n}$ принятия решения.
+            \item Дана матрица парных сравнений $\bm{A}=(a_{ij})$ порядка $n$, где $a_{ij}>0$  ---  во сколько раз альтернатива $\mathcal{A}_{i}$ лучше $\mathcal{A}_{j}$.
+            \item Требуется на основе парных сравнений определить вектор $\bm{x}$ абсолютных рейтингов альтернатив.
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Многокритериальная задача}
+        \begin{itemize}
+            \item Существует $n$ альтернатив $\mathcal{A}_{1},\ldots,\mathcal{A}_{n}$ принятия решения.
+            \item Существует $m$ критериев и для каждого дана матрица парных сравнений $\bm{A}_{k}$.
+            \item Дана матрица попарных сравнений критериев $\bm{C}=(c_{kl})$, где $c_{kl}$ показывает во сколько раз критерий $k$ важнее $l$.
+            \item Требуется на основе матриц $\bm{C}$ и $\bm{A}_{1},\ldots,\bm{A}_{m}$ определить вектор $\bm{x}$ абсолютных рейтингов альтернатив.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Элементы тропической математики}
+    \begin{block}{Max-умножить алгебра}
+        Множество $\mathbb{R}_+ = \{x \in \mathbb{R} \, |\, x \geq 0\}$ с операциями сложения и умножения.
+    \end{block}
+    \begin{itemize}
+        \item Сложение обозначается символом $\oplus$ и для всех $x,y\in\mathbb{R}_{+}$ определено как максимум: $x\oplus y=\max\{x,y\}$.
+        \item Умножение определено и обозначается как обычно.
+        \item Нейтральные элементы по сложению и умножению совпадают с арифметическими нулем и единицей.
+        \item Понятия обратного элемента по умножению и степени числа имеют обычный смысл. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Матрицы в max-умножить алгебре}
+    \begin{itemize}
+        \item Векторные и матричные операции, в том числе операции со скалярами и возведение в натуральную степень, выполняются по стандартным правилам с заменой арифметического сложения на операцию $\oplus$. 
+        % Нулевой вектор, который обозначается символом $\bm{0}$, нулевая матрица, а также положительный вектор имеют стандартный вид.
+        
+        % \item Для ненулевого вектора-столбца $\bm{x}=(x_{j})$ определен мультипликативно сопряженный вектор-строка $\bm{x}^{-}=(x_{j}^{-})$, где $x_{j}^{-}=x_{j}^{-1}$, если $x_{j}\ne0$, и $x_{j}^{-}=0$ в противном случае.
+        
+        
+        
+        \item След матрицы $\bm{A}=(a_{ij})$ порядка $n$
+        $$\mathop\mathrm{tr}\bm{A}=a_{11}\oplus\cdots\oplus a_{nn}.$$
+
+        \item Спектральный радиус матрицы $\bm{A}$
+        \begin{equation*}
+        \lambda
+        =
+        \mathop\mathrm{tr}\bm{A}\oplus\cdots\oplus\mathop\mathrm{tr}\nolimits^{1/n}(\bm{A}^{n})
+        =
+        \bigoplus_{i=1}^{n}{\mathop\mathrm{tr}}^{1/i}(\bm{A}^{i}).
+        \end{equation*}
+
+        \item При $\lambda\leq1$, определен оператор Клини матрицы $\bm{A}$
+        \begin{equation*}
+        \bm{A}^{\ast}
+        =
+        \bm{I}\oplus\bm{A}\oplus\cdots\oplus\bm{A}^{n-1}
+        =
+        \bigoplus_{i=0}^{n-1}\bm{A}^{i}.
+        \end{equation*}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Решение многокритериальной задачи парных сравнений}
+    \begin{itemize}
+        \item[1] На основе матрицы $\bm{C}$ находится вектор весов критериев $\bm{w}$
+        $$\bm{w} =
+        (\lambda^{-1}\bm{C})^{\ast}\bm{v},
+        \qquad \bm{v}>\bm{0},
+        \qquad \lambda =
+        \bigoplus_{i=1}^{m}{\mathop\mathrm{tr}}^{1/i}(\bm{C}^{i}).$$
+        \item[2] Если вектор $\bm{w}$ не единственный (с точностью до положительного множителя), то определяются наилучший $\bm{w}_{1}$ и наихудший $\bm{w}_{2}$ дифференцирующие векторы весов.
+        \item[3]
+        С помощью векторов $\bm{w}_{1}=(w_{i}^{(1)})$ и $\bm{w}_{2}=(w_{i}^{(2)})$ строятся взвешенные суммы матриц парных сравнений альтернатив:
+        $$\bm{B} =
+        \bigoplus_{i=1}^{m}w^{(1)}_{i}\bm{A}_{i},
+        \qquad \bm{D} =
+        \bigoplus_{i=1}^{m}w^{(2)}_{i}\bm{A}_{i}.$$
+        \item[4.]
+        Повторяя действия пунктов 1 и 2 для матрицы $\bm{B}$ ($\bm{D}$) вычисляется наилучший (наихудший)  вектор рейтингов альтернатив.
+ 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Структура для хранения чисел}
+    \begin{block}{Структура}
+        $$\displaystyle \left(\frac{a}{b}\right)^{1/n}, \quad a \in \mathbb{N} \cup 0, \quad b \in \mathbb{N}, \quad \gcd(a, b) = 1, \quad n \in \mathbb{N}$$
+    \end{block}
+    $$n_1 =  n^*_1 \cdot \gcd(n_1, n_2), \qquad n_2 =  n^*_2 \cdot \gcd(n_1, n_2).$$
+    \begin{itemize}
+        \item Умножение
+        $$ \left(\frac{a_1}{b_1}\right)^{1/n_1} \times \left(\frac{a_2}{b_2}\right)^{1/n_2} = \left(\frac{a_1^{n^*_2}a_2^{n^*_1}}{b_1^{n^*_2}b_2^{n^*_1}}\right)^{1/n^*_1\cdot \gcd(n_1, n_2) \cdot n^*_2}.$$
+        После умножения $a_1^{n^*_2}a_2^{n^*_1}$ и $b_1^{n^*_2}b_2^{n^*_1}$ сокращаются на их НОД.
+        \item Сравнение
+        $$ \left(\frac{a_1}{b_1}\right)^{1/n_1} < \left(\frac{a_2}{b_2}\right)^{1/n_2} \Leftrightarrow
+        {a_1^{n^*_2}}{b_2^{n^*_1}} < {a_2^{n^*_1}}{b_1^{n^*_2}}.$$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Реализация}
+    
+    Были реализованы:
+    \begin{itemize}
+        \item Описанная ранее структура $ \left(\frac{a}{b}\right)^{1/n}$
+        \item Элементы тропической математики
+        \begin{itemize}
+            \item След матрицы
+            \item Тропический определитель
+            \item Транспонированная матрица
+            \item Спектральный радиус
+            \item Матрица клини
+            \item Проверка линейной зависимости векторов
+        \end{itemize}
+        \item Решение многокритериальной задачи парных сравнений
+        \item Метод вывода в \LaTeX \, для матриц и структуры
+    \end{itemize}
+    % \begin{block}{названиеблока}
+    %     text
+    % \end{block}
+\end{frame}
+
+% \begin{frame}
+%     \frametitle{Пример решения}
+    
+% \end{frame}
+
+\begin{frame}
+    \frametitle{Заключение}
+    % \begin{block}{названиеблока}
+    %     text
+    % \end{block}
+    \begin{itemize}
+        \item С такой неинтуитивной алгеброй приятно иметь калькулятор.
+        
+        \item В ходе решения задачи принятия решений числа могут стать очень большими, что может быть проблемой при больших размерностях входных матриц. Уже разработана более оптимизированная для max-умножить алгебры структура и ведется ее реализация.
+        
+        \item Разработанная структура может пригодиться и в других областях. Например, отсутствие ошибок округления важно дли криптографии.
+    \end{itemize}
+\end{frame}
+
+
+% \begin{frame}{Список литературы}
+%     \nocite{*}
+%     \bibliographystyle{ugost2008}
+% 	\bibliography{references}
+%     % \begin{thebibliography}{3}
+%     % \bibitem{SSA_with_R}
+%     % \bibitem{supportive_mssa}
+%     % \end{thebibliography}    
+
+%     \note{
+%         На данном слайде представлен список основных источников, используемых в моей работе.
+%     }
+% \end{frame}
+
+\end{document}

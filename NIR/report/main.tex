@@ -16,6 +16,11 @@
 \usepackage{bm}
 \usepackage[english,russian]{babel}
 
+% \usepackage{polyglossia}
+% \usepackage{fontspec}
+% \setmainfont{Times New Roman}
+% \setsansfont{Arial}
+% \setmonofont{Courier New}
 
 
 % c++ code
@@ -29,7 +34,6 @@
 
 
 
-% \pagestyle{plain}
 
 \newtheorem*{definition}{Определение}
 \newtheorem*{example}{Пример}
@@ -244,110 +248,21 @@
         {a_1^{n^*_2}}{b_2^{n^*_1}} < {a_2^{n^*_1}}{b_1^{n^*_2}}.$$
     \end{itemize}
 
-    
+    Реализация в листинге \ref{listing:fraction}.
 
-
-    % \se{Реализации}
-
-    % Помимо класса для хранения чисел и  выполнения операций с ними были реализованы базовые понятия из max-алгебры.
 
     \section{Матрицы}
-    Были реализованы элементы тропической математики такие, как нахождение следа, тропического определителя, транспонированный матрицы, спектрального радиуса, матрицы Клини, проверка линейной зависимости вектора от набора векторов, выбор ЛНЗ набора векторов из данных, нахождение лучших и худших дифференцирующих векторов.
+    Были реализованы элементы тропической математики такие, как нахождение следа, тропического определителя, транспонированный матрицы, спектрального радиуса, матрицы Клини, проверка линейной зависимости вектора от набора векторов, выбор ЛНЗ набора векторов из данных, нахождение лучших и худших дифференцирующих векторов в листинге \ref{listing:matrix}.
 
-
-    Например, реализация нахождения лучшего дифференцирующего вектора:
-    \begin{lstlisting}
-    Matrix BestVector()
-    {
-        T lambda = SpectralRadius();
-        Matrix P((*this / lambda).Kleene().Span());
-
-        vector<uint> k;
-        T max_value = -1;
-        for (uint j = 0; j < P.cols(); j++)
-        {
-            Matrix col_j(P.getCol(j));
-            T tmp = (col_j * col_j.Transpose()).sum();
-            if (tmp > max_value)
-            {
-                k.clear();
-                max_value = tmp;
-            }
-            if (tmp == max_value)
-            {
-                k.push_back(j);
-            }
-        }
-        vector<uint> l(k.size(), 0);
-        for (uint it = 0; it < k.size(); it++)
-        {
-            for (uint i = 0; i < P.rows(); i++)
-            {
-                if (P[i][k[it]] < P[l[it]][k[it]])
-                {
-                    l[it] = i;
-                }
-            }
-        }
-
-        Matrix result(P * (Identity<T>(P.cols()) +
-                           P.filter(l[0], k[0]).Transpose() * P));
-        for (uint i = 1; i < k.size(); i++)
-        {
-            result.cbind(P * (Identity<T>(P.cols()) +
-                              P.filter(l[1], k[1]).Transpose() * P));
-        }
-
-        return result.Span().normCol();
-    }
-    \end{lstlisting}
 
     \section{Вывод решения}
-    К каждому классу был добавлен метод вывода в latex.
-    
-    Пример такого метода для класса чисел "MaxMultiFraction":
-
-    \begin{lstlisting}
-    std::string to_latex(const MaxMultiFraction &fraction)
-    {
-        std::string result = to_string(fraction.numerator_);
-        if (fraction.denominator_ != 1)
-        {
-            result = result + "/" + to_string(fraction.denominator_);
-        }
-
-        if (fraction.root_ != 1)
-        {
-            result = "(" + result + ")^{1/" + to_string(fraction.root_) + "}";
-        }
-        return result;
-    }
-    \end{lstlisting}
+    К каждому классу был добавлен метод вывода в latex в листинге \ref{listing:to_latex}.
     
 
-
-% Проделанная работа
-% -разработана структура для точного хранения чисел (a/b)^(1/n), для которой определены операции сложения (мах) и умножения;
-% -написана программа использующая эту структуру и реализующая решение задачи по заданным матрицам парных сравнений, выводящая решение в latex;
-% -возможно пример реализации чего-то в программе;
 
 
     \chapter{Пример решения практической задачи}
         \input{1.tex}
-
-    % \section{Решение задачи 1}
-    % \input{1.tex}
-    % \section{Решение задачи 2}
-    % \input{2.tex}
-    % \section{Решение задачи 9}
-    % \input{9.tex}
-    % \section{Решение задачи 1 из статьи стр 9}
-    % \input{test.tex}
-    % \section{Решение задачи о выборе места работы из статьи стр 20}
-    % \input{test2.tex}    
-    
-
-
 
     \conclusion
 
@@ -357,12 +272,23 @@
 
     Разработанная структура может пригодиться и в других областях. Например, отсутствие ошибок округления важно дли криптографии.
     
-
-
-
-
     \renewcommand{\refname}{}
     \vspace{-25pt}
     \bibliographystyle{ugost2008}
     \bibliography{references}
+
+    \appendix
+        \chapter{Исходный код}
+
+    % \renewcommand{\sectionfont}{\normalsize\bfseries}
+    % \renewcommand{\theappendixfont}{\normalsize\bfseries}
+    % \clearpage
+    % \addcontentsline{toc}{chapter}{Приложения}
+    \input{fraction.tex}
+    \input{matrix.tex}
+    \input{to_latex.tex}
+    % \input{solution.tex}
+
+
+
 \end{document}

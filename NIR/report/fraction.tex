@@ -1,0 +1,206 @@
+\addcontentsline{toc}{section}{fraction.h}
+\begin{lstlisting}[caption=fraction.h\label{listing:fraction}]
+#pragma once
+
+#include <string>
+#include <assert.h>
+#include <iostream>
+#include <utility> //pair
+#include <numeric> //gcd
+#include <cmath>   //pow
+#include <cln/integer.h>
+
+class MaxMultiFraction
+{
+public:
+    friend std::string to_string(const MaxMultiFraction &fraction);
+    friend std::string to_latex(const MaxMultiFraction &fraction);
+
+    MaxMultiFraction(cln::cl_I numerator, cln::cl_I denominator, uint root = 1)
+        : numerator_(numerator),
+            denominator_(denominator),
+            root_(root)
+    {
+    }
+
+    MaxMultiFraction(double num = 0)
+        : numerator_(1),
+            denominator_(1),
+            root_(1)
+    {
+        if (fmod(num, 1) == 0)
+        {
+            numerator_ = int64_t(num);
+        }
+        else
+        {
+            if (fmod(1.0 / num, 1) != 0)
+            {
+                cout << "fraction constructor error\n"
+                        << num << endl;
+            }
+            assert(fmod(1.0 / num, 1) == 0);
+            denominator_ = int64_t(1 / num);
+        }
+    }
+
+    MaxMultiFraction(string str)
+        : numerator_(1),
+            denominator_(1),
+            root_(1)
+    {
+        auto pos = str.find("/");
+        if (pos == str.npos)
+        {
+            numerator_ = str.c_str();
+        }
+        else
+        {
+            numerator_ = str.substr(0, pos).c_str();
+            denominator_ = str.substr(pos + 1).c_str();
+        }
+    }
+
+    bool operator<(const MaxMultiFraction &other) const
+    {
+        auto tmp = Transform(*this, other);
+        return tmp.first < tmp.second;
+    }
+    bool operator<=(const MaxMultiFraction &other) const
+    {
+        auto tmp = Transform(*this, other);
+        return tmp.first <= tmp.second;
+    }
+    bool operator>(const MaxMultiFraction &other) const
+    {
+        auto tmp = Transform(*this, other);
+        return tmp.first > tmp.second;
+    }
+    bool operator>=(const MaxMultiFraction &other) const
+    {
+        auto tmp = Transform(*this, other);
+        return tmp.first >= tmp.second;
+    }
+    bool operator==(const MaxMultiFraction &other) const
+    {
+        auto tmp = Transform(*this, other);
+        return tmp.first == tmp.second;
+    }
+    bool operator!=(const MaxMultiFraction &other) const
+    {
+        auto tmp = Transform(*this, other);
+        return tmp.first != tmp.second;
+    }
+
+    MaxMultiFraction operator+=(const MaxMultiFraction &other)
+    {
+        if (*this < other)
+        {
+            *this = other;
+        }
+        return *this;
+    }
+    MaxMultiFraction operator+(const MaxMultiFraction &other) const
+    {
+        return MaxMultiFraction(*this) += other;
+    }
+
+    MaxMultiFraction operator*=(const MaxMultiFraction &other)
+    {
+        uint root_gcd = std::gcd(root_, other.root_);
+        numerator_ = FastPow(numerator_, other.root_ / root_gcd) *
+                        FastPow(other.numerator_, root_ / root_gcd);
+        denominator_ = FastPow(denominator_, other.root_ / root_gcd) *
+                        FastPow(other.denominator_, root_ / root_gcd);
+        root_ *= other.root_ / root_gcd;
+
+        Simplify();
+
+        return *this;
+    }
+    MaxMultiFraction operator*(const MaxMultiFraction &other) const
+    {
+        return MaxMultiFraction(*this) *= other;
+    }
+
+    MaxMultiFraction operator/=(const MaxMultiFraction &other)
+    {
+        uint root_gcd = std::gcd(root_, other.root_);
+        numerator_ = FastPow(numerator_, other.root_ / root_gcd) *
+                        FastPow(other.denominator_, root_ / root_gcd);
+        denominator_ = FastPow(denominator_, other.root_ / root_gcd) *
+                        FastPow(other.numerator_, root_ / root_gcd);
+        root_ *= other.root_ / root_gcd;
+
+        Simplify();
+
+        return *this;
+    }
+    MaxMultiFraction operator/(const MaxMultiFraction &other) const
+    {
+        return MaxMultiFraction(*this) /= other;
+    }
+
+    MaxMultiFraction Root(uint root) const
+    {
+        return MaxMultiFraction(numerator_,
+                                denominator_,
+                                root_ * root)
+            .Simplify();
+    }
+    MaxMultiFraction Pow(uint pow) const
+    {
+        uint root_pow_gcd = std::gcd(root_, pow);
+        pow /= root_pow_gcd;
+        return MaxMultiFraction(FastPow(numerator_, pow),
+                                FastPow(denominator_, pow),
+                                root_ / root_pow_gcd);
+    }
+
+    operator double() const
+    {
+        return std::pow(cln::double_approx(numerator_)
+            / cln::double_approx(denominator_), 1.0 / root_);
+    }
+
+private:
+    cln::cl_I numerator_;
+    cln::cl_I denominator_;
+    uint root_;
+
+    MaxMultiFraction Simplify()
+    {
+        cln::cl_I num_den_gcd = cln::gcd(numerator_, denominator_);
+        numerator_ = cln::exquo(numerator_, num_den_gcd);
+        denominator_ = cln::exquo(denominator_, num_den_gcd);
+
+        return *this;
+    }
+
+    cln::cl_I FastPow(cln::cl_I base, cln::cl_I exp) const
+    {
+        cln::cl_I result = 1;
+        while (exp > 0)
+        {
+            if (cl_I_to_int(exp) & 1)
+            {
+                result *= base;
+            }
+            base *= base;
+            exp >>= 1;
+        }
+        return result;
+    }
+
+    std::pair<cln::cl_I, cln::cl_I> Transform(const MaxMultiFraction &first, 
+                                        const MaxMultiFraction &second) const
+    {
+        uint gcd_root = std::gcd(first.root_, second.root_);
+        return {FastPow(first.numerator_, second.root_ / gcd_root) *
+                    FastPow(second.denominator_, first.root_ / gcd_root),
+                FastPow(second.numerator_, first.root_ / gcd_root) *
+                    FastPow(first.denominator_, second.root_ / gcd_root)};
+    }
+};
+
+\end{lstlisting}
