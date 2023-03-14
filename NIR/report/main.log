@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.20)  10 MAR 2023 02:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.27)  14 MAR 2023 10:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/user/Projects/SPBU/Semestr_8/NIR/report/main.tex
-(/home/user/Projects/SPBU/Semestr_8/NIR/report/main.tex
+**/home/sakamoto45/Documents/projects/SPBU/Semestr_8/NIR/report/main.tex
+(/home/sakamoto45/Documents/projects/SPBU/Semestr_8/NIR/report/main.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-04-10> (/usr/share/texmf-dist/tex/latex/disser/disser.cls
 Document Class: disser 2017/03/03 1.4.1 Document class for dissertations
@@ -585,31 +585,31 @@ LaTeX Warning: Unused global option(s):
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 96.
-LaTeX Font Info:    ... okay on input line 96.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 96.
+Package hyperref Info: Link coloring OFF on input line 66.
  (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/share/texmf-dist/tex/latex/refcount/refcount.sty
@@ -619,9 +619,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count300
 )
-LaTeX Info: Redefining \ref on input line 96.
-LaTeX Info: Redefining \pageref on input line 96.
-LaTeX Info: Redefining \nameref on input line 96.
+LaTeX Info: Redefining \ref on input line 66.
+LaTeX Info: Redefining \pageref on input line 66.
+LaTeX Info: Redefining \nameref on input line 66.
  (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -679,7 +679,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \th on input line 96.
+LaTeX Info: Redefining \th on input line 66.
 \c@lstlisting=\count307
 \firstskip=\skip61
 \secondskip=\skip62
@@ -689,11 +689,11 @@ LaTeX Info: Redefining \th on input line 96.
 \seventhskip=\skip66
 \eightthskip=\skip67
 <<ot1.cmap>><<oml.cmap>><<oms.cmap>><<omx.cmap>>
-LaTeX Font Info:    Trying to load font information for U+msa on input line 99.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 69.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 99.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 69.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
@@ -708,35 +708,35 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ]
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRV' on input line 103.
+(hyperref)                removing `\CYRV' on input line 73.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrv' on input line 103.
+(hyperref)                removing `\cyrv' on input line 73.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 103.
+(hyperref)                removing `\cyre' on input line 73.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrd' on input line 103.
+(hyperref)                removing `\cyrd' on input line 73.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 103.
+(hyperref)                removing `\cyre' on input line 73.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrn' on input line 103.
+(hyperref)                removing `\cyrn' on input line 73.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyri' on input line 103.
+(hyperref)                removing `\cyri' on input line 73.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 103.
+(hyperref)                removing `\cyre' on input line 73.
 
 [3
 
@@ -744,26 +744,26 @@ Package hyperref Warning: Glyph not defined in PU encoding,
 ]
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRG' on input line 114.
+(hyperref)                removing `\CYRG' on input line 84.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrl' on input line 114.
+(hyperref)                removing `\cyrl' on input line 84.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 114.
+(hyperref)                removing `\cyra' on input line 84.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrv' on input line 114.
+(hyperref)                removing `\cyrv' on input line 84.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 114.
+(hyperref)                removing `\cyra' on input line 84.
 
 
-Overfull \hbox (4.60521pt too wide) in paragraph at lines 122--123
+Overfull \hbox (4.60521pt too wide) in paragraph at lines 92--93
 []\T2A/cmr/m/n/12 Рассмотрим за^^?да^^?чу оцен^^?ки рей^^?тин^^?гов аль^^?тер^^?на^^?тив, в ко^^?то^^?рой $\OML/cmm/m/it/12 n$ \T2A/cmr/m/n/12 аль^^?тер^^?на^^?тив $\OMS/cmsy/m/n/12 A[]\OML/cmm/m/it/12 ; [] ; \OMS/cmsy/m/n/12 A[]$
  []
 
@@ -772,92 +772,92 @@ Overfull \hbox (4.60521pt too wide) in paragraph at lines 122--123
 ]
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRG' on input line 125.
+(hyperref)                removing `\CYRG' on input line 95.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrl' on input line 125.
+(hyperref)                removing `\cyrl' on input line 95.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 125.
+(hyperref)                removing `\cyra' on input line 95.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrv' on input line 125.
+(hyperref)                removing `\cyrv' on input line 95.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 125.
+(hyperref)                removing `\cyra' on input line 95.
 
 [5
 
 ] [6]
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRG' on input line 170.
+(hyperref)                removing `\CYRG' on input line 140.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrl' on input line 170.
+(hyperref)                removing `\cyrl' on input line 140.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 170.
+(hyperref)                removing `\cyra' on input line 140.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrv' on input line 170.
+(hyperref)                removing `\cyrv' on input line 140.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 170.
+(hyperref)                removing `\cyra' on input line 140.
 
 [7
 
 ]
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRG' on input line 243.
+(hyperref)                removing `\CYRG' on input line 213.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrl' on input line 243.
+(hyperref)                removing `\cyrl' on input line 213.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 243.
+(hyperref)                removing `\cyra' on input line 213.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrv' on input line 243.
+(hyperref)                removing `\cyrv' on input line 213.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 243.
+(hyperref)                removing `\cyra' on input line 213.
 
 [8
 
 ] [9]
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRG' on input line 366.
+(hyperref)                removing `\CYRG' on input line 264.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrl' on input line 366.
+(hyperref)                removing `\cyrl' on input line 264.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 366.
+(hyperref)                removing `\cyra' on input line 264.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrv' on input line 366.
+(hyperref)                removing `\cyrv' on input line 264.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 366.
+(hyperref)                removing `\cyra' on input line 264.
 
 (./1.tex [10
 
@@ -869,43 +869,43 @@ Overfull \hbox (12.61751pt too wide) detected at line 166
 [12]) [13]
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRZ' on input line 383.
+(hyperref)                removing `\CYRZ' on input line 267.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 383.
+(hyperref)                removing `\cyra' on input line 267.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrk' on input line 383.
+(hyperref)                removing `\cyrk' on input line 267.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrl' on input line 383.
+(hyperref)                removing `\cyrl' on input line 267.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyryu' on input line 383.
+(hyperref)                removing `\cyryu' on input line 267.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrch' on input line 383.
+(hyperref)                removing `\cyrch' on input line 267.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 383.
+(hyperref)                removing `\cyre' on input line 267.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrn' on input line 383.
+(hyperref)                removing `\cyrn' on input line 267.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyri' on input line 383.
+(hyperref)                removing `\cyri' on input line 267.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 383.
+(hyperref)                removing `\cyre' on input line 267.
 
 (./main.bbl [14
 
@@ -982,47 +982,47 @@ File: t2acmtt.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 ]
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRP' on input line 397.
+(hyperref)                removing `\CYRP' on input line 281.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrr' on input line 397.
+(hyperref)                removing `\cyrr' on input line 281.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyri' on input line 397.
+(hyperref)                removing `\cyri' on input line 281.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrl' on input line 397.
+(hyperref)                removing `\cyrl' on input line 281.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyro' on input line 397.
+(hyperref)                removing `\cyro' on input line 281.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrzh' on input line 397.
+(hyperref)                removing `\cyrzh' on input line 281.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 397.
+(hyperref)                removing `\cyre' on input line 281.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrn' on input line 397.
+(hyperref)                removing `\cyrn' on input line 281.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyri' on input line 397.
+(hyperref)                removing `\cyri' on input line 281.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 397.
+(hyperref)                removing `\cyre' on input line 281.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRA' on input line 397.
+(hyperref)                removing `\CYRA' on input line 281.
 
 (./fraction.tex
 
@@ -1038,12 +1038,12 @@ Package rerunfilecheck Info: File `main.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  16944 strings out of 478238
- 264291 string characters out of 5850455
+ 264339 string characters out of 5850455
  765867 words of memory out of 5000000
  34048 multiletter control sequences out of 15000+600000
  488616 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,7n,77p,1974b,1956s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 75i,7n,77p,1990b,1956s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 pdfTeX warning (dest): name{lstnumber.A.2.403} has been referenced but does not exist, replaced by a fixed one
 
