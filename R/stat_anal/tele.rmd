@@ -1,5 +1,5 @@
 ---
-title: "Monte_Carlo"
+title: "lm"
 output:
     html_document:
         df_print: paged
@@ -7,29 +7,152 @@ output:
 
 
 
-```{r, include=FALSE}
-# knitr::opts_chunk$set(fig.width = 8, fig.height = 8)
-
+```{r, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(fig.width = 8, fig.height = 8)
+# options(repr.plot.width = 10, repr.plot.height =2)
+library(lm.beta)
 # library(testit)
 
 # library(readxl)
-# library(reshape2)
-# library(ggplot2)
-# library(GGally) # pairwise plot
+library(reshape2)
+library(ggplot2)
+library(GGally) # pairwise plot
+library(olsrr) #
+library(qqplotr)
+
 # library(stringr) # str_squish
 
 # library(correlation) # cor_sort
-# library(tidyr) # drop.na()
-# library(ppcor)
-# library(dplyr) # dataframe
-# setwd("R/Statistical_Analysis_2022/Partial_Correlation_CARDATA/Tkachenko")
+library(tidyr) # drop.na()
+library(ppcor)
+library(dplyr) # dataframe
+if (interactive()) setwd("R/stat_anal/")
 ```
 
 
+
+```{r, message=FALSE, warning=FALSE}
+# df <- read.table("R/stat_anal/televisions_edited.dat",
+df <- read.table("televisions_edited.dat",
+    sep = "\t", dec = ",", na.strings = "*", col.names =
+        c(
+            "Country",
+            "LifeExp",
+            "PpTV",
+            "PpPh",
+            "FLifeExp",
+            "MLifeExp"
+        )
+)
+
+df <- df %>% drop_na()
+
+head(df)
+
+df$LifeExpDif <- (df$FLifeExp - df$MLifeExp) / df$LifeExp
+
+if (interactive()) pdf("ggpairs_unedited.pdf")
+ggpairs(
+    df[, -1],
+    lower = list(continuous = wrap("points", alpha = 0.5, size = 0.3)),
+    diag = list(continuous = "barDiag")
+)
+if (interactive()) dev.off()
+
+df <- df %>% mutate(
+    logPpTV = log(PpTV),
+    logPpPh = log(PpPh),
+    PpTV = NULL,
+    PpPh = NULL
+)
+
+if (interactive()) pdf("ggpairs_logged.pdf")
+ggpairs(
+    df[, -1],
+    lower = list(continuous = wrap("points", alpha = 0.5, size = 0.3)),
+    diag = list(continuous = "barDiag")
+)
+if (interactive()) dev.off()
+
+
+if (interactive()) pdf(file = "normal_probability_plot.pdf")
+ggplot(melt(df[, -1]), aes(sample = value)) +
+    stat_qq_point(size = 2) +
+    geom_abline() +
+    facet_wrap(~variable, scales = "free")
+if (interactive()) dev.off()
+```
 
 ```{r}
+ggplot(df, aes(x = LifeExp, y = LifeExpDif * LifeExp)) +
+    geom_point(size = 5)
 
+
+cor(df$LifeExp, df$LifeExpDif * df$LifeExp)
 ```
 
+# LifeExp ~ FLifeExp + MLifeExp
+
+```{r, message=FALSE, warning=FALSE}
+model <- lm.beta(lm(LifeExp ~ FLifeExp + MLifeExp - 1, data = df))
+summary(model)
+cov2cor(vcov(model))
+```
+
+```{r, message=FALSE, warning=FALSE}
+if (interactive()) pdf("1.pdf")
+ggplot(data = df) +
+    geom_abline() +
+    geom_point(aes(x = FLifeExp, y = MLifeExp, color = Country), size = 5) +
+    # geom_point(aes(x = LifeExp, y = LifeExp, color = Country), size = 5) +
+    theme(legend.position = "none")
+if (interactive()) dev.off()
+```
+
+# LifeExp ~ logPpTV + logPpPh
+
+```{r, message=FALSE, warning=FALSE}
+model <- lm(LifeExp ~ logPpTV + logPpPh, data = df)
+model.beta <- lm.beta(model)
+summary(model.beta)
+cov2cor(vcov(model.beta))
+ols_vif_tol(model)
+# ols_correlations(model)
+
+model <- lm(LifeExp ~ logPpTV, data = df)
+model.beta <- lm.beta(model)
+summary(model.beta)
+# cov2cor(vcov(model.beta))
+# ols_vif_tol(model)
+# ols_correlations(model)
+```
+
+# LifeExpDif ~ logPpTV + logPpPh
+
+```{r, message=FALSE, warning=FALSE}
+model <- lm(LifeExpDif ~ logPpTV + logPpPh, data = df)
+model.beta <- lm.beta(model)
+summary(model.beta)
+cov2cor(vcov(model.beta))
+ols_vif_tol(model)
+# ols_correlations(model)
+
+
+model <- lm(LifeExpDif ~ logPpTV, data = df)
+model.beta <- lm.beta(model)
+summary(model.beta)
+# cov2cor(vcov(model.beta))
+# ols_vif_tol(model)
+```
+
+
+
+```{r, message=FALSE, warning=FALSE}
+if (interactive()) pdf("2.pdf")
+ggplot(data = df, aes(x = logPpTV, y = logPpPh)) +
+    geom_point() +
+    stat_ellipse(level = 0.9, type = "norm")
+if (interactive()) dev.off()
+```
 
 
