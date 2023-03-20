@@ -1,0 +1,41 @@
+---
+title: "task2"
+output:
+    html_document:
+        df_print: paged
+---
+
+
+
+
+```{r, include=FALSE}
+# knitr::opts_chunk$set(fig.width = 8, fig.height = 8)
+
+# library(testit)
+
+# library(readxl)
+# library(reshape2)
+library(ggplot2)
+# library(GGally) # pairwise plot
+# library(stringr) # str_squish
+
+# library(correlation) # cor_sort
+# library(tidyr) # drop.na()
+# library(ppcor)
+# library(dplyr) # dataframe
+# setwd("R/Statistical_Analysis_2022/Partial_Correlation_CARDATA/Tkachenko")
+```
+
+
+
+параметры
+```{r}
+a <- -0.5
+b <- 2
+c <- 3
+```
+
+```{r}
+p <- function(x) (a + b * c^x) * exp(-a * x - b / log(c) * (c^x - 1))
+p_log_diff <- function(x) b * c^x * log(c) / (a + b * c^x) - (a + b * c^x)
+```
