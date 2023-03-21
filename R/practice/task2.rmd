@@ -22,10 +22,16 @@ library(ggplot2)
 # library(correlation) # cor_sort
 # library(tidyr) # drop.na()
 # library(ppcor)
-# library(dplyr) # dataframe
+library(dplyr) # dataframe
 # setwd("R/Statistical_Analysis_2022/Partial_Correlation_CARDATA/Tkachenko")
 ```
 
+```{r}
+# utils
+
+lower_bound <- function(array, value) sapply(value, function(x) sum(array < x))
+# upper_bound <- function(array, value) sum(array <= value) + 1
+```
 
 
 параметры
@@ -36,6 +42,199 @@ c <- 3
 ```
 
 ```{r}
+# p
 p <- function(x) (a + b * c^x) * exp(-a * x - b / log(c) * (c^x - 1))
-p_log_diff <- function(x) b * c^x * log(c) / (a + b * c^x) - (a + b * c^x)
+# h = ln(p)
+h <- function(x) log(a + b * c^x) - a * x - b / log(c) * (c^x - 1)
+# h`
+h_diff <- function(x) b * c^x * log(c) / (a + b * c^x) - (a + b * c^x)
+```
+
+
+```{r}
+# x[1] : left border
+# x[2] : h'(x[2]) < 0
+# x always sorted
+
+# df_insert <- function(df, x_new, i = lower_bound(df$x_l, x_new)) {
+#     df %>% add_row(
+#         x_l = x_new,
+#         h = h(x_new),
+#         g_u_slope = h_diff(x_new),
+#         g_u_intercept = h - g_u_slope * x_new,
+#         # interception of g_u[i], g_u[i+1]
+#         x_u = c(0, (tail(g_u_intercept, -1) - head(g_u_intercept, -1)) /
+#             (head(g_u_slope, -1) - tail(g_u_slope, -1))),
+#         g_l_slope = c((tail(h, -1) - head(h, -1)) / (tail(x_l, -1) - head(x_l, -1)), 0),
+#         g_l_intercept = c(head(head - g_l_slope * x_l, -1), -Inf),
+#         # integral of exp(g_u) from x_u[i] to x_u[i+1]
+#         S = exp(g_u_intercept) / g_l_slope * (c(exp(head(g_l_slope, -1) * tail(x_u, -1)), 0) - exp(g_l_slope * x_u)),
+#         .after = i
+#     )
+# }
+```
+
+
+```{r}
+df_fill <- function(
+    x_l,
+    h_ = h(x_l),
+    g_u_slope = h_diff(x_l),
+    g_u_intercept = h_ - g_u_slope * x_l,
+    # interception of g_u[i], g_u[i+1]
+    x_u = c(0, (tail(g_u_intercept, -1) - head(g_u_intercept, -1)) /
+        (head(g_u_slope, -1) - tail(g_u_slope, -1))),
+    g_l_slope = c((tail(h_, -1) - head(h_, -1)) / (tail(x_l, -1) - head(x_l, -1)), 0),
+    g_l_intercept = c(head(h_ - g_l_slope * x_l, -1), -Inf),
+    # integral of exp(g_u) from x_u[i] to x_u[i+1]
+    S = exp(g_u_intercept) / g_u_slope * (c(exp(head(g_u_slope, -1) * tail(x_u, -1)), 0) - exp(g_u_slope * x_u))) {
+    df_ <- data.frame(
+        x_l = x_l,
+        h = h_,
+        g_u_slope = g_u_slope,
+        g_u_intercept = g_u_intercept,
+        # interception of g_u[i], g_u[i+1]
+        x_u = x_u,
+        g_l_slope = g_l_slope,
+        g_l_intercept = g_l_intercept,
+        # integral of exp(g_u) from x_u[i] to x_u[i+1]
+        S = S
+    )
+    if (any(is.na(df_$S))) {
+        return(df_fill(df_$x_l[!is.na(df_$S)]))
+    } else {
+        return(df_)
+    }
+}
+
+
+
+
+# data.frame(
+#         x_l <-x,
+#         h <- h(x_l),
+#         g_u_slope <- h_diff(x_l),
+#         g_u_intercept <- h - g_u_slope * x_l,
+#         # interception of g_u[i], g_u[i+1]
+#         x_u <- c(0, (tail(g_u_intercept, -1) - head(g_u_intercept, -1)) /
+#             (head(g_u_slope, -1) - tail(g_u_slope, -1))),
+#         g_l_slope <- c((tail(h, -1) - head(h, -1)) / (tail(x_l, -1) - head(x_l, -1)), 0),
+#         g_l_intercept <- c(head(h - g_l_slope * x_l, -1), -Inf),
+#         # integral of exp(g_u) from x_u[i] to x_u[i+1]
+#         S <- exp(g_u_intercept) / g_u_slope * (c(exp(head(g_u_slope, -1) * tail(x_u, -1)), 0) - exp(g_u_slope * x_u))
+#     )
+
+# df <- data.frame(x_l <- c(0, log((log(c) - 2 * a) / b) / log(c)))
+df <- df_fill(c(0, log((log(c) - 2 * a) / b) / log(c)))
+```
+
+
+```{r}
+# g_l <= h <= g_u
+g_l <- function(points, i = lower_bound(df$x_l, points)) {
+    df$g_l_slope[i] * points + df$g_l_intercept[i]
+}
+
+g_u <- function(points, i = lower_bound(df$x_u, points)) {
+    df$g_u_slope[i] * points + df$g_u_intercept[i]
+}
+
+# S_l <= p <= S_u
+S_l <- function(points) exp(g_l(points))
+S_u <- function(points) exp(g_u(points))
+```
+
+
+
+
+
+```{r}
+generate_exp <- function(n_) {
+    i <- sample.int(n = nrow(df), size = n_, prob = df$S, replace = TRUE)
+    a <- df$g_u_slope[i]
+    b <- df$g_u_intercept[i]
+    log(a * runif(n_) * df$S[i] / exp(b) + exp(a * df$x_u[i])) / a
+}
+```
+
+
+
+```{r}
+generate_major <- function(n_) {
+    eta <- generate_exp(n_)
+    alpha <- runif(n_)
+    rejected <- (alpha > S_l(eta) / S_u(eta))
+    df_fill(sort(c(df$x_l, eta[rejected])))
+    # print(sum(rejected))
+}
+
+# generate_exp(1000)
+```
+
+```{r}
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+df <- generate_major(10)
+```
+
+```{r}
+generate <- function(n_) {
+    result <- numeric(n_)
+    rejected <- 1:n_
+    k <- length(rejected)
+    while (k > 0) {
+        result[rejected] <- generate_exp(k)
+        alpha <- runif(k)
+        rejected <- rejected[alpha > S_l(result[rejected]) / S_u(result[rejected])]
+        k <- length(rejected)
+    }
+
+    return(result)
+    # print(sum(rejected))
+}
+```
+
+```{r}
+res <- generate(1000)
+```
+
+
+
+```{r}
+data <- data.frame(sample = res)
+
+func <- data.frame(x = seq(0, 2, by = 0.01), y = p(seq(0, 2, by = 0.01)))
+
+ggplot() +
+    geom_histogram(data = data, aes(x = sample, y = ..density..), binwidth = 0.05) +
+    geom_line(data = func, aes(x = x, y = y))
+```
+
+
+```{r}
+pmakeham <- function(x) {
+    1 - exp(-x * a + b / log(c) * (1 - c^x))
+}
+# pmakeham <- function(x) {
+#     sapply(x, function(t) integrate(p, 0, t))
+# }
+
+ks.test(data$sample, pmakeham)
 ```
