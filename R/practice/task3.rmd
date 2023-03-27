@@ -1,0 +1,140 @@
+---
+title: "task3"
+output:
+    html_document:
+        df_print: paged
+---
+
+
+
+```{r, include=FALSE}
+# knitr::opts_chunk$set(fig.width = 8, fig.height = 8)
+
+# library(testit)
+
+# library(readxl)
+# library(reshape2)
+library(ggplot2)
+# library(GGally) # pairwise plot
+# library(stringr) # str_squish
+
+# library(correlation) # cor_sort
+# library(tidyr) # drop.na()
+# library(ppcor)
+library(dplyr) # dataframe
+library(bbmle)
+
+# setwd("R/Statistical_Analysis_2022/Partial_Correlation_CARDATA/Tkachenko")
+```
+
+# Задание
+
+X ~ log(Norm(mu, sigma))
+
+U < V ~ G(u, v) - любое удобное
+я взял сортиованные пары нормальных
+
+Y = (U, V, X < U, X < V)
+
+найти зависимость ширины дов интервала оценок mu, sigma от объема выборки
+
+# 1 Моделирование выборки из Y
+```{r}
+generate_Y <- function(n = 1, mean = 0, sd = 1) {
+    x <- exp(rnorm(n, mean = mean, sd = sd))
+    # u_ <- exp(rnorm(n))
+    # v_ <- exp(rnorm(n))
+    u_ <- rexp(n)
+    v_ <- rexp(n)
+    u <- pmin(u_, v_)
+    v <- pmax(u_, v_)
+
+    data.frame(
+        u = u,
+        v = v,
+        id1 = x < u,
+        id2 = x < v
+    )
+}
+
+# y <- generate_Y(10000, 3, 2)
+```
+
+# 2 Написать функцию правдоподобия
+L(mu, sigma | y) = p_(mu, sigma)(y)
+
+Y = (u, v, 1, 1)    P = g(u, v) * P(x < u)
+Y = (u, v, 0, 1)    P = g(u, v) * P(u < x < v)
+Y = (u, v, 0, 0)    P = g(u, v) * P(v < x)
+
+P(x < u) = F_teta(u)                    a       1 1
+P(u < x < v) = F_teta(v) - F_teta(u)    b - a   0 1
+P(v < x) = 1 - F_teta(v)                1 - b   0 0
+
+
+```{r}
+g <- function(u, v) {
+    # 2 * dnorm(log(u)) * dnorm(log(v)) * (u < v)
+    2 * dexp(u) * dexp(v) * (u < v)
+}
+
+p <- function(y, mean, sd) {
+    a <- pnorm(log(y$u), mean = mean, sd = sd)
+    b <- pnorm(log(y$v), mean = mean, sd = sd)
+    ifelse(y$id1, a, ifelse(y$id2, b - a, 1 - b))
+}
+
+# y <<- generate_Y(1000, 1, 2)
+
+LL <- function(y, mean, sd) {
+    -sum(log(p(y, mean, sd) * g(y$u, y$v)))
+}
+```
+
+
+
+# 3 Написать процедуры оценивания параметров (с учетом естественных ограничений на область допустимых значений параметров)
+
+```{r}
+estimate_ <- function(n = 1000, param_mean = 0, param_sd = 1) {
+    y <- generate_Y(n, param_mean, param_sd)
+    fit1F <- mle2(minuslogl = function(mean = 0, sd = 1) LL(y, mean, sd))
+    # print(coef(fit1F))
+    # print(vcov(fit1F))
+
+    param <- c(mean = param_mean, sd = param_sd)
+    param_estimate <- coef(fit1F)
+    names(param_estimate) <- paste(names(param_estimate), "estimate", sep = "_")
+    param_moe <- 1.96 * sqrt(diag(vcov(fit1F)))
+    names(param_moe) <- paste(names(param_moe), "moe", sep = "_")
+
+    return(c(n = n, param, param_estimate, param_moe))
+}
+
+estimate <- function(n = 1000, param_mean = 0, param_sd = 1) {
+    data.frame(t(mapply(estimate_, n, param_mean, param_sd)))
+}
+```
+
+надо ли делить на n интервал
+
+# 4 Исследование указанных свойств оценок оценок параметров.
+
+```{r}
+data <- estimate(n = c(100, 500, 1000, 5000, 10000, 50000), param_mean = 1, param_sd = 2)
+```
+
+```{r}
+ggplot(data) +
+    geom_line(aes(x = log(n), y = mean_moe), color = "red") +
+    geom_line(aes(x = log(n), y = sd_moe), color = "blue")
+```
+
+
+```{r}
+# rm(list = ls())
+
+# gc()
+```
+
+
