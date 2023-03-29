@@ -1,0 +1,156 @@
+---
+title: "task4"
+output:
+    html_document:
+        df_print: paged
+---
+
+
+
+```{r, include=FALSE}
+# knitr::opts_chunk$set(fig.width = 8, fig.height = 8)
+
+# library(testit)
+
+# library(readxl)
+library(mvtnorm)
+library(ggplot2)
+# library(GGally) # pairwise plot
+# library(stringr) # str_squish
+
+# library(correlation) # cor_sort
+library(tidyr)
+# library(ppcor)
+library(dplyr) # dataframe
+library(reshape2)
+# library(bbmle)
+# library(graphics)
+
+if (interactive()) setwd("R/practice/")
+# setwd("R/Statistical_Analysis_2022/Partial_Correlation_CARDATA/Tkachenko")
+```
+
+
+```{r}
+ring <- read.table("ring.txt", col.names = c("x", "y"))
+```
+
+
+# Начальные данные
+```{r}
+k <- 2
+p <- rep(1 / k, k)
+mu <- lapply(1:k, function(x) rep(x, 2))
+# mu <- list(c(-1, 1), c(1, -1))
+sigma <- lapply(1:k, function(x) diag(2))
+```
+
+# Скрытые переменные
+```{r}
+r <- expand(ring, nesting(x, y), c = 1:k)
+```
+
+# EM algorithm
+
+```{r}
+E_step <- function() {
+    r <<- r %>%
+        group_by(c) %>%
+        mutate(
+            value_ = p[c] * dmvnorm(cbind(x, y), as.numeric(mu[[c[1]]]), sigma[[c[1]]])
+        ) %>%
+        ungroup() %>%
+        group_by(x, y) %>%
+        mutate(
+            value = value_ / sum(value_)
+        ) %>%
+        ungroup()
+}
+
+M_step <- function() {
+    m <- r %>%
+        group_by(c) %>%
+        summarise(value = sum(value))
+
+    m <- m$value
+
+    p <<- m / sum(m)
+
+    mu <<- lapply(1:k, function(i) {
+        1 / m[i] * r %>%
+            filter(c == i) %>%
+            summarise(sum(x * value), sum(y * value))
+    })
+
+    sigma <<- lapply(1:k, function(i) {
+        r_ <- r %>% filter(c == i)
+        point <- (cbind(r_$x, r_$y) - as.numeric(mu[[i]])) * sqrt(r_$value)
+        return(t(point) %*% point / m[i])
+    })
+}
+```
+
+
+
+```{r}
+# count <- 0
+# LL <- function() {
+#     count <<- count + 1
+#     if (count > 100) count <<- count + 1
+#     return(count)
+# }
+
+LL <- function() sum(log((r %>% group_by(x) %>% summarise(res = sum(value_)))$res))
+```
+
+
+```{r}
+# E_step()
+# M_step()
+# LL()
+```
+
+```{r}
+E_step()
+M_step()
+iterations <- 1
+E_step()
+M_step()
+llvector <- LL()
+E_step()
+M_step()
+llvector <- c(llvector, LL())
+while (llvector[iterations + 1] - llvector[iterations] > .01) {
+    iterations <<- iterations + 1
+    E_step()
+    M_step()
+    llvector <- c(llvector, LL())
+}
+```
+
+# Визуализация
+
+```{r}
+net <- expand.grid(list(
+    x = seq(min(ring$x), max(ring$x), by = .1),
+    y = seq(min(ring$y), max(ring$y), by = .1),
+    c = 1:k
+)) %>%
+    group_by(c) %>%
+    mutate(
+        z = dmvnorm(cbind(x, y), as.numeric(mu[[c[1]]]), sigma[[c[1]]])
+    ) %>%
+    ungroup()
+
+ggplot() +
+    geom_point(data = ring, aes(x = x, y = y)) +
+    geom_contour(data = net, aes(x = x, y = y, z = z, group = c, color = as.factor(c)))
+
+print(LL())
+```
+
+
+```{r}
+# ggplot(data = data.frame(it = 0:iterations, ll = llvector)) +
+#     geom_line(aes(x = it, y = -log(-ll)))
+```

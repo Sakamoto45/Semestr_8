@@ -75,7 +75,8 @@ P(v < x) = 1 - F_teta(v)                1 - b   0 0
 ```{r}
 g <- function(u, v) {
     # 2 * dnorm(log(u)) * dnorm(log(v)) * (u < v)
-    2 * dexp(u) * dexp(v) * (u < v)
+    # 2 * dexp(u) * dexp(v) * (u < v)
+    (u < v)
 }
 
 p <- function(y, mean, sd) {
@@ -131,10 +132,40 @@ ggplot(data) +
 ```
 
 
+
+```{r}
+y <- generate_Y(10000, 1, 2)
+fit1F <- mle2(minuslogl = function(mean = 0, sd = 1) LL(y, mean, sd))
+```
+
+
+```{r}
+# ggplot() +
+#     stat_ellipse(data = )
+
+net <- expand.grid(list(
+    mean = seq(0, 2, by = .01),
+    sd = seq(0, 4, by = .01)
+)) %>%
+    mutate(
+        z = dmvnorm(cbind(mean, sd), coef(fit1F), vcov(fit1F))
+    )
+
+ggplot() +
+    # geom_point(data = ring, aes(x = x, y = y)) +
+    geom_contour(data = net, aes(x = mean, y = sd, z = z))
+
+print(coef(fit1F))
+print(vcov(fit1F))
+```
+
+
 ```{r}
 # rm(list = ls())
 
 # gc()
 ```
+
+
 
 

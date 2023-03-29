@@ -212,6 +212,13 @@ generate <- function(n_) {
 ```
 
 ```{r}
+pmakeham <- function(x) {
+    1 - exp(-x * a + b / log(c) * (1 - c^x))
+}
+```
+
+
+```{r}
 res <- generate(1000)
 ```
 
@@ -229,12 +236,17 @@ ggplot() +
 
 
 ```{r}
-pmakeham <- function(x) {
-    1 - exp(-x * a + b / log(c) * (1 - c^x))
-}
-# pmakeham <- function(x) {
-#     sapply(x, function(t) integrate(p, 0, t))
-# }
+test <- sapply(1:1000, function(x) ks.test(generate(1000), pmakeham)$p.value)
+```
 
-ks.test(data$sample, pmakeham)
+```{r}
+plot(ecdf(test))
+```
+
+
+```{r}
+# ggplot() +
+#     geom_histogram(data = data.frame(sample = cdf), aes(x = sample, y = ..density..), binwidth = 0.05)
+# ggplot(data = data.frame(x = seq(0, 1, 0.01), y = cdf)) +
+#     geom_line(aes(x = x, y = y))
 ```
