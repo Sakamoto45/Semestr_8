@@ -1,0 +1,542 @@
+---
+title: "CITY_US"
+output:
+    html_document:
+        # df_print: paged
+        toc: true
+        toc_float: true 
+---
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(fig.width = 8, fig.height = 8)
+# knitr::opts_chunk$set(
+#     # This should allow Rmarkdown to locate the data
+#     root.dir = rprojroot::find_rstudio_root_file()
+# )
+library(readxl)
+library(reshape2)
+library(ggplot2)
+library(GGally)
+library(stringr)
+library(correlation) # cor_sort
+library(forcats)
+library(tidyr)
+library(symmetry)
+library(moments)
+library(qqplotr)
+library(nortest)
+library(entropy)
+library(car)
+library(ppcor)
+library(dplyr)
+```
+
+# I Предварительный анализ данных
+
+```{r}
+if (interactive() && !str_ends(getwd(), "R/Statistical_Analysis_2022/CITY_US/Tkachenko")) {
+    setwd("R/Statistical_Analysis_2022/CITY_US/Tkachenko")
+}
+
+data <- read_excel("../CITY_US.STD/CITY_shortname.xls")
+data[data == "NA"] <- NA
+data[, -(1:2)] <- data.frame(lapply(data[, -(1:2)], as.numeric))
+fullnames <- names(read_excel("../CITY_US.STD/CITY.xls"))
+```
+
+## 1 Разобраться в том, что означают признаки.
+
+```{r}
+print(fullnames)
+```
+
+## 2 Отобрать признаки
+
+```{r}
+names_interesting <- c("AREA", "POP80", "POP92", "POPDEN", "CRIME", "BORN_F", "POVERT", "INCOME", "UNEMP", "TEMPER")
+
+data <- data %>% select(all_of(c("CITY", "STATE", names_interesting)))
+
+print(head(data))
+```
+
+## 3 Определить вид признаков
+
+Город и штат качественные, остальные количественные, ранги были порядковыми.
+
+
+```{r}
+find_mode_freq <- function(x) {
+    x <- x[!is.na(x)]
+    return(max(tabulate(match(x, x))))
+}
+
+print(data %>% summarise(across(
+    all_of(names_interesting),
+    find_mode_freq
+)))
+
+print(sort(data$UNEMP))
+```
+
+Все количественные буду считать непрерывными.
+возможно UNEMP непрерывный с плохой точностью.
+
+## 4 не актуально
+
+## 5 Построить matrix plot
+
+```{r, message=FALSE, warning=FALSE}
+if (interactive()) pdf("ggpairs_unedited.pdf")
+ggpairs(
+    data[, -(1:2)],
+    lower = list(continuous = wrap("points", alpha = 0.5, size = 0.3)),
+    diag = list(continuous = "barDiag")
+)
+if (interactive()) dev.off()
+```
+
+## 7 outliers
+
+Убираю outliers:
+
+Помечаю некорректные данные в INCOME как NA.
+Удаляю город из Аляски за плотность населения.
+Флорида выделсется на BORN_F-INCOME
+Гаваи выделяются низким уровнем безработицы. странно?
+
+```{r}
+data$INCOME[data$INCOME < 100] <- NA
+data <- data %>% filter(STATE != "AK")
+```
+
+## 6 Несимметричные распределения
+
+Функция, которая логарифмирует, если это сделает выборку симметричнее
+
+```{r}
+log_asymmetric <- function(x) {
+    if (skewness(x, na.rm = TRUE) < abs(skewness(log(x), na.rm = TRUE))) {
+        print("default")
+        return(x)
+    } else {
+        print("logged")
+        return(log(x))
+    }
+}
+```
+
+Автоматически логарифмирую то что имеет асимметрию  и длинный хвост справа
+
+```{r}
+data_logged <- data %>%
+    mutate(across(all_of(names_interesting), log_asymmetric))
+```
+
+```{r, message=FALSE, warning=FALSE}
+if (interactive()) pdf("ggpairs_logged.pdf")
+ggpairs(
+    data_logged[, -(1:2)],
+    lower = list(continuous = wrap("points", alpha = 0.5, size = 0.3)),
+    diag = list(continuous = "barDiag")
+)
+if (interactive()) dev.off()
+```
+
+## 8 однородность
+
+выглядит однородно.
+
+
+## 9 не актуально
+
+## 10 всякие характеристики
+
+```{r}
+print_characteristics <- function(x) {
+    list(
+        mean = mean(x, na.rm = TRUE),
+        var = var(x, na.rm = TRUE),
+        skewness = skewness(x, na.rm = TRUE),
+        kurtosis = kurtosis(x, na.rm = TRUE) - 3
+    )
+}
+
+sapply(data_logged %>% select(all_of
+(names_interesting)), print_characteristics)
+```
+
+# II О виде распределений и о сравнении распределений
+
+## 1 выполнить первое второе задание в логичном порядке
+
+## 2 анализ вида распределения признаков
+
+#### 2. Описать распределения признаков визуально (с помощью нормальной бумаги и PP-plot) и по критерию хи-квадрат и другим критериям.
+
+Сюда входит: normal probability plot (что это такое?), проверка по критериям Лиллиефорса, AD, хи-квадрат, Шапиро-Уилка. По критерию хи-квадрат, а также визуально по PP-plot можно проверить и гипотезы о согласии с другими распределениями, например, логнормальным.
+
+Рассматриваем нормальность
+
+все плотности.
+```{r, warning=FALSE, message = FALSE}
+if (interactive()) pdf(file = "all_density_plots.pdf")
+ggplot(melt(data_logged, id = c("CITY", "STATE")), aes(value)) +
+    theme_bw() +
+    geom_histogram(aes(y = ..density..), bins = 15) +
+    # geom_density() +
+    facet_wrap(~variable, scales = "free") +
+    geom_line(aes(y = dnorm(value,
+        mean = tapply(value, variable, mean, na.rm = TRUE)[PANEL],
+        sd = tapply(value, variable, sd, na.rm = TRUE)[PANEL]
+    )), color = "red") +
+    theme(legend.position = "bottom") +
+    labs(x = "", y = "")
+if (interactive()) dev.off()
+```
+
+
+
+Normal probability plot
+
+```{r, warning=FALSE, message = FALSE}
+if (interactive()) pdf(file = "normal_probability_plot.pdf")
+ggplot(melt(data_logged, id = c("CITY", "STATE")), aes(sample = value)) +
+    stat_qq_point(size = 2) +
+    geom_abline() +
+    facet_wrap(~variable, scales = "free")
+if (interactive()) dev.off()
+```
+
+PP-plot
+
+```{r, warning=FALSE, message = FALSE}
+if (interactive()) pdf(file = "PP_plot.pdf")
+ggplot(melt(data_logged, id = c("CITY", "STATE")), aes(sample = value)) +
+    stat_pp_point(size = 2) +
+    facet_wrap(~variable, scales = "free") +
+    stat_pp_line()
+if (interactive()) dev.off()
+```
+
+Всякие тесты на нормальность
+```{r}
+data_logged$F_TEMPER <- NULL
+test_all <- function(data, test, ...) {
+    print(test(1:10, ...)$method)
+    print(data %>% summarise(across(
+        everything(),
+        function(x) {
+            test(x, ...)$p.value
+        }
+    )))
+}
+
+test_all(data_logged[, -(1:2)], shapiro.test)
+test_all(data_logged[, -(1:2)], lillie.test)
+test_all(data_logged[, -(1:2)], ad.test)
+test_all(data_logged[, -(1:2)], pearson.test)
+```
+
+Критерии отвергают нормальность распределения населения. В остальных признаках отклонения от нормального (логнормального для ранее логарифмированных признаков) распределения тестами не обнаружено.
+
+#### 1. Описать разницу между численностью населения в 1980 и 1992 годах визуально (с помощью ящиков с усами) и по критериям. Добавить признак, который разбивает города на "холодные" и "жаркие". Сравнить их по характеристикам.
+
+добавим признак
+
+```{r}
+temper_split <- median(data_logged$TEMPER)
+data_logged$F_TEMPER <- factor(ifelse(data_logged$TEMPER < temper_split, "cold", "hot"))
+```
+
+## 3 Сначала имеет смысл посмотреть на сравнение распределений в группах с помощью ящиков с усами
+
+```{r}
+if (interactive()) pdf("boxplot_pop.pdf")
+ggplot(
+    melt(data_logged, id.vars = "F_TEMPER", measure.vars = c("POP80", "POP92")),
+    aes(x = variable, y = value, color = F_TEMPER)
+) +
+    geom_boxplot() +
+    scale_color_manual(values = c("blue", "red"))
+if (interactive()) dev.off()
+
+
+if (interactive()) pdf("boxplot_pop_all.pdf")
+ggplot(
+    melt(data_logged, id.vars = "F_TEMPER", measure.vars = c("AREA", "POP80", "POPDEN", "CRIME", "BORN_F", "POVERT", "INCOME", "UNEMP", "TEMPER")),
+    aes(x = variable, y = value, color = F_TEMPER)
+) +
+    geom_boxplot() +
+    facet_wrap(~variable, scales = "free") +
+    scale_color_manual(values = c("blue", "red"))
+if (interactive()) dev.off()
+```
+
+
+## Сравнение признаков при разбиении городов на группы по температуре
+
+## 4 t-test
+
+Разделение на группы было сделано по медиане, поэтому дизайн сбалансированный, и для t-теста можно не выяснять равенство дисперсий.
+
+Но из интереса применю тест Фишера, а перед этим проверю группы на нормальность распределения.
+
+### Признак CRIME
+Из ящиков с усами ожидаю отвержение нулевых гипотез в тестах.
+
+```{r}
+hot <- (data_logged %>%
+    filter(F_TEMPER == "hot"))$CRIME
+cold <- (data_logged %>%
+    filter(F_TEMPER == "cold"))$CRIME
+```
+
+
+```{r}
+cat(shapiro.test(hot)$p.value, shapiro.test(cold)$p.value)
+cat(pearson.test(hot)$p.value, pearson.test(cold)$p.value)
+```
+Тесты на нормальность не обнаружили ненормальности в распределениях. Применю тест Фишера
+```{r}
+var.test(hot, cold)
+```
+Тест Фишера не отверг гипотезу о равенстве дисперсий, но это не так важно, потому что в t-test дизайн сбалансирован и формула не изменится.
+```{r}
+t.test(cold, hot)
+```
+t-test уверенно отвергает гипотезу о равенстве матожиданий, как и ожидалось.
+
+## 5 непараметрический тест Вилкоксона.
+
+Если бы дизайн был несбалансирован или не было бы нормальности распределений и нас не удовлетворяла асимптотичность t-критерия или нас интересовала другая характеристика положение, то мы бы применили критерий Вилкоксона.
+
+```{r}
+wilcox.test(cold, hot, paired = FALSE)
+```
+Он тоже отвергает схожесть распределений.
+
+## 7 критерий Колмогорова-Смирнова
+```{r}
+ks.test(cold, hot)
+```
+Тест Колмогорова-Смирнова обнаруживает разницу в форме распределений.
+
+### Признак INCOME
+для этого признака многое повторится, но я ожидаю неотвержения нулевых гипотез в тестах, потому что ящики с усами похожи.
+
+
+Сейчас я буду применять t-test для сравнения признака INCOME в группах разделения по температуре.
+У меня сбалансированный дизайн (в группах по 38 городов), поэтому не важно, равны дисперсии или нет, но я проверю.
+Применять тест Фишера для проверки равенства дисперсий можно только для нормально распределенных (внутри групп) признаков.
+
+```{r}
+hot <- (data_logged %>%
+    filter(F_TEMPER == "hot"))$INCOME
+cold <- (data_logged %>%
+    filter(F_TEMPER == "cold"))$INCOME
+```
+
+Проверяю нормальность в группах тестом Пирсона (хи квадрат) и Шапира-Уилка
+```{r}
+cat(shapiro.test(hot)$p.value, shapiro.test(cold)$p.value)
+cat(pearson.test(hot)$p.value, pearson.test(cold)$p.value)
+```
+Тесты не обнаружили ненормальности в распределениях в группах.
+Поэтому применю тест Фишера.
+```{r}
+var.test(hot, cold)
+```
+Тест Фишера не отвергает гипотезу о равенстве дисперсий.
+
+Наконец применю t-test, никак не используя результаты про наверно (гипотезу нельзя принимать) равенство дисперсий, потому что дизайн сбалансирован. При нормальных распределениях тест точный. 
+```{r}
+t.test(cold, hot)
+```
+
+t-test не отвергает гипотезу о равенстве матожиданий. Применю тест Вилкоксона. Он ранговый и проверят другую гипотезу про сумму рангов.
+
+```{r}
+wilcox.test(cold, hot)
+```
+
+Тест Вилкоксона не обнаружил разницы в распределениях, так как не отверг нулевую гипотезу.
+
+В тесте Колмогорова-Смирнова есть смысл, если прошлые тесты не нашли различий.
+Тест Колмогорова-Смирнова сравнивает функции распределения целиком и проверяет, похожи ли формы распределений.
+
+```{r}
+ks.test(cold, hot)
+```
+
+p-value большое, тест не нашел заметной разницы между формами распределений.
+
+
+
+
+
+
+
+## 8 сравнение зависимых выборок 
+
+Применяю t-test для зависимых выборок.
+```{r}
+t.test(
+    data_logged$POP80,
+    data_logged$POP92,
+    paired = TRUE
+)
+```
+
+Благодаря тому что тест парный, он смог отвергнуть гипотезу о равенстве матожиданий.
+
+Статистика зависимого критерия больше статистики независимого (при положительной корреляции), поэтому мощнее.
+
+Парный тест Вилкоксона
+```{r}
+wilcox.test(data_logged$POP80, data_logged$POP92, paired = TRUE)
+```
+
+
+Из-за того что тесты парные, они обнаруживают разницу в распределениях.
+
+# III Об анализе зависимостей
+
+## 1 вспомним pairs plot
+
+```{r, message=FALSE, warning=FALSE}
+if (interactive()) pdf("ggpairs_logged.pdf")
+ggpairs(
+    data_logged[, -(1:2)],
+    lower = list(continuous = wrap("points", alpha = 0.5, size = 0.3)),
+    diag = list(continuous = "barDiag")
+)
+if (interactive()) dev.off()
+```
+
+```{r, message=FALSE, warning=FALSE}
+if (interactive()) pdf("ggpairs_logged_colored.pdf")
+ggpairs(
+    data_logged[, -(1:2)],
+    aes(color = F_TEMPER),
+    lower = list(continuous = wrap("points", alpha = 0.5, size = 0.6)),
+    diag = list(continuous = "barDiag"),
+    columns = names_interesting
+) +
+    scale_color_manual(values = c("blue", "red")) +
+    scale_fill_manual(values = c("blue", "red"))
+if (interactive()) dev.off()
+```
+
+## 2 Начинать нужно с анализа линейных зависимостей
+Матрица корреляций пирсона
+
+```{r, warning=FALSE, message = FALSE}
+data_logged <- data_logged %>%
+    relocate(TEMPER, AREA, POP92, POP80, POPDEN, BORN_F, UNEMP, POVERT, CRIME, INCOME)
+
+
+if (interactive()) pdf(file = "cor_matrix_pearson.pdf")
+ggplot(melt(cor(data_logged %>% select(-CITY, -STATE, -F_TEMPER), method = "pearson", use = "pairwise.complete.obs"))) +
+    geom_raster(aes(x = Var2, y = Var1, fill = value)) +
+    geom_text(aes(x = Var2, y = Var1, label = round(value, 2))) +
+    scale_fill_gradient2() +
+    theme_dark() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+if (interactive()) dev.off()
+```
+
+## 3 Затем можно переходить к ранговым коэффициентам корреляции.
+
+Матрица корреляций спирмана
+
+```{r, warning=FALSE, message = FALSE}
+if (interactive()) pdf(file = "cor_matrix_spearman.pdf")
+ggplot(melt(cor(data_logged %>% select(-CITY, -STATE, -F_TEMPER), method = "spearman", use = "pairwise.complete.obs"))) +
+    geom_raster(aes(x = Var2, y = Var1, fill = value)) +
+    geom_text(aes(x = Var2, y = Var1, label = round(value, 2))) +
+    scale_fill_gradient2() +
+    theme_dark() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+if (interactive()) dev.off()
+```
+
+## 4 Проинтерпретируйте найденные корреляции - можно ли сказать, что является причиной, что следствием
+
+```{r, warning=FALSE, message = FALSE, include=FALSE}
+if (interactive()) pdf(file = "all_density_groupped_plots.pdf")
+ggplot(
+    melt(data_logged, id = c("CITY", "STATE", "F_TEMPER")),
+    aes(value, color = F_TEMPER)
+) +
+    theme_bw() +
+    # geom_histogram(bins = 15) +
+    geom_density() +
+    facet_wrap(~variable, scales = "free") +
+    geom_line(aes(y = dnorm(value,
+        mean = tapply(value, variable, mean, na.rm = TRUE)[PANEL],
+        sd = tapply(value, variable, sd, na.rm = TRUE)[PANEL]
+    )), color = "black", linetype = 2) +
+    theme(legend.position = "bottom") +
+    labs(x = "", y = "") +
+    scale_color_manual(values = c("blue", "red"))
+if (interactive()) dev.off()
+
+data_logged$F_TEMPER <- NULL
+
+# plot_all_density(data_logged_melt, aes(value, color = F_TEMPER)) +
+#     scale_color_manual(values = c("blue", "red"))
+```
+
+
+#### частные корреляции
+
+Вычитаю из иностранных и плотности доход
+
+```{r}
+(data_logged %>%
+    dplyr::select(BORN_F, POPDEN, INCOME) %>%
+    drop_na() %>%
+    pcor(method = "pearson"))$estimate["BORN_F", "POPDEN"]
+
+(data_logged %>%
+    dplyr::select(BORN_F, POPDEN, TEMPER) %>%
+    drop_na() %>%
+    pcor(method = "pearson"))$estimate["BORN_F", "POPDEN"]
+```
+Частная корреляция иностранно рожденных и плотности населения за вычетом дохода больше чем обычная корреляция.
+
+```{r}
+if (interactive()) pdf(file = "pcor.pdf")
+
+ggplot(melt((data_logged %>%
+    dplyr::select(UNEMP, POVERT, INCOME, CRIME) %>%
+    drop_na() %>%
+    pcor(method = "pearson"))$estimate), aes(x = Var2, y = Var1)) +
+    geom_raster(aes(fill = value)) +
+    geom_text(aes(label = round(value, 2))) +
+    scale_fill_gradient2()
+if (interactive()) dev.off()
+
+if (interactive()) pdf(file = "cor.pdf")
+ggplot(melt(cor(data_logged %>%
+    dplyr::select(UNEMP, POVERT, INCOME, CRIME) %>%
+    drop_na())), aes(x = Var2, y = Var1)) +
+    geom_raster(aes(fill = value)) +
+    geom_text(aes(label = round(value, 2))) +
+    scale_fill_gradient2()
+if (interactive()) dev.off()
+
+
+if (interactive()) pdf(file = "pairs.pdf")
+
+ggpairs(
+    data_logged %>%
+        dplyr::select(UNEMP, POVERT, INCOME, CRIME) %>%
+        drop_na(),
+    lower = list(continuous = wrap("points", alpha = 0.5, size = 0.3)),
+    diag = list(continuous = "barDiag")
+)
+if (interactive()) dev.off()
+```
