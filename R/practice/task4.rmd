@@ -40,15 +40,18 @@ ring <- read.table("ring.txt", col.names = c("x", "y"))
 ```{r}
 k <- 2
 p <- rep(1 / k, k)
-mu <- lapply(1:k, function(x) rep(x, 2))
-# mu <- list(c(-1, 1), c(1, -1))
+# mu <- lapply(1:k, function(x) rep(x, 2))
+mu <- lapply(1:k, function(x) runif(2))
 sigma <- lapply(1:k, function(x) diag(2))
+print(mu)
 ```
 
 # Скрытые переменные
 ```{r}
 r <- expand(ring, nesting(x, y), c = 1:k)
 ```
+
+
 
 # EM algorithm
 
@@ -91,15 +94,19 @@ M_step <- function() {
 ```
 
 
+```{r}
+r$value_ <- runif(nrow(r))
+r <- r %>%
+    group_by(x, y) %>%
+    mutate(
+        value = value_ / sum(value_)
+    ) %>%
+    ungroup()
+M_step()
+```
+
 
 ```{r}
-# count <- 0
-# LL <- function() {
-#     count <<- count + 1
-#     if (count > 100) count <<- count + 1
-#     return(count)
-# }
-
 LL <- function() sum(log((r %>% group_by(x) %>% summarise(res = sum(value_)))$res))
 ```
 
@@ -144,13 +151,14 @@ net <- expand.grid(list(
 
 ggplot() +
     geom_point(data = ring, aes(x = x, y = y)) +
-    geom_contour(data = net, aes(x = x, y = y, z = z, group = c, color = as.factor(c)))
+    geom_contour(data = net, aes(x = x, y = y, z = z, group = c, color = as.factor(c))) +
+    ggtitle(paste("LL =", LL()))
 
 print(LL())
 ```
 
 
 ```{r}
-# ggplot(data = data.frame(it = 0:iterations, ll = llvector)) +
-#     geom_line(aes(x = it, y = -log(-ll)))
+ggplot(data = data.frame(it = 0:iterations, ll = llvector)) +
+    geom_line(aes(x = it, y = log(max(ll) - ll)))
 ```

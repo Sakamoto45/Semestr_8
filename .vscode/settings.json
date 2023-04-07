@@ -94,6 +94,7 @@
         "queue": "cpp",
         "dense": "cpp",
         "complex": "cpp",
-        "core": "cpp"
+        "core": "cpp",
+        "hash_map": "cpp"
     }
 }

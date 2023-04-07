@@ -1,5 +1,13 @@
-// #include "primes.h"
+//#include "primes.h"
 
-// Primes::Primes()
+// namespace Prime
 // {
+
+//     static Primes &getInstance()
+//     {
+//         static Primes instance; // Guaranteed to be destroyed.
+//                                 // Instantiated on first use.
+//         return instance;
+//     }
+
 // }
