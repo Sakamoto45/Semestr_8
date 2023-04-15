@@ -6,7 +6,7 @@
 namespace MyAlgebra
 {
 
-    // T must have operators * / < == <<
+    // T must have operators * / < == << root
     template <class T>
     class MaxAlgebra
     {
@@ -47,15 +47,15 @@ namespace MyAlgebra
         {
             return !(rhs < lhs);
         }
-        friend MaxAlgebra<T> operator*(const MaxAlgebra<T> &lhs, const MaxAlgebra<T> &rhs)
+        friend inline MaxAlgebra<T> operator*(const MaxAlgebra<T> &lhs, const MaxAlgebra<T> &rhs)
         {
             return lhs.value_ * rhs.value_;
         }
-        friend MaxAlgebra<T> operator/(const MaxAlgebra<T> &lhs, const MaxAlgebra<T> &rhs)
+        friend inline MaxAlgebra<T> operator/(const MaxAlgebra<T> &lhs, const MaxAlgebra<T> &rhs)
         {
             return lhs.value_ / rhs.value_;
         }
-        friend MaxAlgebra<T> operator+(const MaxAlgebra<T> &lhs, const MaxAlgebra<T> &rhs)
+        friend inline MaxAlgebra<T> operator+(const MaxAlgebra<T> &lhs, const MaxAlgebra<T> &rhs)
         {
             return lhs < rhs ? rhs : lhs;
         }
@@ -73,6 +73,10 @@ namespace MyAlgebra
         }
         MaxAlgebra &operator-=(const MaxAlgebra &other) = delete;
         MaxAlgebra operator-(const MaxAlgebra &other) const = delete;
+        inline MaxAlgebra<T> Root(const uint &root)
+        {
+            return value_.Root(root);
+        }
     };
 
     // template <class T>

@@ -1,0 +1,268 @@
+\begin{lstlisting}
+% \begin{lstlisting}[style={CppCodeStyle}]
+#include <iostream>
+#include "matrix.h"
+#include "fraction.h"
+#include "to_latex.h"
+#include "string"
+#include "fstream"
+#include <math.h>
+
+#include <eigen3/Eigen/Dense>
+
+typedef MaxMultiFraction Fraction;
+
+ifstream input;
+ofstream output;
+
+using namespace std;
+
+Eigen::VectorXd MainVector(Eigen::MatrixXd &matrix)
+{
+    Eigen::EigenSolver<Eigen::MatrixXd> es(matrix);
+
+    Eigen::VectorXd eigen_values = es.eigenvalues().real();
+
+    uint max_id = 0;
+    for (uint i = 1; i < eigen_values.size(); i++)
+    {
+        max_id = eigen_values[i] > eigen_values[max_id] ? i : max_id;
+    }
+
+    // output << "The main eigenvector of the matrix is:\n"
+    //      << es.eigenvectors().col(max_id).real() << endl;
+    Eigen::VectorXd result = es.eigenvectors().col(max_id).real();
+    result /= result.sum();
+    return result;
+}
+
+void HierarchyAnalysisMethod(Eigen::MatrixXd &C, vector<Eigen::MatrixXd> &A)
+{
+    Eigen::VectorXd main_vector_C = MainVector(C);
+
+    Eigen::MatrixXd main_vectors_A(A[0].rows(), C.cols());
+
+    for (uint i = 0; i < A.size(); i++)
+    {
+        main_vectors_A.col(i) = MainVector(A[i]);
+    }
+
+    Eigen::VectorXd result = main_vectors_A * main_vector_C;
+    result /= result.maxCoeff();
+    Eigen::VectorXd result_sum = result / result.sum();
+
+    output << "Главный собственный вектор матрицы $C$\n"
+           << equation(to_latex(main_vector_C)) << endl
+           << "Главные собственные вектора матриц $A_i$\n"
+           << equation(to_latex(main_vectors_A)) << endl
+           << "Нормированный по сумме вектор приоритетов\n"
+           << equation(to_latex(result_sum)) << endl
+           << "Нормированный по максимуму вектор приоритетов\n"
+           << equation(to_latex(result)) << endl;
+}
+
+Eigen::VectorXd WeightedGeometricMean(Eigen::MatrixXd &matrix)
+{
+    Eigen::VectorXd result(matrix.rows());
+    for (uint i = 0; i < matrix.rows(); i++)
+    {
+        result(i) = 1;
+        for (uint j = 0; j < matrix.cols(); j++)
+        {
+            result(i) *= matrix(i, j);
+        }
+        result(i) = pow(result(i), 1.0 / matrix.cols());
+    }
+    return result;
+}
+
+void WeightedGeometricMeanMethod(Eigen::MatrixXd &C, vector<Eigen::MatrixXd> &A)
+{
+    Eigen::VectorXd weighted_geometric_mean_C = WeightedGeometricMean(C);
+    weighted_geometric_mean_C /= weighted_geometric_mean_C.sum();
+
+    Eigen::MatrixXd weighted_geometric_means_A(A[0].rows(), C.cols());
+
+    for (uint i = 0; i < A.size(); i++)
+    {
+        weighted_geometric_means_A.col(i) = WeightedGeometricMean(A[i]);
+    }
+
+    // m.array().log()).matrix();
+
+    Eigen::VectorXd result = (weighted_geometric_means_A.array().log().matrix() * weighted_geometric_mean_C).array().exp().matrix();
+    result /= result.maxCoeff();
+
+    output << "Взвешенный по сумме геометрический средний вектор матрицы $C$\n"
+           << weighted_geometric_mean_C << endl
+           << "Геометрические средние вектора матриц $A_i$\n"
+           << weighted_geometric_means_A << endl
+           << "Нормированный по сумме вектор приоритетов\n"
+           << result / result.sum() << endl
+           << "Нормированный по максимуму вектор приоритетов\n"
+           << result << endl;
+}
+
+void CommonPart(Matrix<Fraction> &C, string matrix_name)
+{
+    output << "Нужные степени матрицы $" + matrix_name + "$:\n";
+    auto tmp(C);
+    uint n = C.cols();
+    for (uint i = 2; i <= n; i++)
+    {
+        tmp = tmp * C;
+        output << "$$" + matrix_name + "^" << i << " = "
+               << to_latex(tmp) << "$$\n";
+    }
+
+    output << "Спектральный радиус матрицы $" + matrix_name + "$:\n";
+    output << "$$\\lambda_{" + matrix_name + "} = \\mathrm{tr}" + matrix_name + "\\oplus \\dots \\oplus \\mathrm{tr}^{1/" << n << "}(" + matrix_name + "^{" << n << "}) = " + to_latex(C.SpectralRadius()) + " \\approx " << double(C.SpectralRadius()) << "$$\n";
+
+    output << "Матрица $\\lambda^{-1}" + matrix_name + "$ и ее степени:\n";
+    tmp = C / C.SpectralRadius();
+    auto tmp2(tmp);
+    for (uint i = 1; i < n; i++)
+    {
+        output << "$$(\\lambda^{-1}" + matrix_name + ")^" << i << " = "
+               << to_latex(tmp2) << "$$\n";
+        tmp2 = tmp2 * tmp;
+    }
+
+    output << "Матрица клини:\n";
+    output << "$$(\\lambda^{-1}" + matrix_name + ")^* = I";
+    for (uint i = 1; i < n; i++)
+    {
+        output << " \\oplus (\\lambda^{-1}" + matrix_name + ")^" << i;
+    }
+    output << " = $$\n$$ = " << to_latex((C / C.SpectralRadius()).Kleene()) << "$$\n";
+
+    output << "Линейно независимые столбцы:\n";
+    output << "$$P = " << to_latex((C / C.SpectralRadius()).Kleene().Span()) << "$$\n";
+
+    output << "$$w_1 = "
+           << to_latex(C.BestVector())
+           << "\\qquad w_2 = "
+           << to_latex(C.WorstVector()) << "$$\n";
+}
+
+void MinMaxLogChebyshevApproximationMethod(Matrix<Fraction> &C, vector<Matrix<Fraction>> &A)
+{
+    CommonPart(C, "C");
+
+    auto best_vector_combination(C.BestVector());
+
+    Matrix<Fraction> best_combination(A[0].rows(), A[0].cols(), 0);
+
+    for (uint i = 0; i < A.size(); i++)
+    {
+        best_combination = best_combination + A[i] * best_vector_combination[i][0];
+    }
+
+    auto worst_vector_combination(C.WorstVector());
+
+    Matrix<Fraction> worst_combination(A[0].rows(), A[0].cols(), 0);
+
+    for (uint i = 0; i < A.size(); i++)
+    {
+        worst_combination = worst_combination + A[i] * worst_vector_combination[i][0];
+    }
+
+    output << "$$B = " << to_latex(best_combination) << "$$\n";
+    output << "$$D = " << to_latex(worst_combination) << "$$\n";
+
+    CommonPart(best_combination, "B");
+
+    CommonPart(worst_combination, "D");
+
+    output << "$$w_{best} = " << to_latex(Matrix<double>(best_combination.BestVector())) << "$$\n";
+    output << "$$w_{worst} = " << to_latex(Matrix<double>(worst_combination.WorstVector())) << "$$\n";
+
+    // auto best_vector(C.BestVector());
+    // auto worst_vector(C.WorstVector());
+    // output << best_vector << worst_vector << endl;
+}
+
+Matrix<Fraction> InputMatrix(uint size)
+{
+    Matrix<Fraction> result(size, size);
+    for (uint i = 0; i < size; i++)
+    {
+        for (uint j = 0; j < size; j++)
+        {
+            string tmp;
+            input >> tmp;
+            if (tmp == "")
+            {
+                input >> tmp;
+            }
+            result[i][j] = tmp;
+        }
+    }
+    return result;
+}
+
+Eigen::MatrixXd CopyMatrix(Matrix<Fraction> &matrix)
+{
+    Eigen::MatrixXd result(matrix.cols(), matrix.rows());
+    for (uint i = 0; i < matrix.cols(); i++)
+    {
+        for (uint j = 0; j < matrix.rows(); j++)
+        {
+            result(i, j) = matrix[i][j];
+        }
+    }
+    return result;
+}
+
+int main(int argc, char *argv[])
+{
+    string input_file = "text.txt";
+    if (argc >= 2)
+    {
+        input_file = argv[1];
+    }
+
+    input.open(input_file);
+
+    int criteria_num;
+    int alternatives_num;
+
+    input >> criteria_num >> alternatives_num;
+
+    Matrix<Fraction> C = InputMatrix(criteria_num);
+    Eigen::MatrixXd C_ = CopyMatrix(C);
+    vector<Matrix<Fraction>> A;
+    vector<Eigen::MatrixXd> A_;
+
+    for (int i = 0; i < criteria_num; i++)
+    {
+        A.push_back(InputMatrix(alternatives_num));
+        A_.push_back(CopyMatrix(A[i]));
+    }
+
+    input.close();
+
+    string output_file = "result_" + input_file;
+    if (argc >= 3)
+    {
+        output_file = argv[2];
+    }
+    output.open(output_file);
+
+    output << "Задача:\n";
+
+    output << "$$C= " << to_latex(C) << "$$\n";
+    for (uint i = 0; i < A.size(); i++)
+    {
+        output << "$$A_" << i + 1 << "= " << to_latex(A[i]) << "$$\n";
+    }
+
+    // HierarchyAnalysisMethod(C_, A_);
+    // WeightedGeometricMeanMethod(C_, A_);
+    MinMaxLogChebyshevApproximationMethod(C, A);
+
+    output.close();
+
+    return 0;
+}
+\end{lstlisting}

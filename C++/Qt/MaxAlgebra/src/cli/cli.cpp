@@ -8,7 +8,7 @@
 #include <eigen3/Eigen/Dense>
 
 using namespace MyAlgebra;
-using namespace Prime;
+// using namespace Prime;
 
 typedef MaxAlgebra<double> MyDouble;
 
@@ -16,7 +16,7 @@ using namespace std;
 
 int main(/*int argc, char *argv[]*/)
 {
-    Primes &primes = Primes::getInstance();
+    Prime::Primes &primes = Prime::Primes::getInstance();
 
     // for (uint i = 0; i < 1000; i++)
     // {
@@ -24,7 +24,7 @@ int main(/*int argc, char *argv[]*/)
     // }
     cout << primes[100000] << endl;
 
-    auto decomposition = factorize(62615533);
+    auto decomposition = Prime::factorize(62615533);
     for (auto i : decomposition)
     {
         cout << i.first << "  " << i.second << endl;

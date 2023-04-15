@@ -93,13 +93,13 @@ print(sort(data$UNEMP))
 ## 1.5 Построить matrix plot
 
 ```{r, message=FALSE, warning=FALSE}
-if (interactive()) pdf("ggpairs_unedited.pdf")
-ggpairs(
-    data[, -(1:2)],
-    lower = list(continuous = wrap("points", alpha = 0.5, size = 0.3)),
-    diag = list(continuous = "barDiag")
-)
-if (interactive()) dev.off()
+# if (interactive()) pdf("ggpairs_unedited.pdf")
+# ggpairs(
+#     data[, -(1:2)],
+#     lower = list(continuous = wrap("points", alpha = 0.5, size = 0.3)),
+#     diag = list(continuous = "barDiag")
+# )
+# if (interactive()) dev.off()
 ```
 
 ## 1.7 outliers
@@ -140,13 +140,13 @@ data_logged <- data %>%
 ```
 
 ```{r, message=FALSE, warning=FALSE}
-if (interactive()) pdf("ggpairs_logged.pdf")
-ggpairs(
-    data_logged[, -(1:2)],
-    lower = list(continuous = wrap("points", alpha = 0.5, size = 0.3)),
-    diag = list(continuous = "barDiag")
-)
-if (interactive()) dev.off()
+# if (interactive()) pdf("ggpairs_logged.pdf")
+# ggpairs(
+#     data_logged[, -(1:2)],
+#     lower = list(continuous = wrap("points", alpha = 0.5, size = 0.3)),
+#     diag = list(continuous = "barDiag")
+# )
+# if (interactive()) dev.off()
 ```
 
 ## 1.8 однородность
@@ -178,6 +178,8 @@ sapply(data_logged %>% select(all_of
 df <- data_logged %>%
     select(-CITY, -STATE) %>%
     drop_na()
+df_names <- data_logged %>%
+    drop_na()
 
 ggplot(melt(cor(df))) +
     geom_raster(aes(x = Var2, y = Var1, fill = value)) +
@@ -190,17 +192,8 @@ ggplot(melt(cor(df))) +
 # 2 Задаете зависимые и 'независимые' переменные (регрессоры), не забываете обратить внимание на выбор способа обработки пропущенных наблюдений, функция lm.
 
 ```{r}
-df_names <- data_logged %>%
-    drop_na()
-df <- data_logged %>%
-    select(-CITY, -STATE) %>%
-    drop_na()
-
-model_ <- lm(INCOME ~ ., data = df, na.action = na.exclude)
-
+model_ <- lm(CRIME ~ ., data = df, na.action = na.exclude)
 model <- lm.beta(model_)
-# model.beta <- lm.beta(model)
-# summary(model)
 summary(model)
 
 
@@ -216,10 +209,10 @@ ggplot(melt(cov2cor(vcov(model)))) +
 
 # 3 Интерпретируете результаты регрессии, включая результат lm.beta (в частности, о разнице между b и beta, о значимости и пр.).
 
-
-
 ```{r}
 hist(residuals(model))
+
+shapiro.test(residuals(model))
 
 plot(fitted(model), residuals(model))
 
@@ -229,7 +222,7 @@ abline(h = 0, lty = 2)
 # 4 Далее есть три проблемы, из-за которых результаты регрессии могут быть неправильными
 
 ## линейная модель регрессии не соответствует данным в данных
-    жаль
+    
 ## могут быть сильно зависимые «независимые» переменные
     есть население в 80 и 92 и другие зависимые
 ## также могут быть outliers.
@@ -247,6 +240,12 @@ plot_ellipse <- function(model_, id) {
     confidenceEllipse(model_, which.coef = id)
     points(0, 0, col = "red", pch = 19)
     lines(x = c(0, coef(model_)[id[1]]), c(0, coef(model_)[id[2]]), col = "red")
+
+    # if (id[1] != 1 && id[2] != 1) {
+    #     confidenceEllipse(lm.beta(model_), which.coef = id, vcov. = function(x) cov2cor(vcov(x)))
+    #     points(0, 0, col = "red", pch = 19)
+    #     lines(x = c(0, coef(lm.beta(model_))[id[1]]), c(0, coef(lm.beta(model_))[id[2]]), col = "red")
+    # }
 }
 ```
 
@@ -257,8 +256,8 @@ plot_ellipse(model_, c(3, 7))
 # plot_ellipse(model, c(3, 8))
 # plot_ellipse(model, c(3, 9))
 # plot_ellipse(model, c(3, 10))
-plot_ellipse(model_, c(4, 5))
-plot_ellipse(model_, c(6, 7))
+# plot_ellipse(model_, c(4, 5))
+# plot_ellipse(model_, c(6, 7))
 ```
 
 
@@ -269,79 +268,97 @@ plot_ellipse(model_, c(6, 7))
 
 
 ```{r}
-ols_vif_tol(model_)
+# ols_vif_tol(model_)
 ```
-3 маленьких значения у AREA, POP92, POPDEN, потому что они зависят друг от друга
+<!-- 3 маленьких значения у AREA, POP92, POPDEN, потому что они зависят друг от друга -->
 
 ```{r}
-ols_correlations(model_)
+# ols_correlations(model_)
 ```
 
 # 8 Убираете вручную на основе Redundancy несколько признаков и смотрите, что меняется (R, adjusted R, значимость регрессии, значимость коэффициентов регрессии, независимость «независимых» переменных, AIC).
 
 ```{r}
-model_manual <- lm(INCOME ~ ., data = df, na.action = na.exclude)
+model_manual <- lm(CRIME ~ ., data = df, na.action = na.exclude)
 summary(model_manual)
 ols_vif_tol(model_manual)
 ols_correlations(model_manual)
 AIC(model_manual)
 ```
 
-удаляю AREA
+Удаляю AREA из-за VIF и partial
 
 ```{r}
-model_manual <- lm(INCOME ~ POP80 + POP92 + POPDEN + CRIME + BORN_F + POVERT + UNEMP + TEMPER, data = df, na.action = na.exclude)
+model_manual <- lm(CRIME ~ POP80 + POP92 + POPDEN + INCOME + BORN_F + POVERT + UNEMP + TEMPER, data = df, na.action = na.exclude)
 summary(model_manual)
 ols_vif_tol(model_manual)
 ols_correlations(model_manual)
 AIC(model_manual)
 ```
-удаляю CRIME
+
+Удаляю POP80 из-за VIF
 
 ```{r}
-model_manual <- lm(INCOME ~ POP80 + POP92 + POPDEN + BORN_F + POVERT + UNEMP + TEMPER, data = df, na.action = na.exclude)
+model_manual <- lm(CRIME ~ POP92 + POPDEN + INCOME + BORN_F + POVERT + UNEMP + TEMPER, data = df, na.action = na.exclude)
 summary(model_manual)
 ols_vif_tol(model_manual)
 ols_correlations(model_manual)
 AIC(model_manual)
 ```
-удаляю POPDEN
+
+Удаляю INCOME из-за VIF и Partial
+
 ```{r}
-model_manual <- lm(INCOME ~ POP80 + POP92 + BORN_F + POVERT + UNEMP + TEMPER, data = df, na.action = na.exclude)
+model_manual <- lm(CRIME ~ POP92 + POPDEN + BORN_F + POVERT + UNEMP + TEMPER, data = df, na.action = na.exclude)
 summary(model_manual)
 ols_vif_tol(model_manual)
 ols_correlations(model_manual)
 AIC(model_manual)
 ```
-удаляю POP80
+
+Удаляю POP92 из-за Partial
+
 ```{r}
-model_manual <- lm(INCOME ~ POP92 + BORN_F + POVERT + UNEMP + TEMPER, data = df, na.action = na.exclude)
+model_manual <- lm(CRIME ~ POPDEN + BORN_F + POVERT + UNEMP + TEMPER, data = df, na.action = na.exclude)
 summary(model_manual)
 ols_vif_tol(model_manual)
 ols_correlations(model_manual)
 AIC(model_manual)
 ```
-удаляю TEMPER
+
+Удаляю TEMPER из-за Partial
+
 ```{r}
-model_manual <- lm(INCOME ~ POP92 + BORN_F + POVERT + UNEMP, data = df, na.action = na.exclude)
+model_manual <- lm(CRIME ~ POPDEN + BORN_F + POVERT + UNEMP, data = df, na.action = na.exclude)
 summary(model_manual)
 ols_vif_tol(model_manual)
 ols_correlations(model_manual)
 AIC(model_manual)
 ```
+
+Удаляю UNEMP из-за Partial
+
+```{r}
+model_manual <- lm(CRIME ~ POPDEN + BORN_F + POVERT, data = df, na.action = na.exclude)
+summary(model_manual)
+ols_vif_tol(model_manual)
+ols_correlations(model_manual)
+AIC(model_manual)
+```
+
 все
 
 # 9 Далее переходите к автоматической пошаговой регрессии по AIC. По результатам определяете, сколько признаков оставить. Сравниваете результаты Forward и Backward вариантов.
 
 ```{r}
-model.start <- lm(INCOME ~ 1, data = df, na.action = na.exclude)
+model.start <- lm(CRIME ~ 1, data = df, na.action = na.exclude)
 model.end <- model_
 
 stepAIC(model.start, direction = "forward", scope = list(lower = model.start, upper = model.end))
 stepAIC(model_, direction = "backward")
-stepAIC(model_, direction = "both")
+stepAIC(model_manual, direction = "both", scope = list(lower = model.start, upper = model.end))
 
-modelAIC_ <- lm(INCOME ~ POP80 + POP92 + BORN_F + POVERT + UNEMP, data = df, na.action = na.exclude)
+modelAIC_ <- lm(CRIME ~ AREA + POP80 + POPDEN + BORN_F + POVERT + TEMPER, data = df, na.action = na.exclude)
 modelAIC <- lm.beta(modelAIC_)
 
 summary(modelAIC)
@@ -350,46 +367,82 @@ AIC(modelAIC)
 ```
 
 ```{r}
-# plot_ellipse(modelAIC, c(1, 2))
-# plot_ellipse(modelAIC, c(1, 3))
-# plot_ellipse(modelAIC, c(1, 4))
-# plot_ellipse(modelAIC, c(1, 5))
+plot_ellipse(model_manual, c(1, 2))
+plot_ellipse(model_manual, c(1, 3))
+plot_ellipse(model_manual, c(1, 4))
+plot_ellipse(model_manual, c(2, 3))
+plot_ellipse(model_manual, c(2, 4))
+plot_ellipse(model_manual, c(3, 4))
+
+
+
 plot_ellipse(modelAIC_, c(2, 3))
 plot_ellipse(modelAIC_, c(2, 4))
-plot_ellipse(modelAIC_, c(2, 5))
+plot_ellipse(modelAIC_, c(2, 7))
 plot_ellipse(modelAIC_, c(3, 4))
-plot_ellipse(modelAIC_, c(3, 5))
+plot_ellipse(modelAIC_, c(3, 7))
 plot_ellipse(modelAIC_, c(4, 5))
+
+# plot_ellipse(modelAIC_, c(1, 2))
+# plot_ellipse(modelAIC_, c(1, 3))
+# plot_ellipse(modelAIC_, c(1, 4))
+# plot_ellipse(modelAIC_, c(1, 5))
+# plot_ellipse(modelAIC_, c(1, 6))
+# plot_ellipse(modelAIC_, c(1, 7))
+# plot_ellipse(modelAIC_, c(2, 5))
+# plot_ellipse(modelAIC_, c(2, 6))
+# plot_ellipse(modelAIC_, c(3, 5))
+# plot_ellipse(modelAIC_, c(3, 6))
+# plot_ellipse(modelAIC_, c(4, 6))
+# plot_ellipse(modelAIC_, c(4, 7))
+# plot_ellipse(modelAIC_, c(5, 6))
+# plot_ellipse(modelAIC_, c(5, 7))
+# plot_ellipse(modelAIC_, c(6, 7))
 ```
 
 # 10 Строите обычную регрессию по выбранному числу признаков. Сначала смотрите на нормальность остатков (зачем нужно на это смотреть?), затем смотрите на график Predicted vs Residuals. Как по нему понять, адекватна ли линейная регрессия? Как будет выглядеть график, если на самом деле была квадратичная зависимость (в случае одной независимой переменной)? Как может повлиять на этот график выбор Pairwise deletion для пропущенных наблюдений?
 
 ```{r}
-hist(residuals(model))
+# hist(residuals(modelAIC_))
+# shapiro.test(residuals(modelAIC_))
 
-ols_plot_resid_stud_fit(modelAIC_)
+# ols_plot_resid_stud_fit(modelAIC_)
 
-print(df_names[c(15, 27, 38, 56, 52), ])
+# # print(df_names[c(15, 27, 38, 56, 52), ])
 
-
-
-
-ols_plot_resid_stud(modelAIC_)
+# ols_plot_resid_stud(modelAIC_)
+# # print(df_names[56, ])
 
 
-print(df_names[56, ])
+
+hist(residuals(model_manual))
+shapiro.test(residuals(model_manual))
+
+ols_plot_resid_stud_fit(model_manual)
+
+# print(df_names[c(15, 27, 38, 56, 52), ])
+
+ols_plot_resid_stud(model_manual)
+# print(df_names[56, ])
+
+model_manual_ <- model_manual
+model_manual <- lm.beta(model_manual)
 ```
 
 # 11 Далее переходите к поиску outliers. Сначала смотрите на скаттерплот Residuls vs Deleted Residuals. Нужно объяснить, что этот такое, что откладывается по осям, как там найти outliers.
 
 ```{r}
-ggplot(data_frame(residuals = rstandard(modelAIC), studres = studres(modelAIC)), aes(x = residuals, y = studres)) +
+# ggplot(data_frame(residuals = rstandard(modelAIC), studres = studres(modelAIC)), aes(x = residuals, y = studres)) +
+#     geom_point() +
+#     geom_abline(slope = 1, intercept = 0, color = "red")
+
+ggplot(data_frame(residuals = rstandard(model_manual), studres = studres(model_manual)), aes(x = residuals, y = studres)) +
     geom_point() +
     geom_abline(slope = 1, intercept = 0, color = "red")
 
-ggplot(data_frame(residuals = rstandard(modelAIC), studres = studres(modelAIC)), aes(x = residuals, y = studres - residuals)) +
-    geom_point() +
-    geom_abline(slope = 0, intercept = 0, color = "red")
+# ggplot(data_frame(residuals = rstandard(modelAIC), studres = studres(modelAIC)), aes(x = residuals, y = studres - residuals)) +
+#     geom_point() +
+#     geom_abline(slope = 0, intercept = 0, color = "red")
 ```
 
 
@@ -397,14 +450,28 @@ ggplot(data_frame(residuals = rstandard(modelAIC), studres = studres(modelAIC)),
 # 12 Затем смотрите на разные меры, например, outliers по Куку и по Махаланобису (в пространстве регрессоров). Объясняете, что это такое, по отношению к чему это outliers. Умеете приводить пример, где, в случае одной независимой переменной, находится outliers по Куку, но не по Махаланобису, и наоборот.
 
 ```{r}
-plot(mahalanobis_distance(df)$mahal.dist)
-plot(cooks.distance(modelAIC))
+plot(sort(mahalanobis_distance(df)$mahal.dist, decreasing = TRUE))
+# plot(cooks.distance(modelAIC))
 
-df_names[which(cooks.distance(modelAIC) > 0.1), ]
+# df_names[which(cooks.distance(modelAIC) > 0.06), ]
+
+
+plot(sort(cooks.distance(model_manual), decreasing = TRUE))
+df_names[which(cooks.distance(model_manual) > 0.1), ]
 ```
 
 
 # 13 Итог: результат линейной регрессии, для которой проверена адекватность модели, значимость, отсутствие outliers, проинтерпретированы коэффициенты регрессии. Спрогнозируйте что-нибудь по построенной регрессионной модели, посмотрите на доверительные и предсказательные интервалы.
 
+
+```{r}
+new <- data_logged %>%
+    filter(CITY == "EL_PASO") %>%
+    select(POPDEN, BORN_F, POVERT)
+
+
+
+predict.lm(model_manual_, new)
+```
 
 .......................
