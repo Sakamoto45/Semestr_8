@@ -50,7 +50,18 @@ ring <- read.table("ring.txt", col.names = c("x", "y"))
 
 
 ```{r}
-mc <- 0
+step <- function(x, dP = dnorm, rQ = function(x) runif(x, -delta, delta), dQ = function(x) runif(x, -delta, delta), delta = 1) {
+    y <- x + rQ(length(x))
+    a <- pmin(1, dP(y) / dP(x) * dQ(x - y) / dQ(y - x)) >= runif(length(x))
+    x[a] <- y[a]
+    return(x)
+}
+```
 
-step(x, Q, P = dnorm)
+
+```{r}
+N <- 1000
+iterations <- 1000
+
+mc <- matrix(nrow = 1, ncol = N)
 ```
