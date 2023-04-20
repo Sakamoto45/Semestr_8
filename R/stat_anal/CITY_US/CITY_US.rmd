@@ -3,8 +3,8 @@ title: "CITY_US_new"
 output:
     html_document:
         # df_print: paged
-        # toc: true
-        # toc_float: true 
+        toc: true
+        toc_float: true 
 ---
 
 
@@ -93,13 +93,13 @@ print(sort(data$UNEMP))
 ## 1.5 Построить matrix plot
 
 ```{r, message=FALSE, warning=FALSE}
-# if (interactive()) pdf("ggpairs_unedited.pdf")
-# ggpairs(
-#     data[, -(1:2)],
-#     lower = list(continuous = wrap("points", alpha = 0.5, size = 0.3)),
-#     diag = list(continuous = "barDiag")
-# )
-# if (interactive()) dev.off()
+if (interactive()) pdf("ggpairs_unedited.pdf")
+ggpairs(
+    data[, -(1:2)],
+    lower = list(continuous = wrap("points", alpha = 0.5, size = 0.3)),
+    diag = list(continuous = "barDiag")
+)
+if (interactive()) dev.off()
 ```
 
 ## 1.7 outliers
@@ -445,6 +445,12 @@ ggplot(data_frame(residuals = rstandard(model_manual), studres = studres(model_m
 #     geom_abline(slope = 0, intercept = 0, color = "red")
 ```
 
+## Новое
+новые графики, в том числе, график с рычагами - остатками.
+```{r}
+plot(model_manual)
+```
+
 
 
 # 12 Затем смотрите на разные меры, например, outliers по Куку и по Махаланобису (в пространстве регрессоров). Объясняете, что это такое, по отношению к чему это outliers. Умеете приводить пример, где, в случае одной независимой переменной, находится outliers по Куку, но не по Махаланобису, и наоборот.
@@ -463,15 +469,25 @@ df_names[which(cooks.distance(model_manual) > 0.1), ]
 
 # 13 Итог: результат линейной регрессии, для которой проверена адекватность модели, значимость, отсутствие outliers, проинтерпретированы коэффициенты регрессии. Спрогнозируйте что-нибудь по построенной регрессионной модели, посмотрите на доверительные и предсказательные интервалы.
 
-
+тут прогноз того что оказалось аутлаером
 ```{r}
 new <- data_logged %>%
     filter(CITY == "EL_PASO") %>%
     select(POPDEN, BORN_F, POVERT)
-
-
-
-predict.lm(model_manual_, new)
 ```
 
-.......................
+
+## Новое
+Попытка прогнозировать преступность в Петербуре
+```{r}
+predict.lm(model_manual_, new)
+
+exp(predict.lm(model_manual_, data.frame(POPDEN = log(13342), BORN_F = log(5.3), POVERT = 6.6), interval = "prediction"))
+exp(predict.lm(model_manual_, data.frame(POPDEN = log(13342), BORN_F = log(5.3), POVERT = 6.6), interval = "confidence"))
+```
+преступность за 2022 год в СПб на 100000 чел.
+```{r}
+print(62971 / (7500000 / 100000))
+```
+Плохо согласуется потому что модель построена на американских городах по данным прошлого века.
+Данные собирались по разному, законы разные...
