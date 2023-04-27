@@ -23,6 +23,11 @@ namespace MyAlgebra
             return os;
         }
 
+        operator double() const
+        {
+            return double(value_);
+        }
+
         friend inline bool operator==(const MaxAlgebra<T> &lhs, const MaxAlgebra<T> &rhs)
         {
             return lhs.value_ == rhs.value_;

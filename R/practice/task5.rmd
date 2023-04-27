@@ -1,5 +1,5 @@
 ---
-title: "task4"
+title: "task5"
 output:
     html_document:
         df_print: paged
@@ -23,45 +23,135 @@ library(tidyr)
 # library(ppcor)
 library(dplyr) # dataframe
 library(reshape2)
+library(tseries)
+
+library(rmutil)
 # library(bbmle)
 # library(graphics)
 
-if (interactive()) setwd("R/practice/")
-# setwd("R/Statistical_Analysis_2022/Partial_Correlation_CARDATA/Tkachenko")
+# if (interactive()) setwd("R/practice/")
 ```
 
-
-```{r}
-ring <- read.table("ring.txt", col.names = c("x", "y"))
-```
 
 1. Промоделировать траекторию марковской цепи при помощи алгоритма Метрополиса-Гастингса
 с подходящим пробным распределением (proposal distribution).
-2. Исследовать траекторию цепи на сходимость (выход на стационарность, автокорреляцию). При
-необходимости убрать burn-in интервал и провести прореживание.
+2. Исследовать траекторию цепи на сходимость (выход на стационарность, автокорреляцию). При необходимости убрать burn-in интервал и провести прореживание.
 3. Везде убедиться в том, что получена выборка именно из нужного распределения.
 
 10. Исходная работа Хастингса в 1970 г. была посвящена моделированию стандартного нормального распределения с использованием в качестве пробного распределения случайного блуждания с отдельными шагами, полученными из равномерного распределения на отрезке (−δ, δ), δ > 0.
-(a) Исследуйте свойства алгоритма Метрополиса-Гастингса и получаемой цепи при разных значениях δ (например, δ = 0.1, 1, 10 или другие). Какое значение δ будем оптимальным с точки зрения автокорреляции цепи?
-(b) Промоделируйте выборку из N (0, 1) с использованием других распределений для приращений: Коши и Лапласа (с параметром λ = 1). Сравните свойства получаемой марковской цепи.
-(c) Для трех вышеобозначенных примеров случайного блуждания (с равномерными приращениями на интервале, из распределений Коши и Лапласа) исследуйте возможность получения вероятности перехода в следующее состояние цепи близкой к 0.25 за счет правильного подбора параметров.
 
 
 
 
 ```{r}
-step <- function(x, dP = dnorm, rQ = function(x) runif(x, -delta, delta), dQ = function(x) runif(x, -delta, delta), delta = 1) {
+step <- function(
+    x, dP = dnorm,
+    rQ = function(x) runif(x, -delta, delta),
+    dQ = function(x) dunif(x, -delta, delta),
+    delta = 1) {
     y <- x + rQ(length(x))
     a <- pmin(1, dP(y) / dP(x) * dQ(x - y) / dQ(y - x)) >= runif(length(x))
+
     x[a] <- y[a]
+    n <- dim(mu)[1]
+    if (n == 0) {
+        mu <<- dP(x)
+    } else {
+        mu <<- rbind(mu, 1 / (n + 1) * (tail(mu, 1) * n + dP(x)))
+    }
+    count_all <<- count_all + length(a)
+    count_success <<- count_success + sum(a)
     return(x)
 }
 ```
 
 
 ```{r}
-N <- 1000
-iterations <- 1000
+mcmc <- function(N = 100, iterations = 500, burn.in = 25, thinning = 10, ..., plots = FALSE) {
+    # N <- 100
+    # iterations <- 100
+    count_all <<- 0
+    count_success <<- 0
 
-mc <- matrix(nrow = 1, ncol = N)
+    mc <<- array(rep(0, N), dim = c(1, N))
+    mu <<- array(dim = c(0, N))
+    for (i in 1:iterations) {
+        mc <<- rbind(mc, step(tail(mc, 1), ...))
+    }
+    dimnames(mc)[[1]] <<- 1:dim(mc)[1]
+    dimnames(mu)[[1]] <<- 1:dim(mu)[1]
+
+
+    # hist(tail(mc, 1))
+    # shapiro.test(tail(mc, 1))
+    print("Rate of acceptance of changes")
+    print(count_success / count_all)
+
+    if (plots) {
+        plot(ggplot(melt(mc)) +
+            geom_line(aes(x = Var1, y = value, group = Var2)) +
+            labs(title = "x_n Trajectories"))
+
+        plot(ggplot(melt(mu)) +
+            geom_line(aes(x = Var1, y = value, group = Var2)) +
+            labs(title = "mu_n Trajectories"))
+    }
+
+
+    autocor <- apply(mc, 2, function(x) acf(x, lag.max = iterations / 2, pl = FALSE)$acf[, 1, 1])
+
+    if (plots) {
+        acf(mc[, 1], lag.max = iterations / 2)
+
+        plot(ggplot() +
+            geom_line(data = melt(autocor), aes(x = Var1, y = value, group = Var2)) +
+            # geom_smooth(data = melt(autocor), aes(x = Var1, y = value)) +
+            geom_abline(intercept = 0, slope = 0, color = "blue") +
+            geom_line(aes(x = 1:dim(autocor)[1], y = apply(autocor, 1, mean)), color = "red", size = 2) +
+            labs(title = "Autocorrelation", x = "lag", y = "autocorrelation"))
+    }
+
+    # plot(hist(tail(mc, 1)))
+    # shapiro.test(tail(mc, 1))
+    # plot(hist(mc[ seq(100, 1000, 2)  ,1]))
+
+    tmp <- sapply(1:N, function(x) shapiro.test(mc[seq(burn.in, iterations, thinning), x])$p.value)
+    if (plots) {
+        hist(tmp, main = "Histogram of p-values of shapiro tests of generated samples")
+    }
+    print("test of uniformity of p-values of shapiro tests of generated samples")
+    # print("ks.test p_value")
+    print(ks.test(tmp, "punif"))
+    # return(mc[seq(burn.in, iterations, thinning), ])
+}
+```
+
+(a) Исследуйте свойства алгоритма Метрополиса-Гастингса и получаемой цепи при разных значениях δ (например, δ = 0.1, 1, 10 или другие). Какое значение δ будем оптимальным с точки зрения автокорреляции цепи?
+
+```{r}
+mcmc(delta = 0.1, thinning = 50, plots = TRUE)
+mcmc(thinning = 20, plots = TRUE)
+mcmc(delta = 10, thinning = 20, plots = TRUE)
+```
+
+Оптимальное значение дельты - 3, при нем достигается оптимальная для нормального частота принятия 50% (это на википедии нашел). т.е. достаточно часто, чтобы значение менялось и не слишком маленькими шагами.
+
+```{r}
+mcmc(delta = 3, thinning = 5, plots = TRUE)
+```
+
+(b) Промоделируйте выборку из N (0, 1) с использованием других распределений для приращений: Коши и Лапласа (с параметром λ = 1). Сравните свойства получаемой марковской цепи.
+
+```{r}
+mcmc(rQ = rcauchy, dQ = dcauchy, plots = TRUE)
+mcmc(rQ = rlaplace, dQ = dlaplace, plots = TRUE)
+```
+
+
+(c) Для трех вышеобозначенных примеров случайного блуждания (с равномерными приращениями на интервале, из распределений Коши и Лапласа) исследуйте возможность получения вероятности перехода в следующее состояние цепи близкой к 0.25 за счет правильного подбора параметров.
+
+```{r}
+mcmc(delta = 6.5, thinning = 20)
+mcmc(rQ = function(x) rcauchy(x, scale = 3.5), dQ = function(x) dcauchy(x, scale = 3.5))
+mcmc(rQ = function(x) rlaplace(x, s = 5), dQ = function(x) dlaplace(x, s = 5))
 ```

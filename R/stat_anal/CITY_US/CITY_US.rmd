@@ -234,9 +234,6 @@ abline(h = 0, lty = 2)
 
 ```{r}
 plot_ellipse <- function(model_, id) {
-    # confidenceEllipse(lm.beta(model_), which.coef = id, vcov. = function(x) cov2cor(vcov(x)))
-    # points(0, 0, col = "red", pch = 19)
-    # lines(x = c(0, coef(lm.beta(model_))[id[1]]), c(0, coef(lm.beta(model_))[id[2]]), col = "red")
     confidenceEllipse(model_, which.coef = id)
     points(0, 0, col = "red", pch = 19)
     lines(x = c(0, coef(model_)[id[1]]), c(0, coef(model_)[id[2]]), col = "red")
@@ -247,9 +244,6 @@ plot_ellipse <- function(model_, id) {
         confidenceEllipse(model, which.coef = id, vcov. = function(x) scale_ %*% vcov(x) %*% scale_)
         points(0, 0, col = "red", pch = 19)
         lines(x = c(0, coef(model)[id[1]]), c(0, coef(model)[id[2]]), col = "red")
-        # confidenceEllipse(lm.beta(model_), which.coef = id, vcov. = function(x) cov2cor(vcov(x)))
-        # points(0, 0, col = "red", pch = 19)
-        # lines(x = c(0, coef(lm.beta(model_))[id[1]]), c(0, coef(lm.beta(model_))[id[2]]), col = "red")
     }
 }
 ```
