@@ -1,0 +1,190 @@
+---
+title: "task2"
+output:
+    html_document:
+        df_print: paged
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+```
+
+Ткаченко i = 7
+
+```{r init}
+lambda <- 12
+gamma <- 13
+mu <- 2
+delta <- 0.05
+```
+
+Оценка параметров EZ и DZ для задания начального капитала.
+```{r EZestimate}
+est_len <- 10000
+p_sam <- rpois(est_len, lambda)
+z_sam <- 1:est_len
+for (i in 1:est_len)
+{
+    z_sam[i] <- sum(rgamma(p_sam[i], shape = gamma, scale = mu))
+}
+z_mean <- mean(z_sam)
+z_var <- var(z_sam)
+p_mean <- mean(p_sam)
+```
+
+Значение EZ
+
+```{r}
+z_mean
+```
+
+Значение EZ+2*sqrt(DZ)
+
+```{r}
+U <- z_mean + 2 * sqrt(z_var)
+U
+```
+
+Значение P
+
+```{r}
+P <- (1 + delta) * z_mean
+P
+```
+
+
+Моделирование.
+```{r alg}
+len <- 10000
+years <- 10
+results <- numeric(len)
+razor <- numeric(years)
+j_desp <- numeric(1)
+U_desp <- numeric(len)
+
+j_vict <- numeric(1)
+U_vict <- numeric(len)
+
+x_sum <- numeric(1)
+x_q <- numeric(1)
+x_q <- 0
+x_sum <- 0
+
+t_sum <- numeric(1)
+t_sum <- 0
+for (i in 1:len)
+{
+    # k<-rpois(1, lambda)
+    T_ <- numeric(len)
+    X <- numeric(len)
+    U_t <- numeric(len)
+    S_k <- 0
+    U_S_k <- U
+    U_t[1] <- U
+    j <- 1
+    while (TRUE) {
+        alpha_0 <- runif(1)
+        alpha <- runif(gamma)
+        T_[j] <- -log(alpha_0) / lambda
+        S_k <- S_k + T_[j]
+        X[j] <- -mu * log(prod(alpha))
+        x_sum <- x_sum + X[j]
+        t_sum <- t_sum + T_[j]
+        x_q <- x_q + 1
+        U_S_k <- U_S_k + P * T_[j] - X[j]
+        U_t[j + 1] <- U_S_k
+        if (U_S_k < 0) {
+            results[i] <- 0
+            razor[floor(S_k) + 1] <- razor[floor(S_k) + 1] + 1
+            j_desp <- j
+            U_desp <- U_t
+            break
+        }
+        if (S_k > years) {
+            results[i] <- 1
+            j_vict - j
+            U_vict <- U_t
+            break
+        }
+        j <- j + 1
+    }
+}
+```
+
+Оценка вероятности разорения за 10 лет:
+```{r p est}
+sum(razor[1:years]) / len
+```
+
+Оценки вероятностей разорения в каждом году:
+```{r p_i est}
+p_est <- data.frame(n = 1:years, p = razor[1:years] / len)
+p_est
+```
+
+График изменения капитала, соответсвующий случаю с разорением. По оси икс — номера страховых случаев.
+```{r s}
+# plot(x=1:j, y = U_t[1:j])
+ggplot(data = data.frame(x = 1:j_desp, y = U_desp[1:j_desp]), aes(x = x, y = y)) +
+    geom_line()
+```
+Аналогичный график для случая без разорения.
+```{r bez}
+ggplot(data = data.frame(x = 1:length(U_vict[U_vict > 0]), y = U_vict[U_vict > 0]), aes(x = x, y = y), title = "Случай без разорения") +
+    geom_line()
+```
+
+
+
+Оценка среднего числа страховых случаев в год  (ЕК):
+```{r EK}
+p_mean
+```
+Хорошая оценка при lambda = 12.
+
+Оценка средней суммы страхового возмещения  (ЕХ):
+```{r EX}
+x_sum / x_q
+```
+
+Оценка среднего промежутка между страховыми случаями (ЕТ):
+```{r ET}
+t_sum / x_q
+```
+
+Оценка среднего суммарного страхового возмещения за год  (ЕZ):
+```{r EZ2}
+z_mean
+```
+
+Оценка дисперсии суммы страхового возмещения  (DХ):
+```{r DX}
+z_var / lambda - (x_sum / x_q)^2
+```
+
+Оценка дисперсии суммарного страхового возмещения за год  (DZ):
+```{r DZ}
+z_var
+```
+И корень из неё:
+```{r DZ2}
+sqrt(z_var)
+```
+
+Оценка вероятности разорения при начальном капитале U = 252.75:
+```{r psi(U)}
+sum(razor[1:years]) / len
+```
+
+U/EZ:
+```{r U/EZ}
+U / z_mean
+```
+
+Приближенное значение величины beta, полученное из неравенства Крамера:
+```{r beta_est}
+-log(sum(razor[1:years]) / len) / U
+```
+

@@ -32,8 +32,7 @@ print(mean(replicate(L, sort(replicate(M, sum(qgamma(runif(rpois(1, lambda)), sh
 
 # 2
 Используя рекурентные уравнения найти границу M_z delta для которой P(Z <= M_z delta) >= 0.95
-Найти M*delta (что по логике вещей примерно должно быть равно оценке квантили из первого задания)
-для delta = 0.1 и 0.01
+Найти M*delta для delta = 0.1 и 0.01
 ```{r delta0.1}
 b <- lambda
 delta <- 0.1
@@ -58,27 +57,24 @@ Mz <- k - 1
 ```
 
 ```{r delta0.01}
-# b <- lambda
-# delta <- 0.01
-# g <- 1:100
-# f <- 1:100
-# g[1] <- dpois(0, lambda)
-# f[1] <- 0
+b <- lambda
+delta <- 0.01
+g <- 1:100
+f <- 1:100
+g[1] <- dpois(0, lambda)
+f[1] <- 0
 
-# prob <- g[1]
-# k <- 1
-# while (prob < 0.95) {
-#     k <- k + 1
-#     f[k] <- pgamma((k - 1) * delta, shape = gamma, rate = 1 / mu) - pgamma((k - 2) * delta, shape = gamma, rate = 1 / mu)
+prob <- g[1]
+k <- 1
+while (prob < 0.95) {
+    k <- k + 1
+    f[k] <- pgamma((k - 1) * delta, shape = gamma, rate = 1 / mu) - pgamma((k - 2) * delta, shape = gamma, rate = 1 / mu)
 
-#     temp <- 0
-#     for (m in 0:(k - 1 - 1))
-#     {
-#         temp <- temp + (k - 1 - m) * g[m + 1] * f[k - m - 1]
-#     }
-#     g[k] <- b * temp / (k - 1)
-#     prob <- prob + g[k]
-# }
-# Mz <- k - 1
-# (Mz * delta)
+    m <- 1:(k - 1)
+
+    g[k] <- b / (k - 1) * sum((k - m) * g[m] * f[k - m])
+    prob <- prob + g[k]
+}
+Mz <- k - 1
+(Mz * delta)
 ```
