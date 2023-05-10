@@ -1,0 +1,108 @@
+---
+title: "task4"
+output:
+    html_document:
+        df_print: paged
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+```
+Ткаченко Егор
+
+```{r}
+mu <- 3
+mu1 <- 2.75
+gamma <- 13
+gamma1 <- 18
+lambda <- 9
+lambda1 <- 8
+U <- 80
+modeling <- function() {
+    S <- 0
+    US <- U
+    S_list <- S
+    US_list <- US
+    while (US > 0 && S <= 5) {
+        T_i <- rexp(1, lambda)
+        X_i <- rgamma(1, shape = gamma, scale = mu)
+        Eta <- rgamma(1, shape = gamma1, scale = mu1)
+        J_i <- rexp(1, lambda1)
+        S <- S + T_i
+        US <- US + Eta - X_i
+        S_list <- c(S_list, S)
+        US_list <- c(US_list, US)
+    }
+    return(result_df <- data.frame(
+        S = S_list, U = US_list,
+        year = rep(ceiling(S), length(S_list))
+    ))
+}
+```
+
+# Количество разорений за 5 лет
+
+```{r}
+default_count <- rep(0, 5)
+sample_size <- 10000
+for (i in 1:sample_size) {
+    df <- modeling()
+    if (df$year[1] <= 5) {
+        default_count[df$year[1]] <- default_count[df$year[1]] + 1
+    }
+}
+```
+
+Оценки вероятностей разорений в каждом году:
+```{r}
+default_count / sample_size
+```
+
+# Величины 
+
+$$EK = \lambda  = 9,$$
+$$EX = \gamma \mu = 39,$$
+$$ET_i = \lambda^{-1} = 1/9,$$
+$$EZ = EKEX = 351, DX = \gamma \mu^2 = 117,$$
+$$EJ_i = \lambda_1^{-1} = 1/8,$$
+$$DZ = \lambda EX^2 = 11466,$$
+$$\sigma_Z^2 \approx  107,$$
+$$EP = EME\eta  = \lambda_1\gamma_1\mu_1 = 396,$$
+$$DP = \lambda_1E\eta_1^2 \approx  12931,$$
+$$\Psi (U) = 0.2,$$
+$$U/EZ \approx  0.23,$$
+$$\beta  = 2(EP - EZ)/(DP + DZ) \approx  0.02.$$
+
+# График Ut в случае с разорением
+
+```{r}
+default_year <- 10
+while (default_year > 5) {
+    df <- modeling()
+    default_year <- df$year[1]
+}
+ggplot(df, aes(S, U)) +
+    geom_line() +
+    xlab("Год") +
+    ylab("Капитал") +
+    theme_bw()
+```
+
+# График Ut в случае без разорения
+
+```{r}
+default_year <- 0
+while (default_year <= 5) {
+    df <- modeling()
+    default_year <- df$year[1]
+}
+ggplot(df, aes(S, U)) +
+    geom_line() +
+    xlab("Год") +
+    ylab("Капитал") +
+    theme_bw()
+```
+
+
