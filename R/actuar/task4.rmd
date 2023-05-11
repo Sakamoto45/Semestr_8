@@ -14,28 +14,50 @@ library(ggplot2)
 
 ```{r}
 mu <- 3
-mu1 <- 2.75
-gamma <- 13
-gamma1 <- 18
+mu1 <- 3.2
+gamma <- 20
+gamma1 <- 4
 lambda <- 9
-lambda1 <- 8
-U <- 80
+lambda1 <- 45
+U <- 805
+
+
+print(gamma1 * mu1 * lambda1)
+print(gamma * mu * lambda)
+print(gamma * mu)
+print(gamma1 * mu1)
+
 modeling <- function() {
     S <- 0
     US <- U
     S_list <- S
     US_list <- US
+    T_i <- 0
+    J_i <- 0
     while (US > 0 && S <= 5) {
-        T_i <- rexp(1, lambda)
-        X_i <- rgamma(1, shape = gamma, scale = mu)
-        Eta <- rgamma(1, shape = gamma1, scale = mu1)
-        J_i <- rexp(1, lambda1)
-        S <- S + T_i
-        US <- US + Eta - X_i
+        if (T_i == 0) {
+            T_i <- rexp(1, lambda)
+            X_i <- rgamma(1, shape = gamma, scale = mu)
+        }
+        if (J_i == 0) {
+            J_i <- rexp(1, lambda1)
+            Eta <- rgamma(1, shape = gamma1, scale = mu1)
+        }
+        if (T_i < J_i) {
+            S <- S + T_i
+            US <- US - X_i
+            J_i <- J_i - T_i
+            T_i <- 0
+        } else {
+            S <- S + J_i
+            US <- US + Eta
+            J_i <- 0
+            T_i <- T_i - J_i
+        }
         S_list <- c(S_list, S)
         US_list <- c(US_list, US)
     }
-    return(result_df <- data.frame(
+    return(data.frame(
         S = S_list, U = US_list,
         year = rep(ceiling(S), length(S_list))
     ))
@@ -55,25 +77,31 @@ for (i in 1:sample_size) {
 }
 ```
 
-Оценки вероятностей разорений в каждом году:
+Оценки вероятностей разорений в каждом году и всего за 5 лет:
 ```{r}
 default_count / sample_size
+sum(default_count) / sample_size
 ```
 
 # Величины 
 
 $$EK = \lambda  = 9,$$
-$$EX = \gamma \mu = 39,$$
+$$EX = \gamma \mu = 60,$$
 $$ET_i = \lambda^{-1} = 1/9,$$
-$$EZ = EKEX = 351, DX = \gamma \mu^2 = 117,$$
-$$EJ_i = \lambda_1^{-1} = 1/8,$$
-$$DZ = \lambda EX^2 = 11466,$$
-$$\sigma_Z^2 \approx  107,$$
-$$EP = EME\eta  = \lambda_1\gamma_1\mu_1 = 396,$$
-$$DP = \lambda_1E\eta_1^2 \approx  12931,$$
+$$EZ = EKEX = 540,$$
+$$EJ_i = \lambda_1^{-1} = 1/45,$$
+$$DX = \gamma \mu^2 = 180,$$
+$$DZ = \lambda EX^2 = 34020,$$
+$$\sigma_Z \approx  184,$$
+$$EP = EME\eta  = \lambda_1\gamma_1\mu_1 = 576,$$
+$$DP = \lambda_1E\eta_1^2 =  9216,$$
+$$\sigma_D \approx  96,$$
 $$\Psi (U) = 0.2,$$
-$$U/EZ \approx  0.23,$$
-$$\beta  = 2(EP - EZ)/(DP + DZ) \approx  0.02.$$
+$$\beta  = 2(EP - EZ)/(DP + DZ) \approx  0.002,$$
+$$U \approx  -ln 0.2 / 0.002 \approx 805$$
+$$U/EZ \approx  1.5,$$
+$$e^{-\beta U} = 0.2.$$
+
 
 # График Ut в случае с разорением
 
