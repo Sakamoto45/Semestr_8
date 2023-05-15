@@ -1,178 +1,126 @@
-// #include <QCoreApplication>
-#include "../lib/max_algebra.h"
-#include "../lib/primes.h"
-
+#include <iostream>
+#include <fstream>
 #include <cmath>
 #include <complex>
+#include <random>
+#include <ctime>
 
 #include <eigen3/Eigen/Dense>
 
-using namespace MyAlgebra;
-// using namespace Prime;
+#include "../lib/struct_a.h"
+#include "../lib/struct_b.h"
 
-class DoubleWrapper
+static Eigen::IOFormat LaTeXFormat(
+    Eigen::FullPrecision, Eigen::DontAlignCols,
+    " & ", "\\\\\n", "", "", "\\begin{pmatrix}\n", "\n\\end{pmatrix}");
+
+template <typename T>
+using MatrixT = Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>;
+
+typedef MatrixT<MaxAlgebraA> MatrixA;
+typedef MatrixT<MaxAlgebraB> MatrixB;
+
+template <typename T>
+T SpectralRadius(MatrixT<T> &matrix)
 {
-public:
-    DoubleWrapper(double value = 0)
-        : value_(value)
+    T result = matrix.trace();
+    MatrixT<T> matrix_pow(matrix);
+    for (int i = 2; i <= matrix.cols(); i++)
     {
+        matrix_pow *= matrix;
+        result += matrix_pow.trace().Root(i);
     }
+    return result;
+}
 
-    operator double() const
-    {
-        return value_;
-    }
-
-    friend std::ostream &operator<<(std::ostream &os, const DoubleWrapper &obj)
-    {
-        os << obj.value_;
-        return os;
-    }
-
-    friend inline bool operator<(const DoubleWrapper &lhs, const DoubleWrapper &rhs)
-    {
-        return lhs.value_ > rhs.value_;
-    }
-    friend inline bool operator==(const DoubleWrapper &lhs, const DoubleWrapper &rhs)
-    {
-        return lhs.value_ == rhs.value_;
-    }
-    friend inline DoubleWrapper operator*(const DoubleWrapper &lhs, const DoubleWrapper &rhs)
-    {
-        return lhs.value_ + rhs.value_;
-    }
-    friend inline DoubleWrapper operator/(const DoubleWrapper &lhs, const DoubleWrapper &rhs)
-    {
-        return lhs.value_ - rhs.value_;
-    }
-    inline DoubleWrapper Root(const uint &root)
-    {
-        return DoubleWrapper(value_ / root);
-    }
-
-private:
-    double value_;
-};
-
-typedef MaxAlgebra<DoubleWrapper> MyDouble;
-
-namespace Eigen
+template <typename T>
+MatrixT<T> Kleene(const MatrixT<T> &matrix)
 {
-    using namespace MyAlgebra;
-    template <>
-    struct NumTraits<MaxAlgebra<DoubleWrapper>>
-        : GenericNumTraits<MaxAlgebra<DoubleWrapper>> // permits to get the epsilon, dummy_precision, lowest, highest functions
+    auto n = matrix.cols();
+    MatrixT<T> result(MatrixT<T>::Identity(n, n));
+    MatrixT<T> matrix_pow(matrix);
+    for (int i = 1; i < matrix.cols(); i++)
     {
-        typedef MaxAlgebra<DoubleWrapper> Real;
-        typedef MaxAlgebra<DoubleWrapper> NonInteger;
-        typedef MaxAlgebra<DoubleWrapper> Nested;
-        static inline int digits10() { return 0; }
-        enum
-        {
-            IsComplex = 0,
-            IsInteger = 0,
-            IsSigned = 0,
-            RequireInitialization = 0,
-            ReadCost = 2,
-            AddCost = 3,
-            MulCost = 3
-        };
-    };
-
-    template <typename BinaryOp>
-    struct ScalarBinaryOpTraits<MaxAlgebra<DoubleWrapper>, DoubleWrapper, BinaryOp>
-    {
-        typedef MaxAlgebra<DoubleWrapper> ReturnType;
-    };
-
-    template <typename BinaryOp>
-    struct ScalarBinaryOpTraits<DoubleWrapper, MaxAlgebra<DoubleWrapper>, BinaryOp>
-    {
-        typedef MaxAlgebra<DoubleWrapper> ReturnType;
-    };
+        result += matrix_pow;
+        matrix_pow *= matrix;
+    }
+    return result;
 }
 
 using namespace std;
 
-int main(/*int argc, char *argv[]*/)
+// n - matrix size
+// m - num limit
+// print n m time_structure_A time_structure_B (in ms)
+void test(uint n, uint m, std::random_device &dev, ofstream &output)
 {
-    // Eigen::Matrix3d A_;
-    // A_ << 1.0, 2.0, 1.0, 1.0 / 2, 1.0, 1.0 / 3, 1.0, 1.0, 1.0 / 2;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> dist(1, m);
 
-    // cout << A_ << endl;
+    MatrixA A(n, n);
+    MatrixB B(n, n);
+    for (uint i = 0; i < n; i++)
+    {
+        A(i, i) = MaxAlgebraA(1);
+        B(i, i) = MaxAlgebraB(1);
+        for (uint j = 0; j < i; j++)
+        {
+            int numerator = dist(rng);
+            int denominator = dist(rng);
+            A(i, j) = StructA(numerator, denominator);
+            B(i, j) = StructB(numerator, denominator);
+            A(j, i) = StructA(denominator, numerator);
+            B(j, i) = StructB(denominator, numerator);
+        }
+    }
 
-    // Eigen::Matrix<MyDouble, 3, 3> A(Eigen::Matrix<DoubleWrapper, 3, 3>(A_));
-    Eigen::Matrix<MyDouble, 3, 3> A;
-    Eigen::Matrix<MyDouble, 3, 3> d;
+    output << n << " " << m << " ";
+    std::cout << n << " " << m << " ";
 
-    A << MyDouble(1.0), MyDouble(2.0), MyDouble(1.0), MyDouble(1.0 / 2), MyDouble(1.0), MyDouble(1.0 / 3), MyDouble(1.0), MyDouble(1.0), MyDouble(1.0 / 2);
+    std::clock_t startA = std::clock();
+    MatrixA resultA(Kleene((A / SpectralRadius(A)).eval()));
+    std::clock_t stopA = std::clock();
 
-    cout << A << endl;
-    cout << A * A << endl;
-    cout << A * A * A << endl;
-    cout << A + A * A << endl;
+    output << (stopA - startA) / (double)(CLOCKS_PER_SEC / 1000) << " ";
+    std::cout << (stopA - startA) / (double)(CLOCKS_PER_SEC / 1000) << " ";
 
-    // A << 1, 2, 1, 1.0/2, 1, 1.0/3, 1, 1, 1.0/2;
+    std::clock_t startB = std::clock();
+    MatrixB resultB(Kleene((B / SpectralRadius(B)).eval()));
+    std::clock_t stopB = std::clock();
 
-    // Prime::Primes &primes = Prime::Primes::getInstance();
+    output << (stopB - startB) / (double)(CLOCKS_PER_SEC / 1000) << endl;
+    std::cout << (stopB - startB) / (double)(CLOCKS_PER_SEC / 1000) << endl;
+}
 
-    // // for (uint i = 0; i < 1000; i++)
-    // // {
-    // //     cout << i << "  " << primes[i] << "\n";
-    // // }
-    // cout << primes[100000] << endl;
+int main(int argc, char *argv[])
+{
+    string output_file = "out.txt";
+    if (argc >= 2)
+    {
+        output_file = string(argv[1]);
+    }
 
-    // auto decomposition = Prime::factorize(62615533);
-    // for (auto i : decomposition)
-    // {
-    //     cout << i.first << "  " << i.second << endl;
-    // }
+    std::random_device dev;
 
-    // Eigen::Matrix<MyDouble, 2, 2> test;
-    // test << 1, 2, 3, 4;
+    ofstream output;
+    output.open(output_file);
+    // output.open(output_file, std::ios_base::app);
 
-    // Eigen::Matrix<double, 2, 2> reference;
-    // reference << 1, 2, 3, 4;
+    output << "\"n\" \"m\" \"A\" \"B\"" << endl;
+    cout << "\"n\" \"m\" \"A\" \"B\"" << endl;
 
-    // MyDouble a = 3;
-    // a += 2;
-    // a = 2 + a;
-    // a = a + 2;
-    // a = a * 2;
-    // a *= 2;
-    // a /= 2;
-    // a /= MyDouble(3);
+    for (int n = 10; n <= 100; n += 5)
+    {
+        for (int m = 100; m <= 100; m *= 10)
+        {
+            for (int rep = 0; rep < 2; rep++)
+            {
+                test(n, m, dev, output);
+            }
+        }
+    }
 
-    // a = a / a;
-
-    // std::complex<MyDouble> complexTest(3, 4);
-    // complexTest *= 2;
-
-    // // Eigen::EigenSolver<Eigen::Matrix<MyDouble, 2, 2>> solver(test);
-    // Eigen::EigenSolver<Eigen::Matrix<double, 2, 2>> refSolver(reference);
-    // std::cout << "MyAlgebra:" << std::endl;
-    // std::cout << test.trace() << std::endl;
-
-    // // cout << test << endl;
-
-    // // ;
-
-    // auto test2 = (test * test);
-
-    // cout << test << endl;
-    // cout << 2 * test << endl;
-    // cout << test * test << endl;
-
-    // // cout << (Eigen::Matrix<MyDouble, 2, 2>(test * test)).trace() << endl;
-    // // cout << (test2) << endl;
-    // cout << reference * reference << endl;
-
-    // // MyAlgebra::MaxAlgebra<double> a(3), b(2);
-    // // cout << a << " + " << b << " = " << a + b << endl;
-    // // cout << a << " * " << b << " = " << a * b << endl;
-    // // cout << a << " / " << b << " = " << a / b << endl;
-    // // cout << a << " * 2 = " << a * 2 << endl;
-    // // cout << "a *= 2 = " << (a *= 2) << endl;
+    output.close();
 
     return 0;
 }

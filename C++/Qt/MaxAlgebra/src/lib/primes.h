@@ -7,10 +7,7 @@
 
 namespace Prime
 {
-
-    typedef unsigned long long ull;
-
-    // singleton
+    // typedef unsigned long long ull;
 
     class Primes
     {
@@ -107,7 +104,7 @@ namespace Prime
         void operator=(Primes const &) = delete;
     };
 
-    std::vector<std::pair<uint, int>> factorize(ull n)
+    std::vector<std::pair<uint, int>> factorize(unsigned long long n)
     {
         if (n == 0)
         {
@@ -116,7 +113,7 @@ namespace Prime
         std::vector<std::pair<uint, int>>
             result;
         Primes &primes = Primes::getInstance();
-        for (uint i = 0; primes[i] * primes[i] < n; i++)
+        for (uint i = 0; primes[i] * primes[i] <= n; i++)
         {
             uint count = 0;
             while (n % primes[i] == 0)

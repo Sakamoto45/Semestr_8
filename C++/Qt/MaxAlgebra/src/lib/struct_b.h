@@ -1,8 +1,9 @@
-#include <numeric> //gcd
+#pragma once
+
+#include <numeric>
 #include <cmath>
 #include <string>
 #include <cln/integer.h>
-#include <cln/integer_io.h>
 
 #include "my_utils.h"
 #include "max_algebra.h"
@@ -11,16 +12,20 @@
 class Fraction
 {
 public:
-    Fraction(long long numerator, unsigned long long denominator = 1)
+    Fraction(long long numerator, long long denominator = 1)
         : numerator_(numerator),
           denominator_(denominator) {}
 
     friend std::ostream &operator<<(std::ostream &os, const Fraction &obj)
     {
         os << "{"
-           << obj.numerator_
-           << (obj.denominator_ == 1 ? "" : "/" + obj.denominator_)
-           << "}";
+           << obj.numerator_;
+        if (obj.denominator_ != 1)
+        {
+            os << "/" << obj.denominator_;
+        }
+
+        os << "}";
 
         return os;
     }
@@ -44,14 +49,26 @@ public:
     {
         return (lhs - rhs).numerator_ == 0;
     }
+    friend inline bool operator!=(const Fraction &lhs, const Fraction &rhs)
+    {
+        return !(lhs == rhs);
+    }
     friend inline bool operator<(const Fraction &lhs, const Fraction &rhs)
     {
         return (lhs - rhs).numerator_ < 0;
     }
+    operator double() const
+    {
+        return (double)numerator_ / denominator_;
+    }
+    long long denominator() const
+    {
+        return denominator_;
+    }
 
 private:
     long long numerator_;
-    unsigned long long denominator_;
+    long long denominator_;
 
     Fraction Simplify()
     {
@@ -65,80 +82,337 @@ private:
 class StructB
 {
 public:
-    StructB(cln::cl_I numerator, cln::cl_I denominator, uint root = 1)
+    StructB(unsigned long long numerator, unsigned long long denominator, uint root = 1)
     {
+        Init(numerator, denominator, root);
     }
 
     StructB(double num = 0)
-        : numerator_(1),
-          denominator_(1),
-          root_(1)
     {
         if (num >= 1 || num == 0)
         {
-            numerator_ = int64_t(llround(num));
+            Init(int64_t(llround(num)), 1);
         }
         else
         {
-            denominator_ = int64_t(llround(1 / num));
+            Init(1, int64_t(llround(1 / num)));
         }
     }
 
     StructB(std::string str)
-        : numerator_(1),
-          denominator_(1),
-          root_(1)
     {
         auto pos = str.find("/");
         if (pos == str.npos)
         {
-            numerator_ = str.c_str();
+            Init(atoll(str.c_str()), 1);
         }
         else
         {
-            numerator_ = str.substr(0, pos).c_str();
-            denominator_ = str.substr(pos + 1).c_str();
+            Init(atoll(str.substr(0, pos).c_str()),
+                 atoll(str.substr(pos + 1).c_str()));
         }
     }
 
     operator double() const
     {
-        // return std::pow(cln::double_approx(numerator_) / cln::double_approx(denominator_), 1.0 / root_);
+        if (is_zero)
+        {
+            return 0;
+        }
+        double result = 1;
+        for (auto p : data)
+        {
+            result *= pow(p.first, double(p.second));
+        }
+        return result;
     }
 
     friend std::ostream &operator<<(std::ostream &os, const StructB &obj)
     {
-        // os << obj.value_;
-        os << (obj.root_ == 1 ? "" : "(")
-           << obj.numerator_
-           << (obj.denominator_ == 1 ? "" : "/" + obj.denominator_)
-           << (obj.root_ == 1 ? "" : ")^{1/" + std::to_string(obj.root_) + "}");
+        if (obj.is_zero)
+        {
+            os << 0;
+            return os;
+        }
+        if (obj.data.empty())
+        {
+            os << 1;
+            return os;
+        }
+        for (auto p : obj.data)
+        {
+            os << p.first;
+            if (p.second != Fraction(1))
+            {
+                os << "^" << p.second;
+            }
+            if (p != obj.data.back())
+            {
+                os << "\\cdot ";
+            }
+        }
 
         return os;
     }
 
     friend inline bool operator<(const StructB &lhs, const StructB &rhs)
     {
+        if (rhs.is_zero)
+        {
+            return false;
+        }
+        if (lhs.is_zero)
+        {
+            return true;
+        }
         StructB relation(lhs / rhs);
-        return relation.numerator_ < relation.denominator_;
+        double approx = double(relation);
+        if (abs(approx - 1) > 1e-15)
+        {
+            return approx < 1;
+        }
+
+        long long root_lcm = 1;
+        for (auto p : relation.data)
+        {
+            root_lcm = std::lcm(root_lcm, p.second.denominator());
+        }
+        cln::cl_I numerator = 1;
+        cln::cl_I denominator = 1;
+        for (auto p : relation.data)
+        {
+            if (p.second > Fraction(0))
+            {
+                numerator *= FastPow(cln::cl_I(p.first), p.second * root_lcm);
+            }
+            else
+            {
+                denominator *= FastPow(cln::cl_I(p.first), -p.second * root_lcm);
+            }
+        }
+        return numerator < denominator;
     }
     friend inline bool operator==(const StructB &lhs, const StructB &rhs)
     {
-        StructB relation(lhs / rhs);
-        return relation.numerator_ == relation.denominator_;
+        if (lhs.is_zero && rhs.is_zero)
+        {
+            return true;
+        }
+        if (lhs.is_zero || rhs.is_zero)
+        {
+            return false;
+        }
+        for (auto i = lhs.data.begin(),
+                  j = rhs.data.begin();
+             i != lhs.data.end() ||
+             j != rhs.data.end();)
+        {
+            if (i == lhs.data.end() ||
+                j == rhs.data.end())
+            {
+                return false;
+            }
+            if (*i != *j)
+            {
+                return false;
+            }
+        }
+        return true;
     }
     friend inline StructB operator*(const StructB &lhs, const StructB &rhs)
     {
+        if (lhs.is_zero || rhs.is_zero)
+        {
+            return 0;
+        }
+
+        StructB result(1);
+
+        for (auto i = lhs.data.begin(),
+                  j = rhs.data.begin();
+             i != lhs.data.end() ||
+             j != rhs.data.end();)
+        {
+            if (i == lhs.data.end())
+            {
+                result.data.push_back({j->first, j->second});
+                j++;
+            }
+            else if (j == rhs.data.end())
+            {
+                result.data.push_back({i->first, i->second});
+                i++;
+            }
+            else
+            {
+                uint min_p = std::min(i->first, j->first);
+                Fraction tmp(0);
+                if (i->first == min_p)
+                {
+                    tmp = tmp + Fraction(i->second);
+                    i++;
+                }
+                if (j->first == min_p)
+                {
+                    tmp = tmp + Fraction(j->second);
+                    j++;
+                }
+                if (tmp != Fraction(0))
+                {
+                    result.data.push_back({min_p, tmp});
+                }
+            }
+        }
+        return result;
     }
     friend inline StructB operator/(const StructB &lhs, const StructB &rhs)
     {
+        if (lhs.is_zero || rhs.is_zero)
+        {
+            return 0;
+        }
+
+        StructB result(1);
+
+        for (auto i = lhs.data.begin(),
+                  j = rhs.data.begin();
+             i != lhs.data.end() ||
+             j != rhs.data.end();)
+        {
+            if (i == lhs.data.end())
+            {
+                result.data.push_back({j->first, -(j->second)});
+                j++;
+            }
+            else if (j == rhs.data.end())
+            {
+                result.data.push_back({i->first, i->second});
+                i++;
+            }
+            else
+            {
+                uint min_p = std::min(i->first, j->first);
+                Fraction tmp(0);
+                if (i->first == min_p)
+                {
+                    tmp = tmp + Fraction(i->second);
+                    i++;
+                }
+                if (j->first == min_p)
+                {
+                    tmp = tmp - Fraction(j->second);
+                    j++;
+                }
+                if (tmp != Fraction(0))
+                {
+                    result.data.push_back({min_p, tmp});
+                }
+            }
+        }
+        return result;
     }
     inline StructB Root(const uint &root)
     {
+        if (is_zero)
+        {
+            return 0;
+        }
+        StructB result(1);
+        for (auto p : data)
+        {
+            result.data.push_back({p.first, Fraction(p.second, root)});
+        }
+        return result;
     }
 
 private:
-    cln::cl_I numerator_;
-    cln::cl_I denominator_;
-    uint root_;
+    void Init(unsigned long long numerator, unsigned long long denominator, uint root = 1)
+    {
+        if (numerator == 0)
+        {
+            is_zero = true;
+            return;
+        }
+        is_zero = false;
+
+        auto factorized_numerator = Prime::factorize(numerator);
+        auto factorized_denominator = Prime::factorize(denominator);
+
+        for (auto i = factorized_numerator.begin(),
+                  j = factorized_denominator.begin();
+             i != factorized_numerator.end() ||
+             j != factorized_denominator.end();)
+        {
+            if (i == factorized_numerator.end())
+            {
+                data.push_back({j->first, -Fraction(j->second, root)});
+                j++;
+            }
+            else if (j == factorized_denominator.end())
+            {
+                data.push_back({i->first, Fraction(i->second, root)});
+                i++;
+            }
+            else
+            {
+                uint min_p = std::min(i->first, j->first);
+                Fraction tmp(0);
+                if (i->first == min_p)
+                {
+                    tmp = tmp + Fraction(i->second, root);
+                    i++;
+                }
+                if (j->first == min_p)
+                {
+                    tmp = tmp - Fraction(j->second, root);
+                    j++;
+                }
+                if (tmp != Fraction(0))
+                {
+                    data.push_back({min_p, tmp});
+                }
+            }
+        }
+    }
+
+    std::vector<std::pair<uint, Fraction>> data;
+    bool is_zero;
 };
+
+typedef MyAlgebra::MaxAlgebra<StructB> MaxAlgebraB;
+
+namespace Eigen
+{
+    using namespace MyAlgebra;
+    template <>
+    struct NumTraits<MaxAlgebra<StructB>>
+        : GenericNumTraits<MaxAlgebra<StructB>> // permits to get the epsilon, dummy_precision, lowest, highest functions
+    {
+        typedef MaxAlgebra<StructB> Real;
+        typedef MaxAlgebra<StructB> NonInteger;
+        typedef MaxAlgebra<StructB> Nested;
+        static inline int digits10() { return 0; }
+        enum
+        {
+            IsComplex = 0,
+            IsInteger = 0,
+            IsSigned = 0,
+            RequireInitialization = 1,
+            ReadCost = 2,
+            AddCost = 3,
+            MulCost = 3
+        };
+    };
+
+    template <typename BinaryOp>
+    struct ScalarBinaryOpTraits<MaxAlgebra<StructB>, StructB, BinaryOp>
+    {
+        typedef MaxAlgebra<StructB> ReturnType;
+    };
+
+    template <typename BinaryOp>
+    struct ScalarBinaryOpTraits<StructB, MaxAlgebra<StructB>, BinaryOp>
+    {
+        typedef MaxAlgebra<StructB> ReturnType;
+    };
+}

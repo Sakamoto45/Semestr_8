@@ -1,3 +1,5 @@
+#pragma once
+
 #include <numeric> //gcd
 #include <cmath>
 #include <string>
@@ -59,8 +61,8 @@ public:
     {
         // os << obj.value_;
         os << (obj.root_ == 1 ? "" : "(")
-           << obj.numerator_
-           << (obj.denominator_ == 1 ? "" : "/" + obj.denominator_)
+           << to_string(obj.numerator_)
+           << (obj.denominator_ == 1 ? "" : "/" + to_string(obj.denominator_))
            << (obj.root_ == 1 ? "" : ")^{1/" + std::to_string(obj.root_) + "}");
 
         return os;
@@ -122,3 +124,41 @@ private:
         return *this;
     }
 };
+
+typedef MyAlgebra::MaxAlgebra<StructA> MaxAlgebraA;
+
+namespace Eigen
+{
+    using namespace MyAlgebra;
+    template <>
+    struct NumTraits<MaxAlgebra<StructA>>
+        : GenericNumTraits<MaxAlgebra<StructA>> // permits to get the epsilon, dummy_precision, lowest, highest functions
+    {
+        typedef MaxAlgebra<StructA> Real;
+        typedef MaxAlgebra<StructA> NonInteger;
+        typedef MaxAlgebra<StructA> Nested;
+        static inline int digits10() { return 0; }
+        enum
+        {
+            IsComplex = 0,
+            IsInteger = 0,
+            IsSigned = 0,
+            RequireInitialization = 1,
+            ReadCost = 2,
+            AddCost = 3,
+            MulCost = 3
+        };
+    };
+
+    template <typename BinaryOp>
+    struct ScalarBinaryOpTraits<MaxAlgebra<StructA>, StructA, BinaryOp>
+    {
+        typedef MaxAlgebra<StructA> ReturnType;
+    };
+
+    template <typename BinaryOp>
+    struct ScalarBinaryOpTraits<StructA, MaxAlgebra<StructA>, BinaryOp>
+    {
+        typedef MaxAlgebra<StructA> ReturnType;
+    };
+}

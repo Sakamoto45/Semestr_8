@@ -1,5 +1,9 @@
-// typedef int huge_int;
-typedef unsigned int uint;
+#pragma once
+
+#include <cln/integer.h>
+#include <cln/integer_io.h>
+#include <string>
+#include <sstream>
 
 template <class T>
 T FastPow(T base, uint exp)
@@ -15,4 +19,12 @@ T FastPow(T base, uint exp)
         exp >>= 1;
     }
     return result;
+}
+
+std::string to_string(const cln::cl_I &integer)
+{
+    std::stringstream ss;
+    cln::print_integer(ss, 10, integer);
+
+    return ss.str();
 }

@@ -31,8 +31,7 @@ max_algebra - template
 новая a
 p0^(a0/b0)*p1^(a1/b1)
 
-новая b
-(p0^(a0)*p1^(a1))^1/n
+
 
 
 
