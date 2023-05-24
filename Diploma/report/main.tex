@@ -1,9 +1,9 @@
-% \documentclass[specialist,
-% substylefile = spbu.rtx,
-%                subf,href,colorlinks=true, 12pt]{disser}
-
-\documentclass[specialist, substylefile = spbureport.rtx,
+\documentclass[specialist,
+substylefile = spbu.rtx,
                subf,href,colorlinks=true, 12pt]{disser}
+
+% \documentclass[specialist, substylefile = spbureport.rtx,
+            %    subf,href,colorlinks=true, 12pt]{disser}
 
 \usepackage[a4paper,
             mag=1000, includefoot,
@@ -39,9 +39,13 @@
 }
 
 
+\usepackage{hyperref}
+\usepackage{relsize}
+\usepackage{xspace}
+\newcommand{\Cpp}{\texorpdfstring{\mbox{C\raisebox{.35ex}{\textsmaller[2]{++}}}\xspace}{C++}}
+% \newcommand\Cpp{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\relsize{-3}{\textbf{++}}}}
 
-
-\newtheorem*{definition}{Определение}
+% \newtheorem*{definition}{Определение}
 % \newtheorem*{example}{Пример}
 % \newtheorem*{hypothesis}{Гипотеза}
 % \newtheorem*{question}{Вопрос}
@@ -74,88 +78,91 @@
 % \city{Санкт-Петербург}
 % \date{2023}
 
-\institution{Санкт-Петербургский государственный университет\\
-    Математико-механический факультет\\
-    Кафедра Статистического Моделирования
-}
-\title{«Научно-исследовательская работа» (семестр 8)}
-\topic{Разработка программных средств и решение задач принятия решений с помощью методов тропической математики.}
-\author{Ткаченко Егор Андреевич}
-\group{группа 19.Б04-мм}
-\sa       {Кривулин Николай Кимович}
-\sastatus {д.\,ф.-м.\,н., профессор}
-\city{Санкт-Петербург}
-\date{2023}
+% \institution{Санкт-Петербургский государственный университет\\
+%     Математико-механический факультет\\
+%     Кафедра Статистического Моделирования
+% }
+% \title{«Научно-исследовательская работа» (семестр 8)}
+% \topic{Разработка программных средств и решение задач принятия решений с помощью методов тропической математики.}
+% \author{Ткаченко Егор Андреевич}
+% \group{группа 19.Б04-мм}
+% \sa       {Кривулин Николай Кимович}
+% \sastatus {д.\,ф.-м.\,н., профессор}
+% \city{Санкт-Петербург}
+% \date{2023}
+%     \maketitle
+
+
+    \institution{%
+        Санкт-Петербургский государственный университет\\
+        Математико-механический факультет\\
+        Кафедра Статистического Моделирования
+    }
+
+    \title{Выпускная квалификационная работа}
+
+    % Тема
+    \topic{Разработка программных средств и решение задач принятия решений с помощью методов тропической математики}
+
+    % Автор
+    \author{\textsc{Ткаченко} Егор Андреевич}
+
+    \group{%
+        Уровень образования: бакалавриат\\
+        Направление 01.03.02 <<Прикладная математика и информатика>>\\
+        Основная образовательная программа СВ.5004.2019 <<Прикладная математика и информатика>>
+    }
+
+    % Научный руководитель
+    \sa       {Н.\,К.~Кривулин}
+    \sastatus {Профессор, кафедра статистического моделирования\,\\
+            д.\,ф.-м.\,н., профессор}
+
+    % Рецензент
+    \rev      {В.\,А.~Пархоменко}
+    \revstatus{Старший преподаватель, Высшая школа интеллектуальных систем и суперкомпьютерных технологий СПбПУ Петра Великого}
+
+
+    % Город и год
+    \city{Санкт-Петербург}
+    \date{\number\year}
+
     \maketitle
 
+    %%
+    %% Titlepage in English
+    %%
+    %
+    \institution{%
+        Saint Petersburg State University \\
+        Applied Mathematics and Computer Science
+    }
+    %
+    \title{Graduation Project}
+    %
+    %% Topic
+    \topic{Software development and solution of decision-making problems using tropical mathematics methods}
+    %
+    %% Author
+    \author{\textsc{Tkachenko} Egor Andreevich} % Full Name
+    \group{}
 
-    % \institution{%
-    %     Санкт-Петербургский государственный университет\\
-    %     Математико-механический факультет\\
-    %     Кафедра Статистического Моделирования
-    % }
+    %% Scientific Advisor
+    \sa       {N.\,K.~Krivulin}
+    \sastatus {Professor, Department of Statistical Modelling}
+    %
+    %% Reviewer
+    \rev      {V.\,A.~Parkhomenko}
+    \revstatus{Senior Lecturer, Graduate School of Intelligent Systems and Supercomputing, Peter the Great University of St. Petersburg}
 
-    % \title{Выпускная квалификационная работа}
-
-    % % Тема
-    % \topic{Разработка программных средств и решение задач принятия решений с помощью методов тропической математики}
-
-    % % Автор
-    % \author{\textsc{Ткаченко} Егор Андреевич}
-
-    % \group{%
-    %     Уровень образования: бакалавриат\\
-    %     Направление 01.03.02 <<Прикладная математика и информатика>>\\
-    %     Основная образовательная программа СВ.5004.2019 <<Прикладная математика и информатика>>
-    % }
-
-    % % Научный руководитель
-    % \sa       {Н.\,К.~Кривулин}
-    % \sastatus {Профессор, кафедра статистического моделирования\,\\
-    %         д.\,ф.-м.\,н., профессор}
-
-    % % Рецензент
-    % \rev      {П.\,П.~Петров}
-    % \revstatus{Наиглавнейший научный сотрудник, НПО~<<Хорнс энд Хуфс>>\\
-    %         к.\,ф.-м.\,н., доцент}
-
-    % % Город и год
-    % \city{Санкт-Петербург}
-    % \date{\number\year}
-
-    % \maketitle
-
-    % %%
-    % %% Titlepage in English
-    % %%
-    % %
-    % \institution{%
-    %     Saint Petersburg State University \\
-    %     Applied Mathematics and Computer Science
-    % }
-    % %
-    % \title{Graduation Project}
-    % %
-    % %% Topic
-    % \topic{Software development and solution of decision-making problems using tropical mathematics methods}
-    % %
-    % %% Author
-    % \author{\textsc{Tkachenko} Egor Andreevich} % Full Name
-    % \group{}
-
-    % %% Scientific Advisor
-    % \sa       {N.\,K.~Krivulin}
-    % \sastatus {Professor, Department of Statistical Modelling}
-    % %
-    % %% Reviewer
     % \rev      {P.\,P.~Petrov}
     % \revstatus{The most leading research associate, NPO~``Horns and Hoofs''}
-    % %
-    % %% City & Year
-    % \city{Saint Petersburg}
-    % \date{\number\year}
+    %
+    %% City & Year
+    \city{Saint Petersburg}
+    \date{\number\year}
 
-    % \maketitle[en]
+    \maketitle[en]
 
 
 
@@ -504,7 +511,9 @@
 
     Для решения многокритериальных задач парных сравнений разработаны модели представления данных, алгоритмы точных вычислений, их программная реализация и проведено сравнение.
 
-    Полученные результаты могут оказаться полезными для решения других задач, где требуется обеспечить точные вычисления, например для задач криптографии. 
+    Полученные результаты могут оказаться полезными для решения других задач, где требуется обеспечить точные вычисления, например для задач криптографии.
+    
+    На языке $\Cpp$ было разработано программное средство \cite{SourceCode}, реализующее описанные выше структуры и аппарат тропической математики.  
     
     \renewcommand{\refname}{}
     \vspace{-25pt}
@@ -524,7 +533,5 @@
     % \input{to_latex.tex}
 
     % \input{solution.tex}
-
-
 
 \end{document}

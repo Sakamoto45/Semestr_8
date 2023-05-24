@@ -1,0 +1,1550 @@
+{
+    "blueprint": {
+        "icons": [{
+            "signal": {
+                "type": "item",
+                "name": "refined-concrete"
+            },
+            "index": 1
+        }],
+        "tiles": [{
+            "position": {
+                "x": 354,
+                "y": 309
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 355,
+                "y": 308
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 355,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 355,
+                "y": 310
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 355,
+                "y": 311
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 356,
+                "y": 307
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 356,
+                "y": 308
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 356,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 356,
+                "y": 310
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 356,
+                "y": 311
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 356,
+                "y": 312
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 357,
+                "y": 307
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 357,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 357,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 357,
+                "y": 310
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 357,
+                "y": 311
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 357,
+                "y": 312
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 358,
+                "y": 306
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 358,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 358,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 358,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 358,
+                "y": 310
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 358,
+                "y": 311
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 358,
+                "y": 312
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 359,
+                "y": 305
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 359,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 359,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 359,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 359,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 359,
+                "y": 310
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 359,
+                "y": 311
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 359,
+                "y": 312
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 297
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 298
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 299
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 300
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 301
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 302
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 303
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 304
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 305
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 310
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 311
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 360,
+                "y": 312
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 297
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 298
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 299
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 300
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 301
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 302
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 303
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 304
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 305
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 310
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 311
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 361,
+                "y": 312
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 297
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 298
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 299
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 300
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 301
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 302
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 303
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 304
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 305
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 310
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 311
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 362,
+                "y": 312
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 297
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 298
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 299
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 300
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 301
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 302
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 303
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 304
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 305
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 310
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 311
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 363,
+                "y": 312
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 296
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 297
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 298
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 299
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 300
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 301
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 302
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 303
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 304
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 305
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 310
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 364,
+                "y": 311
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 294
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 295
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 296
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 297
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 298
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 299
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 300
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 301
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 302
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 303
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 304
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 305
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 365,
+                "y": 309
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 293
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 294
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 295
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 296
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 297
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 298
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 299
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 300
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 301
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 302
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 303
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 304
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 305
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 366,
+                "y": 308
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 294
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 295
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 296
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 297
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 298
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 299
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 300
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 301
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 302
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 303
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 304
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 305
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 367,
+                "y": 309
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 295
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 296
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 297
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 298
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 299
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 300
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 301
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 302
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 303
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 304
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 305
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 368,
+                "y": 310
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 295
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 296
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 297
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 298
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 299
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 300
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 301
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 302
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 303
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 304
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 305
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 369,
+                "y": 310
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 296
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 297
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 298
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 299
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 300
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 301
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 302
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 303
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 304
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 305
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 310
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 370,
+                "y": 311
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 297
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 298
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 299
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 300
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 301
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 302
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 303
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 304
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 305
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 310
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 311
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 371,
+                "y": 312
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 372,
+                "y": 305
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 372,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 372,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 372,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 372,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 372,
+                "y": 310
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 372,
+                "y": 311
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 372,
+                "y": 312
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 373,
+                "y": 305
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 373,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 373,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 373,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 373,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 373,
+                "y": 310
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 373,
+                "y": 311
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 374,
+                "y": 305
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 374,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 374,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 374,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 374,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 374,
+                "y": 310
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 375,
+                "y": 305
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 375,
+                "y": 306
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 375,
+                "y": 307
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 375,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 375,
+                "y": 309
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 375,
+                "y": 310
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 376,
+                "y": 306
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 376,
+                "y": 307
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 376,
+                "y": 308
+            },
+            "name": "refined-concrete"
+        }, {
+            "position": {
+                "x": 376,
+                "y": 309
+            },
+            "name": "refined-hazard-concrete-left"
+        }, {
+            "position": {
+                "x": 377,
+                "y": 308
+            },
+            "name": "refined-hazard-concrete-left"
+        }],
+        "item": "blueprint",
+        "version": 281479276986368
+    }
+}

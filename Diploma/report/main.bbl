@@ -7,63 +7,44 @@
 \providecommand*{\BibUrl}[1]{\url{#1}}
 \providecommand{\BibAnnote}[1]{}
 \providecommand*{\BibEmph}[1]{#1}
-\ProvideTextCommandDefault{\cyrdash}{\iflanguage{russian}{\hbox
-  to.8em{--\hss--}}{\textemdash}}
-\providecommand*{\BibDash}{\ifdim\lastskip>0pt\unskip\nobreak\hskip.2em plus
-  0.1em\fi
+\ProvideTextCommandDefault{\cyrdash}{\iflanguage{russian}{\hbox to.8em{--\hss--}}{\textemdash}}
+\providecommand*{\BibDash}{\ifdim\lastskip>0pt\unskip\nobreak\hskip.2em plus 0.1em\fi
 \cyrdash\hskip.2em plus 0.1em\ignorespaces}
 \renewcommand{\newblock}{\ignorespaces}
 
 \bibitem{Saaty1993Prinyatie}
 \selectlanguageifdefined{russian}
-Саати~Т. Принятие решений. Метод анализа
-  иерархий / пер. с англ. Р. Г. Вачнадзе. М.:
-  Радио и связь. \BibDash
+Саати~Т. Принятие решений. Метод анализа иерархий / пер. с англ. Р. Г. Вачнадзе. М.: Радио и связь. \BibDash
 \newblock 1993.
 
 \bibitem{Krivulin2019Metody}
 \selectlanguageifdefined{russian}
-Кривулин~Н.~К., Агеев~В.~А. Методы
-  тропической оптимизации в
-  многокритериальных задачах оценки
-  альтернатив на основе парных сравнений //
-  Вестн. С.-Петерб. ун-та~// Прикладная
-  математика. \BibDash
+Кривулин~Н.~К., Агеев~В.~А. Методы тропической оптимизации в многокритериальных задачах оценки альтернатив на основе парных сравнений // Вестн. С.-Петерб. ун-та~// Прикладная математика. \BibDash
 \newblock 2019. \BibDash
 \newblock Т.~15. \BibDash
 \newblock {С.}~472--488.
 
 \bibitem{Krivulin2019Tropical}
 \selectlanguageifdefined{english}
-Krivulin~N., Sergeev~S. Tropical implementation of the {A}nalytical {H}ierarchy
-  {P}rocess decision method // Fuzzy Sets and Systems. \BibDash
+Krivulin~N., Sergeev~S. Tropical implementation of the {A}nalytical {H}ierarchy {P}rocess decision method // Fuzzy Sets and Systems. \BibDash
 \newblock 2019.
 
 \bibitem{Krivulin2022Using}
 \selectlanguageifdefined{english}
-Krivulin~N., Prinkov~A., Gladkikh~I. Using Pairwise Comparisons to Determine
-  Consumer Preferences in Hotel Selection~// \BibEmph{Mathematics}. \BibDash
+Krivulin~N., Prinkov~A., Gladkikh~I. Using Pairwise Comparisons to Determine Consumer Preferences in Hotel Selection~// \BibEmph{Mathematics}. \BibDash
 \newblock 2022. \BibDash
 \newblock Vol.~10, no.~5. \BibDash
 \newblock P.~1--25.
 
 \bibitem{Krivulin2020Reshenie}
 \selectlanguageifdefined{russian}
-Кривулин~Н.~К., Абильдаев~Т.,
-  Горшечникова~В.~Д., Капаца~Д. и Магдич~Е.~А.~//
-  Мандрикова А. А. О решении
-  многокритериальных задач принятия
-  решений на основе парных сравнений //
-  Компьютерные инструменты в образовании.
-  \BibDash
+Кривулин~Н.~К., Абильдаев~Т., Горшечникова~В.~Д., Капаца~Д. и Магдич~Е.~А.~// Мандрикова А. А. О решении многокритериальных задач принятия решений на основе парных сравнений // Компьютерные инструменты в образовании. \BibDash
 \newblock {№}~2. 2020. \BibDash
 \newblock {С.}~27--58.
 
 \bibitem{Maslov1994Idemotent}
 \selectlanguageifdefined{russian}
-Маслов~В.~П., Колокольцов~В.~Н. Идемпотентный
-  анализ и его применение в оптимальном
-  управлении. \BibDash
+Маслов~В.~П., Колокольцов~В.~Н. Идемпотентный анализ и его применение в оптимальном управлении. \BibDash
 \newblock 1994.
 
 \bibitem{Butkovic2010Maxlinear}
@@ -75,5 +56,11 @@ Butkovi\v{c}~P. Max-linear Systems: Theory and Algorithms. \BibDash
 \selectlanguageifdefined{english}
 Heidergott~B., Olsder~G., Woude~J. Van~Der. \BibDash
 \newblock 2006.
+
+\bibitem{SourceCode}
+\selectlanguageifdefined{english}
+Tkachenko~E.~A. Decision making with MaxAlgebra. \BibDash
+\newblock 2023. \BibDash
+\newblock Access mode: \BibUrl{https://doi.org/10.5281/zenodo.7950762}.
 
 \end{thebibliography}
