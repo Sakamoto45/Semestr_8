@@ -7,34 +7,32 @@
 \providecommand*{\BibUrl}[1]{\url{#1}}
 \providecommand{\BibAnnote}[1]{}
 \providecommand*{\BibEmph}[1]{#1}
-\ProvideTextCommandDefault{\cyrdash}{\iflanguage{russian}{\hbox
-  to.8em{--\hss--}}{\textemdash}}
-\providecommand*{\BibDash}{\ifdim\lastskip>0pt\unskip\nobreak\hskip.2em plus
-  0.1em\fi
+\ProvideTextCommandDefault{\cyrdash}{\iflanguage{russian}{\hbox to.8em{--\hss--}}{\textemdash}}
+\providecommand*{\BibDash}{\ifdim\lastskip>0pt\unskip\nobreak\hskip.2em plus 0.1em\fi
 \cyrdash\hskip.2em plus 0.1em\ignorespaces}
 \renewcommand{\newblock}{\ignorespaces}
 
 \bibitem{Saaty1993Prinyatie}
 \selectlanguageifdefined{russian}
-Саати~Т. Принятие решений. Метод анализа
-  иерархий / пер. с англ. Р. Г. Вачнадзе. М.:
-  Радио и связь. \BibDash
+Саати~Т. Принятие решений. Метод анализа иерархий / пер. с англ. Р. Г. Вачнадзе. М.: Радио и связь. \BibDash
 \newblock 1993.
 
 \bibitem{Krivulin2022Using}
 \selectlanguageifdefined{english}
-Krivulin~Nikolai, Prinkov~Alexey, Gladkikh~Igor. Using Pairwise Comparisons to
-  Determine Consumer Preferences in Hotel Selection~// \BibEmph{Mathematics}.
-  \BibDash
+Krivulin~Nikolai, Prinkov~Alexey, Gladkikh~Igor. Using Pairwise Comparisons to Determine Consumer Preferences in Hotel Selection~// \BibEmph{Mathematics}. \BibDash
 \newblock 2022. \BibDash
 \newblock Vol.~10, no.~5. \BibDash
 \newblock P.~1--25.
 
 \bibitem{Maslov1994Idemotent}
 \selectlanguageifdefined{russian}
-Маслов~В.~П., Колокольцов~В.~Н. Идемпотентный
-  анализ и его применение в оптимальном
-  управлении. \BibDash
+Маслов~В.~П., Колокольцов~В.~Н. Идемпотентный анализ и его применение в оптимальном управлении. \BibDash
 \newblock 1994.
+
+\bibitem{SourceCode}
+\selectlanguageifdefined{english}
+Tkachenko~E.~A. Decision making with MaxAlgebra. \BibDash
+\newblock 2023. \BibDash
+\newblock Access mode: \BibUrl{https://doi.org/10.5281/zenodo.7950762}.
 
 \end{thebibliography}
