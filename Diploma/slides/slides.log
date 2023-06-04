@@ -737,7 +737,6 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package hyperref Info: Link coloring OFF on input line 112.
- (./slides.out) (./slides.out)
 \@outlinefile=\write5
 \openout5 = `slides.out'.
 
@@ -930,12 +929,21 @@ Overfull \hbox (163.88681pt too wide) has occurred while \output is active
 \openout8 = `slides.snm'.
 
  (./slides.aux)
-Package rerunfilecheck Info: File `slides.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `slides.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `slides.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 28088 strings out of 476025
- 533464 string characters out of 5796532
+ 28084 strings out of 476025
+ 533420 string characters out of 5796532
  1866388 words of memory out of 5000000
  47924 multiletter control sequences out of 15000+600000
  526887 words of font info for 69 fonts, out of 8000000 for 9000

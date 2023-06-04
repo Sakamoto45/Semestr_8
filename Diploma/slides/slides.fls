@@ -1366,16 +1366,6 @@ INPUT /usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-INPUT ./slides.out
-INPUT slides.out
-INPUT ./slides.out
-INPUT slides.out
-INPUT ./slides.out
-INPUT slides.out
-INPUT ./slides.out
-INPUT slides.out
-INPUT ./slides.out
-INPUT ./slides.out
 OUTPUT slides.out
 INPUT /usr/share/texmf-dist/tex/latex/ucs/ucsencs.def
 INPUT /usr/share/texmf-dist/tex/latex/ucs/ucsencs.def

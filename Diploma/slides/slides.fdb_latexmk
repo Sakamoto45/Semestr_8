@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex slides"] 1685911471 "slides.aux" "slides.bbl" "slides" 1685912135 2
+["bibtex slides"] 1685912138 "slides.aux" "slides.bbl" "slides" 1685912138 2
   "./references.bib" 1685458530 1285 ac5c86bf091300b00ac1b54c9ef0c5c1 ""
   "/usr/share/texmf-dist/bibtex/bst/gost/ugost2008.bst" 1678900371 62067 43f50c074e75addbcc8c2a37dd589c1f ""
-  "slides.aux" 1685912135 3282 526d9821eb48d4f835f980f346cfc3ff "pdflatex"
+  "slides.aux" 1685912137 3282 526d9821eb48d4f835f980f346cfc3ff "pdflatex"
   (generated)
   "slides.bbl"
   "slides.blg"
   (rewritten before read)
-["pdflatex"] 1685912133 "/home/user/Projects/SPBU/Semestr_8/Diploma/slides/slides.tex" "slides.pdf" "slides" 1685912135 0
+["pdflatex"] 1685912136 "/home/user/Projects/SPBU/Semestr_8/Diploma/slides/slides.tex" "slides.pdf" "slides" 1685912138 0
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lass0500.tfm" 1639570562 3344 04cc4fceacac9c26311c189d8cf8dfa8 ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lass0600.tfm" 1639570549 3336 ffa077eca1169d40eee1410535cc0504 ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lass0800.tfm" 1639570556 3264 26b079dff50e667b3da4d5604970d303 ""
@@ -268,10 +268,10 @@
   "images//line_smooth_norm.pdf" 1684164630 7945 5da070295d463eddcc3da3ef9d6d3ad0 ""
   "images//point.pdf" 1684164630 21637 99eb493f890a0432d11120eda62e3277 ""
   "images//relation.pdf" 1684164630 6350 e9f53559e2abdaa121d7f06dfbd95244 ""
-  "slides.aux" 1685912135 3282 526d9821eb48d4f835f980f346cfc3ff "pdflatex"
-  "slides.bbl" 1685911471 1649 538a69789e1e13b6c69739bc6b52bd06 "bibtex slides"
-  "slides.nav" 1685912135 1574 f5abf7444d939a8c2cd188b6df8c9c87 "pdflatex"
-  "slides.out" 1685912134 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "slides.aux" 1685912137 3282 526d9821eb48d4f835f980f346cfc3ff "pdflatex"
+  "slides.bbl" 1685912138 1649 538a69789e1e13b6c69739bc6b52bd06 "bibtex slides"
+  "slides.nav" 1685912137 1574 f5abf7444d939a8c2cd188b6df8c9c87 "pdflatex"
+  "slides.out" 1685912136 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "slides.tex" 1685912133 35959 9065ed89c0dbdba48309dc84d438478d ""
   "statmod/logo.jpg" 1684082882 8290 308285ad145883d6364601295240680a ""
   (generated)
