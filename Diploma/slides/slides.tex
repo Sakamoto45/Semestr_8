@@ -7,7 +7,7 @@
 \mode<handout> {
     \usepackage{pgfpages}
     \setbeameroption{show notes}
-    \pgfpagesuselayout{2 on 1}[a4paper, border shrink=5mm]
+    % \pgfpagesuselayout{2 on 1}[a4paper, border shrink=5mm]
     \setbeamercolor{note page}{bg=white}
     \setbeamercolor{note title}{bg=gray!10}
     \setbeamercolor{note date}{fg=gray!10}
@@ -44,22 +44,52 @@
 %     Кафедра статистического моделирования}
 
 
+\makeatletter
+\defbeamertemplate*{footline}{infolineslong}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.5ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\beamer@ifempty\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.55\paperwidth,ht=2.5ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle[width=\textwidth, respectlinebreaks]
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.15\paperwidth,ht=2.5ex,dp=1ex,right]{date in head/foot}%
+%    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+\insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\uselanguage{Russian}
+\languagepath{Russian}
 
 
+\makeatother
+\title[Разработка ПО и решение задач принятия решений]{Разработка программных средств и решение задач принятия решений с помощью методов тропической математики}
+\author{Ткаченко Егор Андреевич}
+\institute[]{
+Санкт-Петербургский государственный университет \\
+Прикладная математика и информатика \\
+Кафедра статистического моделирования \\
+\textbf{Научный руководитель:}  доктор физ.-мат. наук, профессор Н.\,К.~Кривулин
+}
 
-    \title[Решение задачи принятия решений]{Разработка программных средств и решение задач принятия решений с помощью методов тропической математики}
 
-    \author{Ткаченко Егор Андреевич, гр.19.Б04-мм}
+    % \title[Решение задачи принятия решений]{Разработка программных средств и решение задач принятия решений с помощью методов тропической математики}
+
+    % \author{Ткаченко Егор Андреевич, гр.19.Б04-мм}
     
-    \institute[Санкт-Петербургский Государственный Университет]{%
-        \small
-        Санкт-Петербургский государственный университет\\
-        Прикладная математика и информатика\\
-        Вычислительная стохастика и статистические модели\\
-        \vspace{1.25cm}
-        Отчет по преддипломной практике (семестр 8)}
+    % \institute[Санкт-Петербургский Государственный Университет]{%
+    %     \small
+    %     Санкт-Петербургский государственный университет\\
+    %     Прикладная математика и информатика\\
+    %     Вычислительная стохастика и статистические модели\\
+    %     \vspace{1.25cm}
+    %     Отчет по преддипломной практике (семестр 8)}
     
-    \date[Зачет]{Санкт-Петербург, 2023}
+    % \date[Зачет]{Санкт-Петербург, 2023}
 
 
 % \title[Решение задачи принятия решений]{Разработка программных средств и решение задач принятия решений с помощью методов тропической математики}
@@ -81,10 +111,11 @@
 
 \begin{document}
 
-\setbeameroption{show notes}
-% \setbeameroption{hide notes}
+% \setbeameroption{show notes}
+\setbeameroption{hide notes}
 
-\begin{frame}[plain]
+\begin{frame}
+    % \begin{frame}[plain]
     \titlepage
 
     \note{Научный руководитель  д.ф.-м.н., доцент Кривулин Николай Кимович,\\
@@ -247,7 +278,7 @@
 
     \note{Определив базовые элементы максалгебры, можно рассмотреть алгоритм решения задачи парных сравнений.
 
-    1) Сначала матрица парных сравнений критериев нормируется и находится ее матрица клини.
+    1) Сначала матрица парных сравнений критериев делится на свое собственное число и находится ее матрица клини.
     Линейная комбинация столбцов полученной матрицы является вектором весов критериев.
     
     2) Если такой вектор не единственный с точностью до умножения на скаляр, то выбирается наилучший и наихудший дифференцирующий векторы.
