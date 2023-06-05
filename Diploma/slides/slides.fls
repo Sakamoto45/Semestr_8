@@ -1366,6 +1366,16 @@ INPUT /usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT ./slides.out
+INPUT slides.out
+INPUT ./slides.out
+INPUT slides.out
+INPUT ./slides.out
+INPUT slides.out
+INPUT ./slides.out
+INPUT slides.out
+INPUT ./slides.out
+INPUT ./slides.out
 OUTPUT slides.out
 INPUT /usr/share/texmf-dist/tex/latex/ucs/ucsencs.def
 INPUT /usr/share/texmf-dist/tex/latex/ucs/ucsencs.def
@@ -1432,7 +1442,8 @@ INPUT slides.nav
 INPUT slides.nav
 INPUT /home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lass0600.tfm
 INPUT /home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lass1440.tfm
-INPUT /home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lasx1095.tfm
+INPUT /home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lass1000.tfm
+INPUT /home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lasx1000.tfm
 INPUT /home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lass0800.tfm
 INPUT /home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lass0500.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
@@ -1475,7 +1486,6 @@ INPUT ./images//point.pdf
 INPUT images//point.pdf
 INPUT ./images//point.pdf
 INPUT ./images//point.pdf
-INPUT /home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lass1000.tfm
 INPUT /home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lass0900.tfm
 INPUT ./images//line.pdf
 INPUT images//line.pdf
@@ -1519,7 +1529,8 @@ INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb
-INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1000.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb
