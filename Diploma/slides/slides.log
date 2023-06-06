@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.4.11)  5 JUN 2023 13:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.5.15)  7 JUN 2023 20:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/sakamoto45/Documents/projects/SPBU/Semestr_8/Diploma/slides/slides.tex
-(/home/sakamoto45/Documents/projects/SPBU/Semestr_8/Diploma/slides/slides.tex
+**/home/user/Projects/SPBU/Semestr_8/Diploma/slides/slides.tex
+(/home/user/Projects/SPBU/Semestr_8/Diploma/slides/slides.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-02-22> (/usr/share/texmf-dist/tex/latex/beamer/beamer.cls
 Document Class: beamer 2023/02/20 v3.69 A class for typesetting presentations
@@ -397,7 +397,15 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))) (/usr/share/texmf-dist/tex/latex/beamer/beamerbasetranslator.sty (/usr/share/texmf-dist/tex/latex/translator/translator.sty
+)) (/usr/share/texmf-dist/tex/latex/sansmathaccent/sansmathaccent.sty
+Package: sansmathaccent 2020/01/31
+ (/usr/share/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2022/10/12 v3.38 KOMA-Script package (file load hooks)
+ (/usr/share/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+Package: scrlfile-hook 2022/10/12 v3.38 KOMA-Script package (using LaTeX hooks)
+ (/usr/share/texmf-dist/tex/latex/koma-script/scrlogo.sty
+Package: scrlogo 2022/10/12 v3.38 KOMA-Script package (logo)
+))))) (/usr/share/texmf-dist/tex/latex/beamer/beamerbasetranslator.sty (/usr/share/texmf-dist/tex/latex/translator/translator.sty
 Package: translator 2021-05-31 v1.12d Easy translation of strings in LaTeX
 )) (/usr/share/texmf-dist/tex/latex/beamer/beamerbasemisc.sty) (/usr/share/texmf-dist/tex/latex/beamer/beamerbasetwoscreens.sty) (/usr/share/texmf-dist/tex/latex/beamer/beamerbaseoverlay.sty
 \beamer@argscount=\count308
@@ -859,12 +867,12 @@ Overfull \hbox (163.88681pt too wide) has occurred while \output is active
 [10
 
 ]
-<images//point.pdf, id=173, 361.35pt x 361.35pt>
+<images//point.pdf, id=174, 361.35pt x 361.35pt>
 File: images//point.pdf Graphic file (type pdf)
 <use images//point.pdf>
 Package pdftex.def Info: images//point.pdf  used on input line 447.
 (pdftex.def)             Requested size: 145.96455pt x 145.9655pt.
-<images//line.pdf, id=174, 361.35pt x 361.35pt>
+<images//line.pdf, id=175, 361.35pt x 361.35pt>
 File: images//line.pdf Graphic file (type pdf)
 <use images//line.pdf>
 Package pdftex.def Info: images//line.pdf  used on input line 447.
@@ -877,12 +885,12 @@ Overfull \hbox (163.88681pt too wide) has occurred while \output is active
 [11
 
  <./images//point.pdf> <./images//line.pdf>]
-<images//line_smooth_norm.pdf, id=193, 361.35pt x 361.35pt>
+<images//line_smooth_norm.pdf, id=194, 361.35pt x 361.35pt>
 File: images//line_smooth_norm.pdf Graphic file (type pdf)
 <use images//line_smooth_norm.pdf>
 Package pdftex.def Info: images//line_smooth_norm.pdf  used on input line 472.
 (pdftex.def)             Requested size: 145.96455pt x 145.9655pt.
-<images//relation.pdf, id=194, 361.35pt x 361.35pt>
+<images//relation.pdf, id=195, 361.35pt x 361.35pt>
 File: images//relation.pdf Graphic file (type pdf)
 <use images//relation.pdf>
 Package pdftex.def Info: images//relation.pdf  used on input line 472.
@@ -895,6 +903,21 @@ Overfull \hbox (163.88681pt too wide) has occurred while \output is active
 [12
 
  <./images//line_smooth_norm.pdf> <./images//relation.pdf>]
+Overfull \hbox (14.4736pt too wide) detected at line 525
+\OML/cmm/b/it/10.95 C \OT1/cmr/m/n/10.95 = []  \OML/cmm/m/it/10.95 ; \OML/cmm/b/it/10.95 A[] \OT1/cmr/m/n/10.95 = []  \OML/cmm/m/it/10.95 ;
+ []
+
+
+Overfull \hbox (24.5588pt too wide) detected at line 525
+\OML/cmm/b/it/10.95 A[] \OT1/cmr/m/n/10.95 = []  \OML/cmm/m/it/10.95 ; \OML/cmm/b/it/10.95 A[] \OT1/cmr/m/n/10.95 = []  \OML/cmm/m/it/10.95 ; \OML/cmm/b/it/10.95 A[] \OT1/cmr/m/n/10.95 = []  \OML/cmm/m/it/10.95 ;
+ []
+
+
+Overfull \hbox (24.5588pt too wide) detected at line 525
+\OML/cmm/b/it/10.95 A[] \OT1/cmr/m/n/10.95 = []  \OML/cmm/m/it/10.95 ; \OML/cmm/b/it/10.95 A[] \OT1/cmr/m/n/10.95 = []  \OML/cmm/m/it/10.95 ; \OML/cmm/b/it/10.95 A[] \OT1/cmr/m/n/10.95 = []  \OML/cmm/m/it/10.95 :
+ []
+
+
 Overfull \hbox (163.88681pt too wide) has occurred while \output is active
  [][][][]  
  []
@@ -902,24 +925,32 @@ Overfull \hbox (163.88681pt too wide) has occurred while \output is active
 [13
 
 ]
+Overfull \hbox (4.42746pt too wide) detected at line 565
+\OT1/cmr/m/n/10.95 = [] \OMS/cmsy/m/n/10.95 ^^Y [] \OML/cmm/m/it/10.95 :
+ []
+
+
 Overfull \hbox (163.88681pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [14
 
-] (./slides.bbl
-LaTeX Font Info:    Trying to load font information for T2A+cmtt on input line 36.
- (/usr/share/texmf-dist/tex/latex/cyrillic/t2acmtt.fd
-File: t2acmtt.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
-))
+]
 Overfull \hbox (163.88681pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [15
 
- </usr/share/texmf-dist/tex/latex/beamer/beamericonarticle.pdf>]
+]
+Overfull \hbox (163.88681pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[16
+
+]
 \tf@nav=\write6
 \openout6 = `slides.nav'.
 
@@ -934,18 +965,18 @@ Package rerunfilecheck Info: File `slides.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 27894 strings out of 476025
- 528217 string characters out of 5796532
- 1866388 words of memory out of 5000000
- 47743 multiletter control sequences out of 15000+600000
- 526867 words of font info for 69 fonts, out of 8000000 for 9000
+ 28003 strings out of 476025
+ 530650 string characters out of 5796532
+ 1876388 words of memory out of 5000000
+ 47847 multiletter control sequences out of 15000+600000
+ 527380 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 101i,16n,104p,531b,703s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on slides.pdf (15 pages, 303799 bytes).
+ 128i,16n,122p,515b,709s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1000.pfb>
+Output written on slides.pdf (16 pages, 289567 bytes).
 PDF statistics:
- 341 PDF objects out of 1000 (max. 8388607)
- 223 compressed objects within 3 object streams
- 35 named destinations out of 1000 (max. 500000)
+ 335 PDF objects out of 1000 (max. 8388607)
+ 219 compressed objects within 3 object streams
+ 33 named destinations out of 1000 (max. 500000)
  302 words of extra memory for PDF output out of 10000 (max. 10000000)
 
